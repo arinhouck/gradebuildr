@@ -1,0 +1,33 @@
+<header class="main-header">
+  <nav class="navbar">
+    <div class="container">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand"><b>grade</b>buildr</a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <li><a href="#" {{action "toggleModal"}}>Register</a></li>
+        <li class="dropdown user user-menu">
+          <a href="#" class="dropdown-toggle">
+            <span>Login</span>
+            {{!-- Login Partial --}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    </div>
+  </nav>
+</header>
+
+{{#if isShowingModal}}
+  {{#modal-dialog close="toggleModal"
+                  alignment="center"
+                  translucentOverlay=true}}
+    Oh hai there!
+  {{/modal-dialog}}
+{{/if}}

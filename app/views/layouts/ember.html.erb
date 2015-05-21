@@ -3,12 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <title>Gradebuildr</title>
-    <%= stylesheet_link_tag 'frontend' %>
     <%= include_ember_script_tags :frontend %>
+    <%= include_ember_stylesheet_tags :frontend %>
     <%= csrf_meta_tags %>
   </head>
-
-  <body>
+  <body class="skin-black layout-top-nav">
     <%= yield %>
   </body>
 </html>
