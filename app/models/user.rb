@@ -1,22 +1,24 @@
 class User < ActiveRecord::Base
-  before_save :set_auth_token
+  before_filter :authenticate_user_from_token!
+
+  # Enter the normal Devise authentication path,
+  # using the token authenticated user if available
+  before_filter :authenticate_user!
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  private
-  def set_auth_token
-    if self.authentication_token.blank?
-      self.authentication_token = generate_authentication_token
-    end
-  end
+private
+ def authenticate_user_from_token!
+   authenticate_with_http_token do |token, options|
+     user_email = options[:email].presence
+     user = user_email && User.find_by_email(user_email)
 
-  def generate_authentication_token
-    loop do
-      token = Devise.friendly_token
-      break token unless User.where(authentication_token: token).first
-    end
-  end
+     if user && Devise.secure_compare(user.authentication_token, token)
+       sign_in user, store: false
+     end
+   end
+ end
 end
