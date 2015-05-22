@@ -10,7 +10,9 @@
 
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
-        <li><a href="#">Register</a></li>
+        <li>
+          <a href="#" {{action 'openModal'}} modal-id="registerModal"> Register </a>
+        </li>
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle">
             <span>Login</span>
@@ -24,10 +26,19 @@
   </nav>
 </header>
 
-{{#if isShowingModal}}
-  {{#modal-dialog close="toggleModal"
-                  alignment="center"
-                  translucentOverlay=true}}
-    Oh hai there!
-  {{/modal-dialog}}
-{{/if}}
+{{#em-modal-form open-if=openModal configName="bs" id="registerModal" on-submit="register" in-async=async}}
+    {{#em-modal-title}}
+        {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+        <h4 class="modal-title">Register</h4>
+    {{/em-modal-title}}
+    {{#em-modal-body}}
+        {{#if async}}
+            Submitting, please wait...
+        {{else}}
+            <label for="title">Testing</label>
+        {{/if}}
+    {{/em-modal-body}}
+    {{#em-modal-footer}}
+        <button type="submit" class="btn btn-primary btn-flat" {{bind-attr disabled=async}}>Submit</button>
+    {{/em-modal-footer}}
+{{/em-modal-form}}
