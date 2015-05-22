@@ -12,34 +12,7 @@
 
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
-        <li>
-          <a href="#register" {{action 'openModal'}} modal-id="register"> Register </a>
-        </li>
-        {{#if session.isAuthenticated}}
-        <li class="dropdown user user-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            {{session.name}}
-          </a>
-          <ul class="dropdown-menu">
-            <!-- Menu Footer-->
-            <li class="user-footer">
-              <div class="pull-left">
-                <a href="./profile.html" class="btn btn-default btn-flat">Profile</a>
-              </div>
-              <div class="pull-right">
-                <button {{action 'invalidateSession'}} class="btn btn-default btn-flat">Log out</button>
-              </div>
-            </li>
-          </ul>
-        </li>
-        {{else}}
-        <li class="dropdown user user-menu">
-          {{#link-to "login" class="dropdown-toggle"}}
-            <span>Login</span>
-            {{!-- Login Partial --}}
-          {{/link-to}}
-        </li>
-        {{/if}}
+        {{render 'login'}}
       </ul>
     </div>
 

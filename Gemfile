@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'ember-cli-rails'
 gem 'devise'
+gem 'pry'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
