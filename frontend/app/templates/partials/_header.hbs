@@ -1,38 +1,54 @@
-<header class="main-header">
-  <nav class="navbar">
-    <div class="container">
-    <div class="navbar-header">
-      {{#link-to "index" class="navbar-brand"}}
-        <b>grade</b>buildr
-      {{/link-to}}
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-        <i class="fa fa-bars"></i>
-      </button>
-    </div>
+{{#if isDashboard}}
+  <header class="main-header">
+    {{#link-to "index" class="logo"}}
+      <b>grade</b>buildr
+    {{/link-to}}
+    <nav class="navbar">
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          {{render 'login'}}
+        </ul>
+      </div>
+    </nav>
+  </header>
+{{else}}
+  <header class="main-header">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-header">
+          {{#link-to "index" class="navbar-brand"}}
+            <b>grade</b>buildr
+          {{/link-to}}
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
 
-    <div class="navbar-custom-menu">
-      <ul class="nav navbar-nav">
-        {{render 'login'}}
-      </ul>
-    </div>
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            {{render 'login'}}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+{{/if}}
 
-    </div>
-  </nav>
-</header>
-
-{{#em-modal-form open-if=openModal configName="bs" id="register" on-submit="register" in-async=async}}
-    {{#em-modal-title}}
-        {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
-        <h4 class="modal-title">Register</h4>
-    {{/em-modal-title}}
-    {{#em-modal-body}}
-        {{#if async}}
-            Submitting, please wait...
-        {{else}}
-            <label for="title">Testing</label>
-        {{/if}}
-    {{/em-modal-body}}
-    {{#em-modal-footer}}
-        <button type="submit" class="btn btn-primary btn-flat" {{bind-attr disabled=async}}>Submit</button>
-    {{/em-modal-footer}}
-{{/em-modal-form}}
+{{#unless session.isAuthenticated}}
+  {{#em-modal-form open-if=openModal configName="bs" id="register" on-submit="register" in-async=async}}
+      {{#em-modal-title}}
+          {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+          <h4 class="modal-title">Register</h4>
+      {{/em-modal-title}}
+      {{#em-modal-body}}
+          {{#if async}}
+              Submitting, please wait...
+          {{else}}
+              <label for="title">Testing</label>
+          {{/if}}
+      {{/em-modal-body}}
+      {{#em-modal-footer}}
+          <button type="submit" class="btn btn-primary btn-flat" {{bind-attr disabled=async}}>Submit</button>
+      {{/em-modal-footer}}
+  {{/em-modal-form}}
+{{/unless}}
