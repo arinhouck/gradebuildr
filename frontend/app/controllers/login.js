@@ -6,7 +6,7 @@ export default Ember.Controller.extend(LoginControllerMixin, {
 
   actions: {
     toggleMenu: function() {
-      $('li.dropdown a').parent().toggleClass('open')
+      $('li.dropdown a').parent().toggleClass('open');
     }
   }
 

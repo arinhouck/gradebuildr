@@ -35,20 +35,11 @@
 {{/if}}
 
 {{#unless session.isAuthenticated}}
-  {{#em-modal-form open-if=openModal configName="bs" id="register" on-submit="register" in-async=async}}
-      {{#em-modal-title}}
-          {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
-          <h4 class="modal-title">Register</h4>
-      {{/em-modal-title}}
-      {{#em-modal-body}}
-          {{#if async}}
-              Submitting, please wait...
-          {{else}}
-              <label for="title">Testing</label>
-          {{/if}}
-      {{/em-modal-body}}
-      {{#em-modal-footer}}
-          <button type="submit" class="btn btn-primary btn-flat" {{bind-attr disabled=async}}>Submit</button>
-      {{/em-modal-footer}}
-  {{/em-modal-form}}
+{{#em-modal-form open-if=openModal configName="bs" id="registerModal" on-submit="register" in-async=async}}
+  {{#em-modal-title}}
+    {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+    <h4 class="modal-title">Register</h4>
+  {{/em-modal-title}}
+  {{render 'users.new'}}
+{{/em-modal-form}}
 {{/unless}}

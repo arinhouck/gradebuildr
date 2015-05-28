@@ -17,6 +17,7 @@ gem 'ember-cli-rails'
 gem 'devise'
 gem 'pry'
 gem 'font-awesome-rails'
+gem 'active_model_serializers'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
