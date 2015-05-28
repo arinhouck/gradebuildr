@@ -7,6 +7,7 @@ def create
     sign_in(user)
     data = {
       token: user.authentication_token,
+      id: user.id,
       email: user.email,
       name: user.name
     }

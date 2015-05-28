@@ -27,7 +27,7 @@ test('Register an user', function() {
   click('button#createUser');
 
   andThen(function() {
-    equal( currentRouteName(), 'dashboard', 'routed correctly');
+    equal( currentRouteName(), 'dashboard.index', 'routed correctly');
   });
   // andThen(function() {
   //   equal(find("a:contains(Test Title)").length, 1, "post is displayed");
