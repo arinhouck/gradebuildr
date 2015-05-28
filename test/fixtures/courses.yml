@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  name: MyString
+  creditHours: 1
+  gradingScale: MyString
+
+two:
+  subject: MyString
+  name: MyString
+  creditHours: 1
+  gradingScale: MyString

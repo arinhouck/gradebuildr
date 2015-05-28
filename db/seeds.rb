@@ -9,3 +9,7 @@
 if !User.any?
   User.create(name: 'Arin', email: 'arinhouck@gmail.com', password: 'password')
 end
+
+if !Course.any?
+  Course.create(user_id: 1, subject: 'CSE', number: 230, creditHours: 3, gradingScale: 'Plus')
+end

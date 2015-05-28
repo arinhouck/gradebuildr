@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   openModal: false,
 
   isDashboard: function() {
-    return this.get('currentPath') === 'dashboard';
+    return window.location.href.indexOf('dashboard') >= 0;
   }.property('currentPath'),
 
   containerClass: function() {
