@@ -1,17 +1,18 @@
 class SessionsController < Devise::SessionsController
 
 def create
-  respond_to do |format|
-    format.json do
-      self.resource = warden.authenticate!(auth_options)
-      sign_in(resource_name, resource)
-      data = {
-        token: self.resource.authentication_token,
-        email: self.resource.email,
-        name: self.resource.name
-      }
-      render json: data, status: 201
-    end
+  user = User.find_for_database_authentication(email: params[:user][:email])
+
+  if user && user.valid_password?(params[:user][:password])
+    sign_in(user)
+    data = {
+      token: user.authentication_token,
+      email: user.email,
+      name: user.name
+    }
+    render json: data, status: 201
+  else
+    render json: { error: "Invalid email or password" }, status: :unauthorized
   end
 end
 
