@@ -11,13 +11,15 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-aqua">
           <div class="inner">
-            <h3>6</h3>
-            <p>Courses</p>
+            <h3>{{model.user.courses.length}}</h3>
+            <p>{{h-pluralize model.user.courses.length "Course" omitCount=true}}</p>
           </div>
           <div class="icon">
             <i class="ion ion-university"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          {{#link-to 'dashboard.courses' class='small-box-footer'}}
+            More info <i class="fa fa-arrow-circle-right"></i>
+          {{/link-to}}
         </div>
       </div>
       <div class="col-lg-3 col-xs-6">

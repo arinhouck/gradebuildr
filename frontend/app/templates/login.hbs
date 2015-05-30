@@ -24,6 +24,7 @@
     </a>
       <ul class="dropdown-menu">
           <li class="user-body">
+            {{loginErrorMessage}}
             <form {{action "authenticate" on="submit"}}>
             <div class="form-group">
               <label for="identification">Email address</label><br />
