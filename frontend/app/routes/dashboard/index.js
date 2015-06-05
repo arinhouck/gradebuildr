@@ -4,6 +4,7 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function() {
     var id = this.get('session.content.secure.id');
+    debugger;
     if (id) {
       var url = "/users/" + id + ".json";
       return new Ember.RSVP.Promise(function(resolve, reject) {
