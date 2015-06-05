@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName: 'div',
-  colors: 'yellow,blue,aqua,green,red',
+  colors: 'primary,info,success,warning,danger,gray,navy,teal,purple,orange,maroon,black',
   classNames: ['progress-bar'],
   attributeBindings: ['style', 'role', 'aria-valuemin', 'ariaValueNow:aria-valuenow', 'aria-valuemax'],
   classTypePrefix: 'progress-bar',
@@ -17,7 +17,7 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     var colors = this.colors.split(',');
     var randColor = colors[Math.floor(Math.random() * colors.length)];
-    this.$().addClass('progress-bar-' + randColor)
+    this.$().addClass('bg-' + randColor)
   },
 
   style: function() {
