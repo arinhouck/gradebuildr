@@ -21,7 +21,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each course in model}}
+              {{#each model.courses as |course|}}
                 <tr>
                   <td>
                     {{!-- {{#link-to 'dashboard.courses.show' course}} --}}
@@ -36,10 +36,10 @@
                   </td>
                   <td>
                     <div class="progress">
-                      <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-                        <span>30% Assignments</span>
-                      </div>
-                      <div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                      {{#each course.weights as |weight|}}
+                        {{progress-bar name=weight.name percentage=weight.percentage}}
+                      {{/each}}
+                      {{!-- <div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
                         <span>10% Quizzes</span>
                       </div>
                       <div class="progress-bar progress-bar-blue" role="progressbar" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100" style="width: 18%">
@@ -50,7 +50,7 @@
                       </div>
                       <div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" style="width: 22%">
                         <span>22% Final Exam</span>
-                      </div>
+                      </div> --}}
                     </div>
                   </td>
                 </tr>
