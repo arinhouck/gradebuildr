@@ -2,11 +2,92 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   courses: DS.hasMany('course'),
+  grades: DS.hasMany('grade'),
   email: DS.attr('string'),
   name: DS.attr('string'),
   gradePoints: DS.attr('number'),
   gradeUnits: DS.attr('number'),
   password: DS.attr('string'),
-  password_confirmation: DS.attr('string')
+  password_confirmation: DS.attr('string'),
+
+  semesterGradePoints: function() {
+    var courses = this.get('courses');
+    var gradePoints = 0;
+    var self = this;
+    courses.forEach(function(course){
+      gradePoints += self.scoreToGradePoints(course.get('currentGrade'), course)*(course.get('creditHours'))
+    });
+    return gradePoints;
+  }.property('courses.currentGrade', 'courses.creditHours'),
+
+  semesterCreditHours: function() {
+    var courses = this.get('courses');
+    var creditHours = 0;
+    courses.forEach(function(course) {
+      creditHours += course.get('creditHours')
+    });
+    return creditHours;
+  }.property('courses.creditHours'),
+
+  semesterGpa: function() {
+    var semesterGpa = this.get('semesterGradePoints') / this.get('semesterCreditHours')
+    return semesterGpa.toFixed(2);
+  }.property('semesterGradePoints', 'semesterCreditHours'),
+
+  scoreToGradePoints: function(score, course) {
+    var gradingScale = course.get('gradingScale');
+    var plus = gradingScale.indexOf('Plus') >= 0;
+    var minus = gradingScale.indexOf('Minus') >= 0;
+    if (score >= 97) // A+
+      if (plus)
+        return 4.33;
+      else
+        return 4;
+    else if (score >= 93) // A
+      return 4;
+    else if (score >= 90) // A-
+      if (minus)
+        return 3.7;
+      else
+        return 4;
+    else if (score >= 87) // B+
+      if (plus)
+        return 3.33;
+      else
+        return 3;
+    else if (score >= 83) // B
+      return 3;
+    else if (score >= 80) // B-
+      if (minus)
+        return 2.7;
+      else
+        return 3;
+    else if (score >= 77) // C+
+      if (plus)
+        return 2.3;
+      else
+        return 2;
+    else if (score >= 73) // C
+      return 2;
+    else if (score >= 70) // C-
+      if (minus)
+        return 1.7;
+      else
+        return 2;
+    else if (score >= 67) // D+
+      if (plus)
+        return 1.3;
+      else
+        return 1;
+    else if (score >= 63) // D
+      return 1;
+    else if (score >= 60) // D-
+      if(minus)
+        return 0.7;
+      else
+        return 1;
+    else
+      return 0;
+  }
 
 });
