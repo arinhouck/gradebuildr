@@ -21,7 +21,11 @@
           {{fa-icon 'university'}}<span>Courses</span>
         </a>
       {{/link-to}}
-      <li><a href="./grades.html">{{fa-icon 'fa-file-text-o'}}<span>Grades</span></a></li>
+      {{#link-to 'dashboard.grades' tagName="li" href=false}}
+        <a {{bind-attr href="view.href"}}>
+          {{fa-icon 'file-text-o'}}<span>Grades</span>
+        </a>
+      {{/link-to}}
     </ul>
 
   </div>

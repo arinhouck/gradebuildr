@@ -32,3 +32,14 @@ weights = [
   Weight.create(course_id: courses[0].id, name: 'Midterm 2', percentage: 20),
   Weight.create(course_id: courses[0].id, name: 'Final Exam', percentage: 22)
 ]
+
+puts "Load grades"
+Grade.delete_all
+grades = [
+  Grade.create(user_id: users[0].id, course_id: courses[0].id, weight_id: weights[0].id, name: 'Homework #1', score: 20, score_total: 30),
+  Grade.create(user_id: users[0].id, course_id: courses[0].id, weight_id: weights[0].id, name: 'Homework #2', score: 25, score_total: 30),
+  Grade.create(user_id: users[0].id, course_id: courses[0].id, weight_id: weights[1].id, name: 'Quiz #1', score: 10, score_total: 10),
+  Grade.create(user_id: users[0].id, course_id: courses[0].id, weight_id: weights[1].id, name: 'Quiz #2', score: 9, score_total: 10),
+  Grade.create(user_id: users[0].id, course_id: courses[0].id, weight_id: weights[3].id, name: 'Midterm 1', score: 12.5, score_total: 14),
+  Grade.create(user_id: users[0].id, course_id: courses[0].id, weight_id: weights[4].id, name: 'Midterm 2', score: 12, score_total: 14)
+]

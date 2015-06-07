@@ -14,6 +14,7 @@ Router.map(function() {
     this.route('courses', function() {
       this.route('show');
     });
+    this.route('grades', function() {});
   });
 });
 

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :courses
   resources :weights
+  resources :grades
 
   root 'ember#index'
   get '/*path' => 'ember#index'

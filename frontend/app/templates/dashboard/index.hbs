@@ -11,8 +11,8 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-aqua">
           <div class="inner">
-            <h3>{{model.user.courses.length}}</h3>
-            <p>{{h-pluralize model.user.courses.length "Course" omitCount=true}}</p>
+            <h3>{{model.courses.length}}</h3>
+            <p>{{h-pluralize model.courses.length "Course" omitCount=true}}</p>
           </div>
           <div class="icon">
             <i class="ion ion-university"></i>
@@ -25,13 +25,15 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3>129</h3>
-            <p>Grades</p>
+            <h3>{{model.grades.length}}</h3>
+            <p>{{h-pluralize model.grades.length "Grade" omitCount=true}}</p>
           </div>
           <div class="icon">
             <i class="ion ion-document"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          {{#link-to 'dashboard.grades' class='small-box-footer'}}
+            More info {{fa-icon 'arrow-circle-right'}}
+          {{/link-to}}
         </div>
 
       </div>
