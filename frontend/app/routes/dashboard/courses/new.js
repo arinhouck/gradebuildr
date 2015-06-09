@@ -4,11 +4,10 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function() {
     var store = this.store;
-    return store.find('user', this.get('session.content.secure.id'));
+    return store.createRecord('course');
   },
   setupController: function(controller, model) {
     controller.set('model', model);
-    controller.set('course', controller.store.createRecord('course', {user_id: model.get('id')}));
   },
   actions: {
     willTransition: function() {

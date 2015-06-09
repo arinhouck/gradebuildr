@@ -13,8 +13,12 @@ export default Ember.Controller.extend({
           weight.save()
         });
       }
-      this.get('course').save().then(function(course){
-        self.get('model.courses').pushObject(course);
+      this.store.find('user', this.get('session.content.secure.id')).then(function(user) {
+        debugger;
+        self.get('model').set('user', user);
+      })
+      this.get('model').save().then(function(course){
+        // self.get('user.courses').pushObject(course);
         $.growl.notice({title: 'Course', message: 'Sucessfully created course.'})
       })
     },

@@ -5,7 +5,7 @@
   {{/em-modal-title}}
 
 {{#em-modal-body}}
-  {{#if course.async}}
+  {{#if model.async}}
       Submitting, please wait...
   {{else}}
     <div class="box-body">
@@ -13,15 +13,15 @@
         <div class="row">
           <div class="col-sm-4">
             <label for="subject">Subject</label>
-            {{input value=course.subject class='form-control' id="subject" placeholder='Enter subject name'}}
+            {{input value=model.subject class='form-control' id="subject" placeholder='Enter subject name'}}
           </div>
           <div class="col-sm-4">
             <label for="number">Number</label>
-            {{input value=course.number class='form-control' id="subjectNumber" type='number' placeholder='Enter subject number'}}
+            {{input value=model.number class='form-control' id="subjectNumber" type='number' placeholder='Enter subject number'}}
           </div>
           <div class="col-sm-4">
             <label for="creditHours">Credit Hours</label>
-            {{input value=course.creditHours class='form-control' id='creditHours' type='number' placeholder='Enter credit hours'}}
+            {{input value=model.creditHours class='form-control' id='creditHours' type='number' placeholder='Enter credit hours'}}
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
         <label for="gradingScale">Grading Scale</label>
         {{view "select"
            content=scales
-           value=course.gradingScale
+           value=model.gradingScale
            class='form-control'
            prompt='Please select a grading scale'
         }}
