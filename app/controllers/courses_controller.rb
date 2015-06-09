@@ -29,4 +29,10 @@ class CoursesController < ApplicationController
     end
   end
 
+  # private
+  #
+  # def course_params
+  #   params.require(:course).permit(:subject, :number, :credit_hours, :grading_scale, :user_id)
+  # end
+
 end

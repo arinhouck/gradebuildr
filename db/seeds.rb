@@ -16,12 +16,12 @@ users = [
 puts "Load courses"
 Course.delete_all
 courses = [
-  Course.create(user_id: users[0].id, subject: 'EEE', number: 230, creditHours: 3, gradingScale: 'Plus'),
-  Course.create(user_id: users[0].id, subject: 'CSE', number: 240, creditHours: 3, gradingScale: 'Regular'),
-  Course.create(user_id: users[0].id, subject: 'COM', number: 263, creditHours: 3, gradingScale: 'Plus/Minus'),
-  Course.create(user_id: users[0].id, subject: 'GLG', number: 102, creditHours: 3, gradingScale: 'Regular'),
-  Course.create(user_id: users[0].id, subject: 'GLG', number: 104, creditHours: 1, gradingScale: 'Plus/Minus'),
-  Course.create(user_id: users[0].id, subject: 'MAT', number: 343, creditHours: 3, gradingScale: 'Plus/Minus')
+  Course.create(user_id: users[0].id, subject: 'EEE', number: 230, credit_hours: 3, grading_scale: 'Plus'),
+  Course.create(user_id: users[0].id, subject: 'CSE', number: 240, credit_hours: 3, grading_scale: 'Regular'),
+  Course.create(user_id: users[0].id, subject: 'COM', number: 263, credit_hours: 3, grading_scale: 'Plus/Minus'),
+  Course.create(user_id: users[0].id, subject: 'GLG', number: 102, credit_hours: 3, grading_scale: 'Regular'),
+  Course.create(user_id: users[0].id, subject: 'GLG', number: 104, credit_hours: 1, grading_scale: 'Plus/Minus'),
+  Course.create(user_id: users[0].id, subject: 'MAT', number: 343, credit_hours: 3, grading_scale: 'Plus/Minus')
 ]
 
 puts "Load weights"

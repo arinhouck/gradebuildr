@@ -17,12 +17,12 @@ ActiveRecord::Schema.define(version: 20150607011853) do
   enable_extension "plpgsql"
 
   create_table "courses", force: :cascade do |t|
-    t.string   "subject",      default: "", null: false
+    t.string   "subject",       default: "", null: false
     t.string   "number"
-    t.integer  "creditHours"
-    t.string   "gradingScale"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "credit_hours"
+    t.string   "grading_scale"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
   end
 
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150607011853) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "authentication_token",   default: "", null: false
-    t.string   "name"
+    t.string   "name",                   default: "", null: false
     t.float    "gradePoints"
     t.float    "gradeUnits"
     t.datetime "created_at"

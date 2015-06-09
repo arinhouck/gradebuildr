@@ -3,11 +3,11 @@
 one:
   subject: MyString
   name: MyString
-  creditHours: 1
-  gradingScale: MyString
+  credit_hours: 1
+  grading_scale: MyString
 
 two:
   subject: MyString
   name: MyString
-  creditHours: 1
-  gradingScale: MyString
+  credit_hours: 1
+  grading_scale: MyString

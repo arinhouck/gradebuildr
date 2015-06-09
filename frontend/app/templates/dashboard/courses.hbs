@@ -52,9 +52,13 @@
         </div>
       </div>
       <div class="box-footer clearfix">
-        <a class="btn btn-sm btn-default btn-flat pull-right">Create New Course</a>
+        {{#link-to 'dashboard.courses.new' class="btn btn-sm btn-default btn-flat pull-right" id="newCourse"}}
+          New Course
+        {{/link-to}}
       </div>
     </div>
+
+    {{outlet}}
 
   </section>
 </div>

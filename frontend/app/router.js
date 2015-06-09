@@ -12,7 +12,7 @@ Router.map(function() {
   });
   this.route('dashboard', function() {
     this.route('courses', function() {
-      this.route('show');
+      this.route('new')
     });
     this.route('grades', function() {});
   });

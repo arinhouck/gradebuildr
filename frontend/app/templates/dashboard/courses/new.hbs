@@ -1,0 +1,68 @@
+{{#em-modal-form open-if=openModal configName="bs" id="newCourseModal" on-submit="createCourse" in-async=async}}
+  {{#em-modal-title}}
+    {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+    <h4 class="modal-title">New Course</h4>
+  {{/em-modal-title}}
+
+{{#em-modal-body}}
+  {{#if course.async}}
+      Submitting, please wait...
+  {{else}}
+    <div class="box-body">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="subject">Subject</label>
+            {{input value=course.subject class='form-control' id="subject" placeholder='Enter subject name'}}
+          </div>
+          <div class="col-sm-4">
+            <label for="number">Number</label>
+            {{input value=course.number class='form-control' id="subjectNumber" type='number' placeholder='Enter subject number'}}
+          </div>
+          <div class="col-sm-4">
+            <label for="creditHours">Credit Hours</label>
+            {{input value=course.creditHours class='form-control' id='creditHours' type='number' placeholder='Enter credit hours'}}
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="gradingScale">Grading Scale</label>
+        {{view "select"
+           content=scales
+           value=course.gradingScale
+           class='form-control'
+           prompt='Please select a grading scale'
+        }}
+      </div>
+
+      <div class="form-group">
+        <a class="label bg-green pull-right" {{action 'addWeight'}}><small>{{fa-icon 'plus'}} Add Weight</small></a>
+        <label for="weights">
+          Weights
+        </label>
+        {{#each weight in weights}}
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6">
+                {{input value=weight.subject class='form-control input-sm' id="weightName" placeholder='Enter weight name'}}
+              </div>
+              <div class="col-sm-6">
+                <div class="input-group">
+                  {{input value=weight.number class='form-control input-sm' type='number' id="percentage" placeholder='Enter weight percentage'}}
+                  <div class="input-group-addon">%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{ else }}
+          <p class='text-muted'> No weights. </p>
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+{{/em-modal-body}}
+{{#em-modal-footer}}
+  <button type="submit" class="btn btn-primary btn-flat" id="createCourse" {{bind-attr disabled=async}}>New</button>
+{{/em-modal-footer}}
+
+{{/em-modal-form}}
