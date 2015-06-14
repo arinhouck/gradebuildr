@@ -1,8 +1,8 @@
-class CourseSerializer < ActiveModel::Serializer
-  embed :ids, include: false
+    class CourseSerializer < ActiveModel::Serializer
+      embed :ids, include: true
 
-  attributes :id, :subject, :number, :credit_hours, :grading_scale
-  #has_one :user
-  has_many :weights
-  has_many :grades
-end
+      attributes :id, :subject, :number, :credit_hours, :grading_scale, :user_id
+      #has_one :user
+      has_many :weights
+      has_many :grades
+    end

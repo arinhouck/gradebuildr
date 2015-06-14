@@ -22,13 +22,13 @@ export default Ember.Component.extend({
 
   style: function() {
     return "width:" + this.percentage + "%;";
-  }.property('percentage').cacheable(),
+  }.property('percentage'),
 
   // color: function() {
   //   this.$().
   // }.observes('color'),
   ariaValueNow: function() {
     return this.percentage;
-  }.property('percentage').cacheable()
+  }.property('percentage')
 
 });

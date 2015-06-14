@@ -20,7 +20,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(params[:course])
+    @course = Course.new(course_params)
 
     if @course.save
       render json: @course, status: :created
@@ -29,10 +29,10 @@ class CoursesController < ApplicationController
     end
   end
 
-  # private
-  #
-  # def course_params
-  #   params.require(:course).permit(:subject, :number, :credit_hours, :grading_scale, :user_id)
-  # end
+  private
+
+  def course_params
+    params.require(:course).permit(:subject, :number, :credit_hours, :grading_scale, :user_id)
+  end
 
 end
