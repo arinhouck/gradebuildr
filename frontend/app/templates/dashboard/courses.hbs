@@ -19,6 +19,7 @@
                 <th>Current Grade</th>
                 <th>Grading Scale</th>
                 <th>Weights</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -44,6 +45,10 @@
                         {{progress-bar name=weight.name percentage=weight.percentage}}
                       {{/each}}
                     </div>
+                  </td>
+                  <td>
+                    <button type="button" name="button" class="btn btn-default btn-flat btn-xs" title="Edit">{{fa-icon 'edit'}}</button>
+                    <button type="button" name="button" class="btn btn-danger btn-flat btn-xs" title="Delete" {{action 'deleteCourse'}}>{{fa-icon 'trash'}}</button>
                   </td>
                 </tr>
               {{/each}}
