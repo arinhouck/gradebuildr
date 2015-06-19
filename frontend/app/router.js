@@ -15,7 +15,9 @@ Router.map(function() {
       this.route('new');
       this.route('edit', {path: 'edit/:course_id'});
     });
-    this.route('grades', function() {});
+    this.route('grades', function() {
+      this.route('new');
+    });
   });
 });
 

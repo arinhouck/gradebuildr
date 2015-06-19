@@ -1,0 +1,66 @@
+{{#em-modal-form open-if=openModal configName="bs" id="newGradeModal" on-submit="createGrades" in-async=async}}
+  {{#em-modal-title}}
+    {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+    <h4 class="modal-title">New Grades</h4>
+  {{/em-modal-title}}
+
+{{#em-modal-body}}
+  {{#if model.async}}
+      Submitting, please wait...
+  {{else}}
+    <div class="box-body">
+
+      <div class="form-group">
+        <label for="course">Course</label>
+        {{view "select"
+           content=model.courses
+           value=selectedCourse
+           optionValuePath="content.id"
+           optionLabelPath="content.name"
+           class='form-control'
+           prompt='Please select a course'
+        }}
+      </div>
+
+      <div class="form-group">
+        <a {{bind-attr class=":label :bg-green :pull-right course::hide"}} {{action 'addGrade'}}><small>{{fa-icon 'plus'}} Add Grade</small></a>
+        <label for="grades">
+          Grades
+        </label>
+        {{#each grade in grades}}
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-4">
+                {{input value=grade.name class='form-control input-sm' placeholder='Enter grade name'}}
+              </div>
+              <div class="col-sm-4">
+                {{view "select"
+                   content=gradeWeights
+                   value=selectedWeight
+                   optionValuePath="content.id"
+                   optionLabelPath="content.name"
+                   class='form-control input-sm'
+                   prompt='Please select a grade weight'
+                }}
+              </div>
+              <div class="col-sm-4">
+                <div class="input-group">
+                  {{input value=grade.score class='form-control input-sm no-border' type='number' placeholder='Score'}}
+                  <div class="input-group-addon lead no-border">/</div>
+                  {{input value=grade.scoreTotal class='form-control input-sm no-border' type='number' placeholder='Total'}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{ else }}
+          <p class='text-muted'> No grades. </p>
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+{{/em-modal-body}}
+{{#em-modal-footer}}
+  <button type="submit" class="btn btn-primary btn-flat" id="createGrade" {{bind-attr disabled=async}}>New</button>
+{{/em-modal-footer}}
+
+{{/em-modal-form}}
