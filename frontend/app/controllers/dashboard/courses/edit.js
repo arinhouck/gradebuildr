@@ -5,29 +5,29 @@ export default Ember.Controller.extend({
   weights: [],
 
   actions: {
-    createCourse: function() {
+    editCourse: function() {
       var self = this;
       var course = this.get('model');
-      var weights = this.get('weights');
-      this.store.find('user', this.get('session.content.secure.id')).then(function(user) {
-        course.set('user', user);
-        return course.save();
-      }).then(function(course) {
+      var weights = this.get('model.weights');
+      course.save().then(function(course) {
+        // TODO: Filter by is dirty
         if (weights.length > 0) {
           weights.forEach(function(weight) {
-            weight.save();
+            if (weight.get('isDirty')) {
+              weight.save();
+            }
           });
         }
       }).then(function() {
         self.transitionToRoute('dashboard.courses').then(function() {
-          $.growl.notice({title: 'Course', message: 'Sucessfully created.'});
+          $.growl.notice({title: 'Course', message: 'Sucessfully updated.'});
         });
       });
     },
     addWeight: function() {
       var weight = this.store.createRecord('weight');
       weight.set('course', this.get('model'));
-      this.get('weights').pushObject(weight);
+      this.get('model.weights').pushObject(weight);
     },
     removeWeight: function(weight) {
       this.get('weights').removeObject(weight);

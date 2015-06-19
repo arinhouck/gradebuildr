@@ -12,7 +12,7 @@ class CoursesController < ApplicationController
 
   def update
     @course = Course.find(params[:id])
-    if @course.update_attributes(params[:course])
+    if @course.update_attributes(course_params)
       render json: @course
     else
       render json: @course.errors, status: 500
@@ -27,6 +27,12 @@ class CoursesController < ApplicationController
     else
       render json: @course.errors, status: 500
     end
+  end
+
+  def destroy
+    @course = Course.find(params[:id])
+    @course.destroy
+    render json: @course, status: 200
   end
 
   private

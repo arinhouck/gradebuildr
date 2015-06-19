@@ -47,8 +47,10 @@
                     </div>
                   </td>
                   <td>
-                    <button type="button" name="button" class="btn btn-default btn-flat btn-xs" title="Edit">{{fa-icon 'edit'}}</button>
-                    <button type="button" name="button" class="btn btn-danger btn-flat btn-xs" title="Delete" {{action 'deleteCourse'}}>{{fa-icon 'trash'}}</button>
+                    {{#link-to 'dashboard.courses.edit' course class="btn btn-default btn-flat btn-xs"}}
+                      {{fa-icon 'edit'}}
+                    {{/link-to}}
+                    <button type="button" name="button" class="btn btn-danger btn-flat btn-xs" title="Delete" {{action 'deleteCourse' course}}>{{fa-icon 'trash'}}</button>
                   </td>
                 </tr>
               {{/each}}

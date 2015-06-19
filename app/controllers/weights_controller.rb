@@ -7,7 +7,7 @@ class WeightsController < ApplicationController
 
   def update
     @weight = Weight.find(params[:id])
-    if @weight.update_attributes(params[:weight])
+    if @weight.update_attributes(weight_params)
       render json: @weight
     else
       render json: @weight.errors, status: 500
