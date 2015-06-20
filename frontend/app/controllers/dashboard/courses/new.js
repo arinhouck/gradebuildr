@@ -28,6 +28,7 @@ export default Ember.Controller.extend({
         }
       }).then(function() {
         controller.transitionToRoute('dashboard.courses');
+        controller.send('updateIndex');
         $.growl.notice({title: 'Course', message: 'Sucessfully created.'});
       });
     },

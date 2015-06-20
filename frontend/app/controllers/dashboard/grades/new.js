@@ -24,16 +24,11 @@ export default Ember.Controller.extend({
     });
   }.observes('selectedCourse'),
 
-  setWeight: function() {
-    debugger;
-  }.observes('grade.selectedWeight'),
-
   actions: {
     createGrades: function() {
       var controller = this;
       var grades = this.get('grades');
       if (grades.length > 0) {
-        // TODO: Use Ember Promise (then doesn't work)
 
         this.set('isSaving', true);
 
@@ -43,14 +38,10 @@ export default Ember.Controller.extend({
 
         Ember.RSVP.all(promises).then(function(grades) {
           controller.transitionToRoute('dashboard.grades');
+          controller.send('updateIndex');
           $.growl.notice({title: 'Grades', message: 'Sucessfully created.'});
         });
 
-        // .then(function() {
-        //   controller.transitionToRoute('dashboard.grades').then(function() {
-        //     $.growl.notice({title: 'Grades', message: 'Sucessfully created.'});
-        //   });
-        // });
       }
     },
     addGrade: function() {

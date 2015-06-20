@@ -10,5 +10,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         weights: store.all('weight')
       }
     });
+  },
+  actions: {
+    updateIndex: function() {
+      this.refresh();
+    }
   }
 });
