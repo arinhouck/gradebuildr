@@ -2,6 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   grades: [],
+  isSaving: false,
+
+  isOpenDidChange: function() {
+    if (!this.get('isOpen') && !this.get('isSaving')) {
+      this.transitionToRoute('dashboard.grades');
+    }
+  }.observes('isOpen'),
 
   setCourse: function() {
     var controller = this;
@@ -17,24 +24,34 @@ export default Ember.Controller.extend({
     });
   }.observes('selectedCourse'),
 
+  setWeight: function() {
+    debugger;
+  }.observes('grade.selectedWeight'),
+
   actions: {
     createGrades: function() {
       var controller = this;
       var grades = this.get('grades');
-        if (grades.length > 0) {
-          // TODO: Use Ember Promise (then doesn't work)
-          grades.forEach(function(grade) {
-            controller.store.find('weight', grade.get('selectedWeight')).then(function(weight) {
-              grade.set('weight', weight)
-              grade.save();
-            });
-          });
-          // .then(function() {
-          //   controller.transitionToRoute('dashboard.grades').then(function() {
-          //     $.growl.notice({title: 'Grades', message: 'Sucessfully created.'});
-          //   });
-          // });
-        }
+      if (grades.length > 0) {
+        // TODO: Use Ember Promise (then doesn't work)
+
+        this.set('isSaving', true);
+
+        var promises = grades.map(function(grade) {
+            return grade.save();
+        }, []);
+
+        Ember.RSVP.all(promises).then(function(grades) {
+          controller.transitionToRoute('dashboard.grades');
+          $.growl.notice({title: 'Grades', message: 'Sucessfully created.'});
+        });
+
+        // .then(function() {
+        //   controller.transitionToRoute('dashboard.grades').then(function() {
+        //     $.growl.notice({title: 'Grades', message: 'Sucessfully created.'});
+        //   });
+        // });
+      }
     },
     addGrade: function() {
       var grade = this.store.createRecord('grade');

@@ -1,4 +1,4 @@
-{{#em-modal-form open-if=openModal configName="bs" id="editGradeModal" on-submit="editGrade" in-async=async}}
+{{#em-modal-form open-if=openModal is-open=isOpen configName="bs" id="editGradeModal" on-submit="editGrade" in-async=async}}
   {{#em-modal-title}}
     {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
     <h4 class="modal-title">Edit Grade</h4>
@@ -22,30 +22,7 @@
         }}
       </div>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col-sm-4">
-            {{input value=model.name class='form-control input-sm' placeholder='Enter grade name'}}
-          </div>
-          <div class="col-sm-4">
-            {{view "select"
-               content=gradeWeights
-               value=selectedWeight
-               optionValuePath="content.id"
-               optionLabelPath="content.name"
-               class='form-control input-sm'
-               prompt='Please select a grade weight'
-            }}
-          </div>
-          <div class="col-sm-4">
-            <div class="input-group">
-              {{input value=model.score class='form-control input-sm no-border' type='number' placeholder='Score'}}
-              <div class="input-group-addon lead no-border">/</div>
-              {{input value=model.scoreTotal class='form-control input-sm no-border' type='number' placeholder='Total'}}
-            </div>
-          </div>
-        </div>
-      </div>
+      {{grade-form grade=model gradeWeights=gradeWeights}}
     </div>
   {{/if}}
 {{/em-modal-body}}

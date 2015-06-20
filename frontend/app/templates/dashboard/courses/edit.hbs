@@ -1,4 +1,4 @@
-{{#em-modal-form open-if=openModal configName="bs" id="editCourseModal" on-submit="editCourse" in-async=async}}
+{{#em-modal-form open-if=openModal is-open=isOpen configName="bs" id="editCourseModal" on-submit="editCourse" in-async=async}}
   {{#em-modal-title}}
     {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
     <h4 class="modal-title">Edit Course</h4>
@@ -43,10 +43,10 @@
         {{#each weight in model.weights}}
           <div class="form-group">
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-xs-6">
                 {{input value=weight.name class='form-control input-sm' placeholder='Enter weight name'}}
               </div>
-              <div class="col-sm-6">
+              <div class="col-xs-6">
                 <div class="input-group">
                   {{input value=weight.percentage class='form-control input-sm' type='number' placeholder='Enter weight percentage'}}
                   <div class="input-group-addon">%</div>

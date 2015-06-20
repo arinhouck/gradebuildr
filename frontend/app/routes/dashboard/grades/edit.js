@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     controller.set('model', model);
     controller.set('courses', this.store.all('course'));
     controller.set('selectedCourse', model.get('course.id'));
-    controller.set('selectedWeight', model.get('weight.id'));
+    controller.set('model.selectedWeight', model.get('weight.id'));
   },
   actions: {
     willTransition: function() {

@@ -1,0 +1,24 @@
+<div class="form-group">
+  <div class="row">
+    <div class="col-sm-4 col-xs-6">
+      {{input value=grade.name class='form-control input-sm' placeholder='Enter grade name'}}
+    </div>
+    <div class="col-sm-4 col-xs-6">
+      {{view "select"
+         content=gradeWeights
+         value=grade.selectedWeight
+         optionValuePath="content.id"
+         optionLabelPath="content.name"
+         class='form-control input-sm'
+         prompt='Please select a grade weight'
+      }}
+    </div>
+    <div class="col-sm-4 col-xs-12">
+      <div class="input-group">
+        {{input value=grade.score class='form-control input-sm no-border' type='number' placeholder='Score'}}
+        <div class="input-group-addon lead no-border">/</div>
+        {{input value=grade.scoreTotal class='form-control input-sm no-border' type='number' placeholder='Total'}}
+      </div>
+    </div>
+  </div>
+</div>

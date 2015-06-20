@@ -1,6 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  isSaving: false,
+
+  isOpenDidChange: function() {
+    if (!this.get('isOpen') && !this.get('isSaving')) {
+      this.transitionToRoute('dashboard.grades');
+    }
+  }.observes('isOpen'),
 
   setCourse: function() {
     var controller = this;
@@ -18,13 +25,13 @@ export default Ember.Controller.extend({
     editGrade: function() {
       var controller = this;
       var grade = this.get('model');
-      controller.store.find('weight', this.get('selectedWeight')).then(function(weight) {
+      this.set('isSaving', true);
+      controller.store.find('weight', grade.get('selectedWeight')).then(function(weight) {
         grade.set('course', controller.get('course'));
         grade.set('weight', weight);
         grade.save().then(function() {
-          controller.transitionToRoute('dashboard.grades').then(function() {
-            $.growl.notice({title: 'Grade', message: 'Sucessfully updated.'});
-          });
+          controller.transitionToRoute('dashboard.grades');
+          $.growl.notice({title: 'Grade', message: 'Sucessfully updated.'});
         });
       });
 
