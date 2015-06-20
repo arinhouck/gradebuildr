@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.0.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -14,7 +15,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 
 gem 'ember-cli-rails'
-gem 'devise'
+gem 'devise', '~> 3.5.1'
 gem 'pry'
 gem 'font-awesome-rails'
 gem 'active_model_serializers'
