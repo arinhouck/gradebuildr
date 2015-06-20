@@ -13,15 +13,15 @@
         <div class="row">
           <div class="col-sm-4">
             <label for="subject">Subject</label>
-            {{input value=model.subject class='form-control' id="subject" placeholder='Enter subject name'}}
+            {{input value=model.subject class='form-control' required='true' id="subject" placeholder='Enter subject name'}}
           </div>
           <div class="col-sm-4">
             <label for="number">Number</label>
-            {{input value=model.number class='form-control' id="subjectNumber" type='number' placeholder='Enter subject number'}}
+            {{input value=model.number class='form-control'  required='true' id="subjectNumber" type='number' placeholder='Enter subject number'}}
           </div>
           <div class="col-sm-4">
             <label for="creditHours">Credit Hours</label>
-            {{input value=model.creditHours class='form-control' id='creditHours' type='number' placeholder='Enter credit hours'}}
+            {{input value=model.creditHours class='form-control' required='true' id='creditHours' type='number' placeholder='Enter credit hours'}}
           </div>
         </div>
       </div>
@@ -32,6 +32,7 @@
            value=model.gradingScale
            class='form-control'
            prompt='Please select a grading scale'
+           required='true'
         }}
       </div>
 
@@ -44,17 +45,17 @@
           <div class="form-group">
             <div class="row">
               <div class="col-xs-6">
-                {{input value=weight.name class='form-control input-sm' placeholder='Enter weight name'}}
+                {{input value=weight.name class='form-control input-sm' required='true' placeholder='Enter weight name'}}
               </div>
               <div class="col-xs-6">
                 <div class="input-group">
-                  {{input value=weight.percentage class='form-control input-sm' type='number' placeholder='Enter weight percentage'}}
+                  {{input value=weight.percentage class='form-control input-sm' required='true' type='number' placeholder='Enter weight percentage'}}
                   <div class="input-group-addon">%</div>
                 </div>
               </div>
             </div>
           </div>
-        {{ else }}
+        {{else}}
           <p class='text-muted'> No weights. </p>
         {{/each}}
       </div>
