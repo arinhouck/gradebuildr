@@ -29,6 +29,12 @@ class GradesController < ApplicationController
       end
     end
 
+    def destroy
+      @grade = Grade.find(params[:id])
+      @grade.destroy
+      render json: @grade, status: 200
+    end
+
     private
 
     def grade_params
