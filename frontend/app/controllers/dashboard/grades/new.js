@@ -17,10 +17,6 @@ export default Ember.Controller.extend({
     });
   }.observes('selectedCourse'),
 
-  weight: function() { // TODO: make this value unique by select
-    return this.store.find('weight', this.get('selectedWeight'));
-  }.property('selectedWeight'),
-
   actions: {
     createGrades: function() {
       var controller = this;
@@ -28,13 +24,16 @@ export default Ember.Controller.extend({
         if (grades.length > 0) {
           // TODO: Use Ember Promise (then doesn't work)
           grades.forEach(function(grade) {
-            grade.set('weight', controller.get('weight'))
-            grade.save();
-          }).then(function() {
-            controller.transitionToRoute('dashboard.grades').then(function() {
-              $.growl.notice({title: 'Grades', message: 'Sucessfully created.'});
+            controller.store.find('weight', grade.get('selectedWeight')).then(function(weight) {
+              grade.set('weight', weight)
+              grade.save();
             });
           });
+          // .then(function() {
+          //   controller.transitionToRoute('dashboard.grades').then(function() {
+          //     $.growl.notice({title: 'Grades', message: 'Sucessfully created.'});
+          //   });
+          // });
         }
     },
     addGrade: function() {

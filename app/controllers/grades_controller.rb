@@ -12,7 +12,7 @@ class GradesController < ApplicationController
 
     def update
       @grade = Grade.find(params[:id])
-      if @grade.update_attributes(params[:grade])
+      if @grade.update_attributes(grade_params)
         render json: @grade
       else
         render json: @grade.errors, status: 500
@@ -20,13 +20,19 @@ class GradesController < ApplicationController
     end
 
     def create
-      @grade = Grade.new(params[:grade])
+      @grade = Grade.new(grade_params)
 
       if @grade.save
         render json: @grade, status: :created
       else
         render json: @grade.errors, status: 500
       end
+    end
+
+    private
+
+    def grade_params
+      params.require(:grade).permit(:name, :weight_id, :user_id, :course_id, :score, :score_total)
     end
 
 end
