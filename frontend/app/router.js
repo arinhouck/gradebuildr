@@ -17,6 +17,7 @@ Router.map(function() {
     });
     this.route('grades', function() {
       this.route('new');
+      this.route('edit', {path: 'edit/:grade_id'});
     });
   });
 });
