@@ -30,6 +30,10 @@ export default DS.Model.extend({
   }.property('courses.creditHours'),
 
   semesterGpa: function() {
+    if (this.get('semesterCreditHours') == 0) {
+      return '—';
+    }
+
     var semesterGpa = this.get('semesterGradePoints') / this.get('semesterCreditHours')
     return semesterGpa.toFixed(2);
   }.property('semesterGradePoints', 'semesterCreditHours'),
