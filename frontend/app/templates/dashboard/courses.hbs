@@ -56,7 +56,13 @@
                     <button type="button" name="button" class="btn btn-danger btn-flat btn-xs" title="Delete" {{action 'deleteCourse' course}}>{{fa-icon 'trash'}}</button>
                   </td>
                 </tr>
-              {{/each}}
+                {{else}}
+                  <tr class='lead'>
+                    <td colspan='5' class='text-center'>
+                      No courses.
+                    </td>
+                  </tr>
+                {{/each}}
             </tbody>
           </table>
         </div>

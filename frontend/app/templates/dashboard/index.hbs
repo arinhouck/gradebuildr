@@ -82,13 +82,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{!-- Component for each grade row --}}
+                  {{#each grade in pagedGradeContent}}
+                    {{grade-row grade=grade}}
+                  {{else}}
+                    <tr class='lead'>
+                      <td colspan='5' class='text-center'>
+                        No grades.
+                      </td>
+                    </tr>
+                  {{/each}}
                 </tbody>
               </table>
             </div>
           </div>
           <div class="box-footer clearfix">
-            <a href="javascript::;" class="btn btn-sm btn-default btn-flat pull-right">View All Grades</a>
+            {{#link-to 'dashboard.grades' class="btn btn-sm btn-default btn-flat pull-right" id="newGrade"}}
+              View All Grades
+            {{/link-to}}
           </div>
         </div>
 
