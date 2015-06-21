@@ -1,5 +1,8 @@
-<div class="content-wrapper" style="min-height: 916px;">
+<div class="content-wrapper">
   <section class="content-header">
+    {{#link-to 'dashboard.grades.new' class="btn btn-sm btn-default btn-flat pull-right" id="newGrade"}}
+      New Grade
+    {{/link-to}}
     <h1>
       Grades
     </h1>
@@ -22,7 +25,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each grade in model}}
+              {{#each grade in pagedContent}}
                 <tr>
                   <td>{{grade.name}}</td>
                   <td>{{grade.course.name}}</td>
@@ -41,9 +44,7 @@
         </div>
       </div>
       <div class="box-footer clearfix">
-        {{#link-to 'dashboard.grades.new' class="btn btn-sm btn-default btn-flat pull-right" id="newGrade"}}
-          New Grade
-        {{/link-to}}
+        <span class='pull-right'>{{page-numbers content=pagedContent}}</span>
       </div>
     </div>
 
