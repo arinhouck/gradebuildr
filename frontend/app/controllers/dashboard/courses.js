@@ -2,6 +2,9 @@ import Ember from 'ember';
 import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
 export default Ember.Controller.extend({
+  sortProperties: ['createdAt:desc'],
+  sortedCourses: Ember.computed.sort('model.courses', 'sortProperties'),
+
   // setup our query params
   queryParams: ["page", "perPage"],
 
@@ -12,7 +15,7 @@ export default Ember.Controller.extend({
 
   // can be called anything, I've called it pagedContent
   // remember to iterate over pagedContent in your template
-  pagedContent: pagedArray('model.courses', {pageBinding: "page", perPageBinding: "perPage"}),
+  pagedContent: pagedArray('sortedCourses', {pageBinding: "page", perPageBinding: "perPage"}),
 
   // binding the property on the paged array
   // to a property on the controller

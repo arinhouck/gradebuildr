@@ -6,6 +6,7 @@ export default DS.Model.extend({
   weight: DS.belongsTo('weight', {async: true}),
   name: DS.attr('string'),
   score: DS.attr('number'),
-  scoreTotal: DS.attr('number')
+  scoreTotal: DS.attr('number'),
+  createdAt: DS.attr('date')
 
 });
