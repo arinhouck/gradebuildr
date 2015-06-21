@@ -1,8 +1,10 @@
 import Ember from 'ember';
-import LoginControllerMixin from 'simple-auth/mixins/login-controller-mixin';
+import DropdownComponentMixin from 'ember-rl-dropdown/mixins/rl-dropdown-component';
 
-export default Ember.Controller.extend(LoginControllerMixin, {
+export default Ember.Component.extend(DropdownComponentMixin,{
   authenticator: 'simple-auth-authenticator:devise',
+  tagName: 'li',
+  classNames: ['user', 'user-menu'],
 
   actions: {
     authenticate: function() {
@@ -12,9 +14,9 @@ export default Ember.Controller.extend(LoginControllerMixin, {
         $.growl.error({message: response.error})
       });
     },
-    toggleMenu: function() {
-      $('li.dropdown a').parent().toggleClass('open');
+    invalidateSession: function() {
+      this.get('session').invalidate();
+      this.send('toggleMenu');
     }
   }
-
 });

@@ -1,3 +1,4 @@
+
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
@@ -27,10 +28,10 @@ export default Ember.Controller.extend({
     }
   }.observes('isDashboard').on('init'),
 
-    actions: {
-      openModal: function(){
-        this.set('openModal', true);
-      }
+  actions: {
+    openModal: function(){
+      this.set('openModal', true);
     }
+  }
 
 });

@@ -1,0 +1,47 @@
+{{#if session.isAuthenticated}}
+    <a {{action "toggleDropdown"}} href="#" class="rl-dropdown-toggle">
+      Welcome, {{session.content.secure.name}}
+    </a>
+    {{#if dropdownExpanded}}
+    <ul class="dropdown-menu rl-dropdown">
+      <li class="user-footer">
+        <div class="pull-left">
+          <button href="#" class="btn btn-default btn-flat">Profile</button>
+        </div>
+        <div class="pull-right">
+          <button {{action 'invalidateSession'}} class="btn btn-default btn-flat">Log out</button>
+        </div>
+      </li>
+    </ul>
+    {{/if}}
+{{else}}
+  <a {{action "toggleDropdown" }} href="#" class="rl-dropdown-toggle">
+    <span>Login</span>
+  </a>
+
+  {{#if dropdownExpanded}}
+    <ul class="dropdown-menu rl-dropdown">
+        <li class="user-body">
+          {{loginErrorMessage}}
+          <form {{action "authenticate" on="submit"}}>
+          <div class="form-group">
+            <label for="identification">Email address</label><br />
+            {{input value=identification placeholder="Email address" type="text" name="email" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label><br />
+            {{input value=password placeholder="Password" type="password" name="password" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <div class="pull-left">
+              <button {{action 'toggleMenu'}} class="btn btn-default btn-flat" id="cancel">Cancel</button>
+            </div>
+            <div class="pull-right">
+              <button type="submit" class="btn btn-default btn-flat" id="login">Log in</button>
+            </div>
+          </div>
+          </form>
+        </li>
+    </ul>
+  {{/if}}
+{{/if}}
