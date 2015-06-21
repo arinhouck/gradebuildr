@@ -1,7 +1,7 @@
 {
   "name": "frontend",
-  "version": "0.0.0",
-  "description": "Small description for frontend goes here",
+  "version": "0.0.1",
+  "description": "Gradebuildr",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -13,11 +13,11 @@
     "test": "ember test",
     "postinstall": "node_modules/.bin/bower install"
   },
-  "repository": "",
+  "repository": "git://github.com/arinhouck/gradebuildr.git",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": "0.12.1"
   },
-  "author": "",
+  "author": "Arin Houck",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.4.1",

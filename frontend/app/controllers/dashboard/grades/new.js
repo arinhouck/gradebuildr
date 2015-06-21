@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   grades: [],
-  isSaving: false,
 
   isOpenDidChange: function() {
     if (!this.get('isOpen') && !this.get('isSaving')) {
@@ -12,16 +11,13 @@ export default Ember.Controller.extend({
 
   setCourse: function() {
     var controller = this;
+    var course = this.get('selectedCourse');
     this.set('grades', []); // Reset grades
     this.set('gradeWeights', []); // Reset gradeWeights
-
-    this.store.find('course', this.get('selectedCourse')).then(function(course){
-      controller.set('course', course);
+    if (course) {
       controller.send('addGrade'); // Push first grade
-      if (course) {
-        controller.set('gradeWeights', course.get('weights'));
-      }
-    });
+      controller.set('gradeWeights', course.get('weights'));
+    }
   }.observes('selectedCourse'),
 
   actions: {
@@ -47,7 +43,7 @@ export default Ember.Controller.extend({
     addGrade: function() {
       var grade = this.store.createRecord('grade');
       grade.set('user', this.get('model'));
-      grade.set('course', this.get('course'));
+      grade.set('course', this.get('selectedCourse'));
       this.get('grades').pushObject(grade);
     },
     removeGrade: function(grade) {

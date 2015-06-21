@@ -14,10 +14,11 @@
         <label for="course">Course</label>
         {{view "select"
            content=model.courses
-           value=selectedCourse
+           selection=selectedCourse
            optionValuePath="content.id"
            optionLabelPath="content.name"
            class='form-control'
+           id='selectCourse'
            prompt='Please select a course'
            required='true'
         }}
