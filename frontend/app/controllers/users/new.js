@@ -13,7 +13,6 @@ export default Ember.Controller.extend({
           password: user.get('password')
         }).then((function() {
           self.transitionToRoute('dashboard');
-          $.growl.notice({ message: "You have successfully registered." });
         }));
       }, function(response) {
         // self.set('errors', response.responseJSON.errors)
