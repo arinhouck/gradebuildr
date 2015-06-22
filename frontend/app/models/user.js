@@ -16,7 +16,6 @@ export default DS.Model.extend({
     var self = this;
     courses.forEach(function(course){
       gradePoints += self.scoreToGradePoints(course.get('currentGrade'), course)*(course.get('creditHours'))
-      debugger;
     });
     return gradePoints;
   }.property('courses.currentGrade', 'courses.creditHours'),
