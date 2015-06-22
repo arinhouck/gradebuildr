@@ -4,6 +4,23 @@
     </a>
     {{#if dropdownExpanded}}
     <ul class="dropdown-menu rl-dropdown">
+      <li class="user-header text-center">
+
+        <div class="img-circle university-badge">
+          <span>ASU</span>
+        </div>
+        <p>
+
+          <div class="row">
+            <div class="col-xs-6">
+              <small><b>Grade Points:</b> {{session.content.secure.gradePoints}}</small>
+            </div>
+              <div class="col-xs-6">
+                <small><b>Grade Units:</b> {{session.content.secure.gradeUnits}}</small>
+              </div>
+          </div>
+        </p>
+      </li>
       <li class="user-footer">
         <div class="pull-left">
           <button href="#" class="btn btn-default btn-flat">Profile</button>

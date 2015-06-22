@@ -32,8 +32,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
 
       t.string :name, null: false, default: ""
-      t.float :gradePoints
-      t.float :gradeUnits
+      t.float :grade_points, default: 0
+      t.float :grade_units, default: 0
 
       t.timestamps
     end

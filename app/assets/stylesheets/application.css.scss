@@ -28,3 +28,21 @@
 .dropdown-menu {
   display: block;
 }
+
+.university-badge {
+  z-index: 5;
+  height: 90px;
+  width: 90px;
+  background: #bbb;
+  border: 3px solid;
+  border-color: transparent;
+  display: inline-block;
+  border-color: rgba(255,255,255,0.2);
+}
+.university-badge > span {
+  vertical-align:middle;
+  line-height: 85px;
+  margin: 0;
+  font-size: 23px;
+  font-weight: 300;
+}
