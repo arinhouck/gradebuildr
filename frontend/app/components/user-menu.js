@@ -16,7 +16,6 @@ export default Ember.Component.extend(DropdownComponentMixin,{
     },
     invalidateSession: function() {
       this.get('session').invalidate();
-      this.send('toggleMenu');
     }
   }
 });
