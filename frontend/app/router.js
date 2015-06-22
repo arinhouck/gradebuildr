@@ -18,6 +18,10 @@ Router.map(function() {
       this.route('new');
       this.route('edit', {path: 'edit/:grade_id'});
     });
+
+    this.route('profile', function() {
+      this.route('edit');
+    });
   });
 });
 

@@ -10,11 +10,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     controller.set('model', model);
     controller.set('isSaving', false);
     controller.set('weights', []);
-  },
-  actions: {
-    willTransition: function() {
-      var course = this.controller.get('model');
-      course.rollback();
-    }
   }
 });

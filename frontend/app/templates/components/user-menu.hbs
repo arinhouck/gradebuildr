@@ -23,7 +23,9 @@
       </li>
       <li class="user-footer">
         <div class="pull-left">
-          <button href="#" class="btn btn-default btn-flat">Profile</button>
+          {{#link-to 'dashboard.profile.edit' class='btn btn-default btn-flat'}}
+            Profile
+          {{/link-to}}
         </div>
         <div class="pull-right">
           <button {{action 'invalidateSession'}} class="btn btn-default btn-flat">Log out</button>

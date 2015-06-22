@@ -9,13 +9,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     controller.set('model', model);
     controller.set('selectedCourse', void 0);
     controller.set('isSaving', false);
-  },
-  actions: {
-    willTransition: function() {
-      var grades = this.controller.get('grades');
-      grades.forEach(function(grade){
-        grade.rollback();
-      })
-    }
   }
 });
