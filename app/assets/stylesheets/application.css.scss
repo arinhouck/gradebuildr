@@ -16,6 +16,19 @@
 
  @import "font-awesome";
 
+  .modal {
+    overflow: none;
+    max-height: none;
+  }
+ .modal .modal-body {
+     max-height: 320px;
+     overflow-y: auto;
+ }
+ @media (min-width: 768px) {
+   .modal .modal-body {
+      max-height: 420px;
+   }
+}
  .skin-black .main-header .navbar-brand {
    border-right: none;
  }
