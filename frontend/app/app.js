@@ -12,6 +12,16 @@ App = Ember.Application.extend({
   Resolver: Resolver
 });
 
+Ember.Router.reopen({
+  notifyGoogleAnalytics: function() {
+    if (!ga) { return; }
+    return ga('send', 'pageview', {
+        'page': this.get('url'),
+        'title': this.get('url')
+      });
+  }.on('didTransition')
+});
+
 loadInitializers(App, config.modulePrefix);
 
 export default App;
