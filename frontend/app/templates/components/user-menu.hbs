@@ -1,16 +1,14 @@
 {{#if session.isAuthenticated}}
     <a {{action "toggleDropdown"}} href="#" class="rl-dropdown-toggle">
-      Welcome, {{session.content.secure.name}}
+      {{gravatar-image email=session.content.secure.email class='user-image'}}
+      <span class="hidden-xs">{{session.content.secure.name}}</span>
     </a>
     {{#if dropdownExpanded}}
     <ul class="dropdown-menu rl-dropdown">
       <li class="user-header text-center">
+        {{gravatar-image email=session.content.secure.email class='img-circle'}}
 
-        <div class="img-circle university-badge">
-          <span>ASU</span>
-        </div>
         <p>
-
           <div class="row">
             <div class="col-xs-6">
               <small><b>Grade Points:</b> {{session.content.secure.gradePoints}}</small>
