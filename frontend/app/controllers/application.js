@@ -31,6 +31,9 @@ export default Ember.Controller.extend({
   actions: {
     openModal: function(){
       this.set('openModal', true);
+    },
+    toggleSidebar: function() {
+      $('body').toggleClass('sidebar-collapse')
     }
   }
 

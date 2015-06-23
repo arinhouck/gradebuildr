@@ -11,6 +11,5 @@ export default Ember.Controller.extend({
 
   // can be called anything, I've called it pagedContent
   // remember to iterate over pagedContent in your template
-  pagedGradeContent: pagedArray('sortedGrades', {pageBinding: "page", perPageBinding: "perPage"}),
-
+  pagedGradeContent: pagedArray('sortedGrades', {pageBinding: "page", perPageBinding: "perPage"})
 });

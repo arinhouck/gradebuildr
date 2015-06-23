@@ -16,6 +16,9 @@
 
  @import "font-awesome";
 
+ .skin-black .main-header .navbar-brand {
+   border-right: none;
+ }
 
  div.checkbox > label > span {
    vertical-align: middle;
@@ -30,6 +33,7 @@
 }
 
 .user-menu {
+  z-index: 1000;
   small > b {
     display:block;
   }
