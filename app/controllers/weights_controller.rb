@@ -1,4 +1,5 @@
 class WeightsController < ApplicationController
+  before_filter :authenticate
 
   def show
     @weight = Weight.find(params[:id])
@@ -30,4 +31,9 @@ class WeightsController < ApplicationController
     params.require(:weight).permit(:name, :percentage, :course_id, :user_id)
   end
 
+  def authenticate
+    authenticate_or_request_with_http_token do |token, options|
+      User.find_by(authentication_token: token)
+    end
+  end
 end

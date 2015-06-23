@@ -32,3 +32,6 @@
 /frontend/libpeerconnection.log
 /frontend/npm-debug.log
 /frontend/testem.log
+
+# Ignore application configuration
+/config/application.yml

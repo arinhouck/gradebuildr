@@ -21,6 +21,7 @@ gem 'font-awesome-rails'
 gem 'active_model_serializers'
 
 gem 'rails_12factor', group: :production
+gem 'figaro'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

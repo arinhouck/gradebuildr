@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_filter :authenticate
 
   def index
     @courses = User.find(params[:user_id]).courses
@@ -39,6 +40,12 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(:subject, :number, :credit_hours, :grading_scale, :user_id)
+  end
+
+  def authenticate
+    authenticate_or_request_with_http_token do |token, options|
+      User.find_by(authentication_token: token)
+    end
   end
 
 end
