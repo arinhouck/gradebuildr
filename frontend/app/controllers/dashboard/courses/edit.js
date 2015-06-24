@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   scales: ['Regular', 'Plus/Minus', 'Plus', 'Minus'],
+  isntValid: Em.computed.not('isValid'),
+  weights: Em.computed.alias('model.weights'),
 
   isOpenDidChange: function() {
     if (!this.get('isOpen') && !this.get('isSaving')) {

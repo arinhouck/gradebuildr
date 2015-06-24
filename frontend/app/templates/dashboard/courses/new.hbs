@@ -1,59 +1,53 @@
-{{#em-modal-form open-if=openModal is-open=isOpen configName="bs" id="newCourseModal" on-submit="createCourse" in-async=async}}
+{{#em-modal-form open-if=openModal is-open=isOpen configName="bs" id="newCourseModal" on-submit="createCourse"}}
   {{#em-modal-title}}
     {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
     <h4 class="modal-title">New Course</h4>
   {{/em-modal-title}}
 
-{{#em-modal-body}}
-  {{#if async}}
-      <p class="lead text-center">Submitting, please wait...</p>
-  {{else}}
-    <div class="box-body">
-      <div class="form-group">
-        <div class="row">
-          <div class="col-sm-4">
-            <label for="subject">Subject</label>
-            {{input value=model.subject class='form-control' id="subject" required='true' placeholder='Enter subject name'}}
-          </div>
-          <div class="col-sm-4">
-            <label for="number">Number</label>
-            {{input value=model.number class='form-control' id="subjectNumber"  required='true' type='number' placeholder='Enter subject number'}}
-          </div>
-          <div class="col-sm-4">
-            <label for="creditHours">Credit Hours</label>
-            {{input value=model.creditHours class='form-control' id='creditHours' required='true' type='number' placeholder='Enter credit hours'}}
+  {{#em-modal-body}}
+      <div class="box-body">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <label for="subject">Subject</label>
+              {{input value=model.subject class='form-control' id="subject" required='true' placeholder='Enter subject name'}}
+            </div>
+            <div class="col-sm-4">
+              <label for="number">Number</label>
+              {{input value=model.number class='form-control' id="subjectNumber"  required='true' type='number' placeholder='Enter subject number'}}
+            </div>
+            <div class="col-sm-4">
+              <label for="creditHours">Credit Hours</label>
+              {{input value=model.creditHours class='form-control' id='creditHours' required='true' type='number' placeholder='Enter credit hours'}}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="gradingScale">Grading Scale</label>
-        {{view "select"
-           content=scales
-           value=model.gradingScale
-           class='form-control'
-           prompt='Please select a grading scale'
-           required='true'
-        }}
-      </div>
+        <div class="form-group">
+          <label for="gradingScale">Grading Scale</label>
+          {{view "select"
+             content=scales
+             value=model.gradingScale
+             class='form-control'
+             prompt='Please select a grading scale'
+             required='true'
+          }}
+        </div>
 
-      <div class="form-group">
-        <a class="label bg-green pull-right" {{action 'addWeight'}}><small>{{fa-icon 'plus'}} Add Weight</small></a>
-        <label for="weights">
-          <p>
-            Weights
-          </p>
-        </label>
-        {{#each weight in weights}}
-          {{weight-row weight=weight parent=this}}
-        {{else}}
-          <p class='text-muted'> No weights. </p>
-        {{/each}}
+        <div class="form-group">
+          <a class="label bg-green pull-right" {{action 'addWeight'}}><small>{{fa-icon 'plus'}} Add Weight</small></a>
+          <label for="weights">
+            <p> Weights </p>
+          </label>
+          {{#if isntValid}} <small class='text-red' style="margin-left: 10px;">(Weights must add up to 100%)</small> {{/if}}
+          {{#each weight in weights}}
+            {{weight-row weight=weight parent=this}}
+          {{else}}
+            <p class='text-muted'> No weights. </p>
+          {{/each}}
+        </div>
       </div>
-    </div>
-  {{/if}}
-{{/em-modal-body}}
-{{#em-modal-footer}}
-  <button type="submit" class="btn btn-primary btn-flat" id="createCourse" {{bind-attr disabled=async}}>New</button>
-{{/em-modal-footer}}
-
+  {{/em-modal-body}}
+  {{#em-modal-footer}}
+    <button type="submit" class="btn btn-primary btn-flat" id="createCourse" {{bind-attr disabled=isntValid}}>New</button>
+  {{/em-modal-footer}}
 {{/em-modal-form}}

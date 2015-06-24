@@ -1,13 +1,10 @@
-{{#em-modal-form open-if=openModal is-open=isOpen configName="bs" id="editCourseModal" on-submit="editCourse" in-async=async}}
+{{#em-modal-form open-if=openModal is-open=isOpen configName="bs" id="editCourseModal" on-submit="editCourse"}}
   {{#em-modal-title}}
     {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
     <h4 class="modal-title">Edit Course</h4>
   {{/em-modal-title}}
 
 {{#em-modal-body}}
-  {{#if model.async}}
-      Submitting, please wait...
-  {{else}}
     <div class="box-body">
       <div class="form-group">
         <div class="row">
@@ -39,8 +36,9 @@
       <div class="form-group">
         <a class="label bg-green pull-right" {{action 'addWeight'}}><small>{{fa-icon 'plus'}} Add Weight</small></a>
         <label for="weights">
-          Weights
+          <p> Weights </p>
         </label>
+        {{#if isntValid}} <small class='text-red' style="margin-left: 10px;">(Weights must add up to 100%)</small> {{/if}}
         {{#each weight in model.weights}}
           {{weight-row weight=weight parent=this editMode=true}}
         {{else}}
@@ -48,10 +46,9 @@
         {{/each}}
       </div>
     </div>
-  {{/if}}
 {{/em-modal-body}}
 {{#em-modal-footer}}
-  <button type="submit" class="btn btn-primary btn-flat" id="editCourse" {{bind-attr disabled=async}}>Save</button>
+  <button type="submit" class="btn btn-primary btn-flat" id="editCourse" {{bind-attr disabled=isntValid}}>Save</button>
 {{/em-modal-footer}}
 
 {{/em-modal-form}}

@@ -4,12 +4,26 @@ export default Ember.Component.extend({
   alertBox: false,
   confirm: false,
   weightToDelete: null,
+  onlyWeight: Ember.computed.equal('parent.weights.length', 1),
+
+  didInsertElement: function() {
+    this.validatePercentage();
+  },
+
+  validatePercentage: function(){
+    var percentageSum = 0;
+    var weights = this.get('parent.weights');
+    weights.forEach(function(weight) {
+      percentageSum += parseInt(weight.get('percentage'));
+    });
+
+    this.set('parent.isValid', percentageSum == 100);
+  }.observes('weight.percentage', 'parent.weights.length'),
 
   deleteWeight: function() {
     var weight = this.get('weightToDelete');
     var weights = this.get('parent.weights');
     if (this.get('editMode')) {
-      weights = this.get('parent.model.weights');
       weight.destroyRecord();
     }
     $.growl.notice({title: 'Weight', message: 'Successfully deleted.'});

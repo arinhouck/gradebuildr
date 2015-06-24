@@ -9,6 +9,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   setupController: function(controller, model) {
     controller.set('model', model);
     controller.set('isSaving', false);
-    controller.set('weights', []);
+    controller.set('weights', [ controller.store.createRecord('weight', {course: model}) ]);
   }
 });
