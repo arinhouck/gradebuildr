@@ -5,11 +5,11 @@
       <p>This application was made to help you track your grades in your college curriculum and properly weigh grades based on your course criteria.</p>
       <p>
         {{#if session.isAuthenticated}}
-          {{#link-to 'dashboard.index' class='btn btn-default btn-flat btn-md'}}
+          {{#link-to 'dashboard.index' class='btn btn-outline btn-flat'}}
             Go to Dashboard
           {{/link-to}}
         {{else}}
-          <a class="btn btn-default btn-flat btn-md" href="#" role="button">Learn more</a>
+          <a class="btn btn-flat btn-outline" href="#" role="button">Learn more</a>
         {{/if}}
       </p>
     </div>
