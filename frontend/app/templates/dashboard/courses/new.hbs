@@ -39,22 +39,12 @@
       <div class="form-group">
         <a class="label bg-green pull-right" {{action 'addWeight'}}><small>{{fa-icon 'plus'}} Add Weight</small></a>
         <label for="weights">
-          Weights
+          <p>
+            Weights
+          </p>
         </label>
         {{#each weight in weights}}
-          <div class="form-group">
-            <div class="row">
-              <div class="col-sm-6">
-                {{input value=weight.name class='form-control input-sm' required='true' placeholder='Enter weight name'}}
-              </div>
-              <div class="col-sm-6">
-                <div class="input-group">
-                  {{input value=weight.percentage class='form-control input-sm' required='true' type='number' placeholder='Enter weight percentage'}}
-                  <div class="input-group-addon">%</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {{weight-row weight=weight parent=this}}
         {{else}}
           <p class='text-muted'> No weights. </p>
         {{/each}}

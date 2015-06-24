@@ -33,9 +33,6 @@ export default Ember.Controller.extend({
       var weight = this.store.createRecord('weight');
       weight.set('course', this.get('model'));
       this.get('model.weights').pushObject(weight);
-    },
-    removeWeight: function(weight) {
-      this.get('weights').removeObject(weight);
     }
   }
 });

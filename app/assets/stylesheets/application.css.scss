@@ -20,17 +20,25 @@
     overflow: none;
     max-height: none;
   }
+  .center-button-sm {
+    vertical-align: middle;
+    line-height: 27px;
+  }
  .modal .modal-body {
      max-height: 320px;
      overflow-y: auto;
  }
  @media (min-width: 768px) {
    .modal .modal-body {
-      max-height: 420px;
+      max-height: 450px;
    }
-}
+  }
  .skin-black .main-header .navbar-brand {
    border-right: none;
+ }
+
+ .label-group > a {
+   margin-right: 5px;
  }
 
  div.checkbox > label > span {

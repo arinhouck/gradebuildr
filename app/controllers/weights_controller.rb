@@ -25,6 +25,12 @@ class WeightsController < ApplicationController
     end
   end
 
+  def destroy
+    @weight = Weight.find(params[:id])
+    @weight.destroy
+    render json: @weight, status: 200
+  end
+
   private
 
   def weight_params
