@@ -49,11 +49,15 @@
                       {{/each}}
                     </div>
                   </td>
-                  <td>
+                  <td class='label-group'>
                     {{#link-to 'dashboard.courses.edit' course class="btn btn-default btn-flat btn-xs"}}
                       {{fa-icon 'edit'}}
                     {{/link-to}}
-                    <button type="button" name="button" class="btn btn-danger btn-flat btn-xs" title="Delete" {{action 'deleteCourse' course}}>{{fa-icon 'trash'}}</button>
+                    {{#bs-popover title='Are you sure?' icon='trash' class="btn btn-danger btn-flat btn-xs" action='deleteCourse' model=course}}
+                      <p>
+                        <small class='text-red'><b>This will delete all grades associated with {{course.name}}.</b></small>
+                      </p>
+                    {{/bs-popover}}
                   </td>
                 </tr>
                 {{else}}

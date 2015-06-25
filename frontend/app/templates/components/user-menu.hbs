@@ -1,5 +1,5 @@
 {{#if session.isAuthenticated}}
-    <a {{action "toggleDropdown"}} href="#" class="rl-dropdown-toggle">
+    <a {{action "toggleDropdown"}} class="rl-dropdown-toggle">
       {{gravatar-image email=session.content.secure.email class='user-image'}}
       <span class="hidden-xs">{{session.content.secure.name}}</span>
     </a>
