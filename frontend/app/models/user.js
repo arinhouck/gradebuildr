@@ -18,7 +18,7 @@ export default DS.Model.extend({
       gradePoints += self.scoreToGradePoints(course.get('currentGrade'), course)*(course.get('creditHours'))
     });
     return gradePoints;
-  }.property('courses.currentGrade', 'courses.creditHours'),
+  }.property('courses.@each.currentGrade', 'courses.@each.creditHours'),
 
   semesterCreditHours: function() {
     var courses = this.get('courses');
@@ -27,7 +27,7 @@ export default DS.Model.extend({
       creditHours += course.get('creditHours')
     });
     return creditHours;
-  }.property('courses.creditHours'),
+  }.property('courses.@each.creditHours'),
 
   semesterGpa: function() {
     if (this.get('semesterCreditHours') == 0) {
@@ -36,7 +36,7 @@ export default DS.Model.extend({
 
     var semesterGpa = this.get('semesterGradePoints') / this.get('semesterCreditHours')
     return semesterGpa.toFixed(2);
-  }.property('semesterGradePoints', 'semesterCreditHours'),
+  }.property('courses.@each.currentGrade', 'courses.@each.creditHours'),
 
   cumulativeGpa: function() {
     var totalPoints = this.get('gradePoints') + this.get('semesterGradePoints');

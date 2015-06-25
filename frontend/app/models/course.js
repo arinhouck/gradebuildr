@@ -45,6 +45,6 @@ export default DS.Model.extend({
       return currentGrade.toFixed(2);
     }
 
-  }.property('grades.score', 'grades.scoreTotal', 'grades.weight'),
+  }.property('grades.@each.score', 'grades.@each.scoreTotal', 'grades.@each.weight'),
 
 });
