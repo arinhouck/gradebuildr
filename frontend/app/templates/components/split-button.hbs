@@ -1,0 +1,13 @@
+<button type="button" class="btn btn-default btn-flat btn-sm">{{#if selection}} {{selection}} {{else}} Filter by {{name}} {{/if}}</button>
+<button type="button" class="btn btn-default btn-flat btn-sm rl-dropdown-toggle" {{action "toggleDropdown"}}>
+  <span class="caret"></span>
+  <span class="sr-only">Toggle Dropdown</span>
+</button>
+{{#if dropdownExpanded}}
+<ul class="dropdown-menu rl-dropdown" role="menu">
+  <li><a {{action 'all'}}>All</a></li>
+  {{#each filterContent as |filter|}}
+    <li><a {{action 'filter' filter}}>{{filter}}</a></li>
+  {{/each}}
+</ul>
+{{/if}}
