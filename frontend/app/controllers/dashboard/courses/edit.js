@@ -19,11 +19,10 @@ export default Ember.Controller.extend({
       this.set('isSaving', true);
       course.save().then(function(course) {
         // TODO: Filter by is dirty
-        if (weights.length > 0) {
-          weights.forEach(function(weight) {
-            if (weight.get('isDirty')) {
+        var dirtyWeights = weights.filterProperty('isDirty')
+        if (dirtyWeights.length > 0) {
+          dirtyWeights.forEach(function(weight) {
               weight.save();
-            }
           });
         }
       }).then(function() {
