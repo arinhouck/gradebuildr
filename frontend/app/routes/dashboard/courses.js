@@ -11,7 +11,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     });
   },
   setupController: function(controller, model) {
-    debugger;
     controller.set('courses', model.courses);
     controller.set('semesters', model.semesters);
     controller.set('weights', model.weights);

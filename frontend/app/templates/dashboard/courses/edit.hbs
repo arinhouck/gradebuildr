@@ -23,6 +23,16 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="semester">Semester</label>
+        {{view "select"
+           content=semesterNames
+           value=model.semester
+           class='form-control'
+           prompt='Please select a semester'
+           required='true'
+        }}
+      </div>
+      <div class="form-group">
         <label for="gradingScale">Grading Scale</label>
         {{view "select"
            content=scales
@@ -32,7 +42,6 @@
            required='true'
         }}
       </div>
-
       <div class="form-group">
         <a class="label bg-green pull-right" {{action 'addWeight'}}><small>{{fa-icon 'plus'}} Add Weight</small></a>
         <label for="weights">

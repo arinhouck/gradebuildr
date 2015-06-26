@@ -25,9 +25,8 @@
         <div class="form-group">
           <label for="semester">Semester</label>
           {{view "select"
-             content=semesters
-             value=selectedSemester
-             optionLabelPath="content.name"
+             content=semesterNames
+             value=model.semester
              class='form-control'
              prompt='Please select a semester'
              required='true'

@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   scales: ['Regular', 'Plus/Minus', 'Plus', 'Minus'],
+  semesterNames: Ember.computed.alias('semesters.@each.name'),
   isntValid: Em.computed.not('isValid'),
 
   isOpenDidChange: function() {
@@ -9,10 +10,6 @@ export default Ember.Controller.extend({
       this.transitionToRoute('dashboard.courses');
     }
   }.observes('isOpen'),
-
-  selectionDidChange: function() {
-    this.set('model.semester', this.get('selectedSemester.name'))
-  }.observes('selectedSemester'),
 
   actions: {
     createCourse: function() {
