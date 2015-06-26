@@ -1,14 +1,15 @@
 <div class="content-wrapper">
   <section class="content-header">
     <span class="pull-right">
-      {{split-button parent=this filterContent=uniqueNames name='Course' filterBy='course.name'}}
+      {{split-button parent=this selection=selectedSemester filterContent=uniqueSemesters name='Semester'}}
+      {{split-button parent=this selection=selectedCourse filterContent=uniqueNames name='Course'}}
       {{#link-to 'dashboard.grades.new' class="btn btn-sm btn-success btn-flat" id="newGrade"}}
         New Grade
       {{/link-to}}
     </span>
 
     <h1>
-      Grades 
+      Grades
     </h1>
   </section>
 

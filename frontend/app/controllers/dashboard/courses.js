@@ -3,7 +3,22 @@ import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
 export default Ember.Controller.extend({
   sortProperties: ['createdAt:desc'],
-  sortedCourses: Ember.computed.sort('model.courses', 'sortProperties'),
+  sortedCourses: Ember.computed.sort('filteredCourses', 'sortProperties'),
+  semesterNames: Ember.computed.alias('semesters.@each.name'),
+  uniqueSemesters: Ember.computed.uniq('semesterNames'),
+  selectedSemester: null,
+
+  filteredCourses: function(){
+    var courses = this.get('courses');
+    var selectedSemester = this.get('selectedSemester');
+    var matched;
+    if (selectedSemester) {
+      matched = courses.filterBy('semester', selectedSemester);
+    } else {
+      matched = courses;
+    }
+    return matched;
+ }.property('courses', 'selectedSemester'),
 
   // setup our query params
   queryParams: ["page", "perPage"],
@@ -15,11 +30,11 @@ export default Ember.Controller.extend({
 
   // can be called anything, I've called it pagedContent
   // remember to iterate over pagedContent in your template
-  pagedContent: pagedArray('sortedCourses', {pageBinding: "page", perPageBinding: "perPage"}),
+  pagedContent: pagedArray('sortedCourses', {pageBinding: 'page', perPageBinding: 'perPage'}),
 
   // binding the property on the paged array
   // to a property on the controller
-  totalPagesBinding: "model.courses.totalPages",
+  totalPagesBinding: 'model.courses.totalPages',
 
   actions: {
     deleteCourse: function(course) {

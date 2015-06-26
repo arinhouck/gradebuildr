@@ -39,7 +39,7 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:subject, :number, :credit_hours, :grading_scale, :user_id)
+    params.require(:course).permit(:subject, :number, :credit_hours, :grading_scale, :user_id, :semester)
   end
 
   def authenticate

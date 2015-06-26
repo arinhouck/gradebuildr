@@ -4,11 +4,15 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function() {
     var store = this.store;
-    return store.createRecord('course');
+    return Ember.RSVP.hash({
+      course: store.createRecord('course'),
+      semesters: store.find('semester')
+    });
   },
   setupController: function(controller, model) {
-    controller.set('model', model);
+    controller.set('model', model.course);
+    controller.set('semesters', model.semesters);
     controller.set('isSaving', false);
-    controller.set('weights', [ controller.store.createRecord('weight', {course: model}) ]);
+    controller.set('weights', [ controller.store.createRecord('weight', {course: model.course}) ]);
   }
 });

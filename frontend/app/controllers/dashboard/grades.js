@@ -3,22 +3,32 @@ import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
 export default Ember.Controller.extend({
   sortProperties: ['createdAt:desc'],
+  semesterNames: Ember.computed.alias('semesters.@each.name'),
+  uniqueSemesters: Ember.computed.uniq('semesterNames'),
   sortedGrades: Ember.computed.sort('filteredGrades', 'sortProperties'),
   courses: Ember.computed.alias('model.@each.course'),
   names: Ember.computed.alias('courses.@each.name'),
   uniqueNames: Ember.computed.uniq('names'),
+  selectedSemester: null,
+  selectedCourse: null,
 
-  filteredGrades: function() {
-    return this.get('model');
-  }.on('init').property(),
-
-  filterContent: function(filtered) {
-    if (filtered) {
-      this.set('filteredGrades', filtered);
+  filteredGrades: function(){
+    var grades = this.get('model');
+    var selectedSemester = this.get('selectedSemester');
+    var selectedCourse = this.get('selectedCourse');
+    var matched;
+    if(selectedSemester && selectedCourse) {
+      var matched = grades.filterBy("course.semester", selectedSemester).
+                           filterBy('course.name', selectedCourse);
+    } else if (selectedSemester) {
+      matched = grades.filterBy("course.semester", selectedSemester);
+    } else if (selectedCourse) {
+      matched = grades.filterBy("course.name", selectedCourse);
     } else {
-      this.set('filteredGrades', this.get('model'));
+      matched = grades;
     }
-  },
+    return matched;
+ }.property('model', 'selectedSemester', 'selectedCourse'),
 
   // setup our query params
   queryParams: ["page", "perPage"],

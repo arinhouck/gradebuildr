@@ -8,6 +8,7 @@ export default DS.Model.extend({
   number: DS.attr('number'),
   creditHours: DS.attr('number'),
   gradingScale: DS.attr('string'),
+  semester: DS.attr('string'),
   createdAt: DS.attr('date'),
 
   name: function() {

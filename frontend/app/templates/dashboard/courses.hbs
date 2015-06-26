@@ -1,8 +1,11 @@
 <div class="content-wrapper">
   <section class="content-header">
-    {{#link-to 'dashboard.courses.new' class="btn btn-sm btn-success btn-flat pull-right" id="newCourse"}}
-      New Course
-    {{/link-to}}
+    <span class='pull-right'>
+      {{split-button parent=this selection=selectedSemester filterContent=uniqueSemesters name='Semester'}}
+      {{#link-to 'dashboard.courses.new' class="btn btn-sm btn-success btn-flat" id="newCourse"}}
+        New Course
+      {{/link-to}}
+    </span>
     <h1>
       Courses
     </h1>
@@ -21,6 +24,7 @@
                 <th>Credit Hours</th>
                 <th>Current Grade</th>
                 <th>Grading Scale</th>
+                <th>Semester</th>
                 <th>Weights</th>
                 <th>Actions</th>
               </tr>
@@ -41,6 +45,9 @@
                   </td>
                   <td>
                     {{course.gradingScale}}
+                  </td>
+                  <td>
+                    {{course.semester}}
                   </td>
                   <td>
                     <div class="progress">
