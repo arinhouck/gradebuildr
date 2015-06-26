@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
       matched = courses;
     }
     return matched;
- }.property('courses', 'selectedSemester'),
+ }.property('courses', 'courses.[]', 'selectedSemester'),
 
   // setup our query params
   queryParams: ["page", "perPage"],
