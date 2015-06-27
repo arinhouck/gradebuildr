@@ -19,7 +19,6 @@ export default Ember.Controller.extend({
       var weights = this.get('model.weights');
       this.set('isSaving', true);
       course.save().then(function(course) {
-        // TODO: Filter by is dirty
         var dirtyWeights = weights.filterProperty('isDirty')
         if (dirtyWeights.length > 0) {
           dirtyWeights.forEach(function(weight) {
