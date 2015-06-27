@@ -6,54 +6,7 @@
 
 {{#em-modal-body}}
     <div class="box-body">
-      <div class="form-group">
-        <div class="row">
-          <div class="col-sm-4">
-            <label for="subject">Subject</label>
-            {{input value=model.subject class='form-control' required='true' id="subject" placeholder='Enter subject name'}}
-          </div>
-          <div class="col-sm-4">
-            <label for="number">Number</label>
-            {{input value=model.number class='form-control'  required='true' id="subjectNumber" type='number' placeholder='Enter subject number'}}
-          </div>
-          <div class="col-sm-4">
-            <label for="creditHours">Credit Hours</label>
-            {{input value=model.creditHours class='form-control' required='true' id='creditHours' type='number' placeholder='Enter credit hours'}}
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="semester">Semester</label>
-        {{view "select"
-           content=semesterNames
-           value=model.semester
-           class='form-control'
-           prompt='Please select a semester'
-           required='true'
-        }}
-      </div>
-      <div class="form-group">
-        <label for="gradingScale">Grading Scale</label>
-        {{view "select"
-           content=scales
-           value=model.gradingScale
-           class='form-control'
-           prompt='Please select a grading scale'
-           required='true'
-        }}
-      </div>
-      <div class="form-group">
-        <a class="label bg-green pull-right" {{action 'addWeight'}}><small>{{fa-icon 'plus'}} Add Weight</small></a>
-        <label for="weights">
-          <p> Weights </p>
-        </label>
-        {{#if isntValid}} <small class='text-red' style="margin-left: 10px;">(Weights must add up to 100%)</small> {{/if}}
-        {{#each weight in model.weights}}
-          {{weight-row weight=weight parent=this editMode=true}}
-        {{else}}
-          <p class='text-muted'> No weights. </p>
-        {{/each}}
-      </div>
+      {{partial "dashboard/courses/form"}}
     </div>
 {{/em-modal-body}}
 {{#em-modal-footer}}
