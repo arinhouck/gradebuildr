@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
 
   // binding the property on the paged array
   // to a property on the controller
-  totalPagesBinding: 'model.courses.totalPages',
+  totalPagesBinding: 'courses.totalPages',
 
   actions: {
     deleteCourse: function(course) {

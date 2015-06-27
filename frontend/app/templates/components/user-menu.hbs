@@ -1,20 +1,20 @@
 {{#if session.isAuthenticated}}
     <a {{action "toggleDropdown"}} class="rl-dropdown-toggle">
-      {{gravatar-image email=session.content.secure.email class='user-image'}}
-      <span class="hidden-xs">{{session.content.secure.name}}</span>
+      {{gravatar-image email=session.currentUser.email class='user-image'}}
+      <span class="hidden-xs">{{session.currentUser.name}}</span>
     </a>
     {{#if dropdownExpanded}}
     <ul class="dropdown-menu rl-dropdown">
       <li class="user-header text-center">
-        {{gravatar-image email=session.content.secure.email class='img-circle'}}
+        {{gravatar-image email=session.currentUser.email class='img-circle'}}
 
         <p>
           <div class="row">
             <div class="col-xs-6">
-              <small><b>Grade Points:</b> {{session.content.secure.gradePoints}}</small>
+              <small><b>Grade Points:</b> {{session.currentUser.gradePoints}}</small>
             </div>
               <div class="col-xs-6">
-                <small><b>Grade Units:</b> {{session.content.secure.gradeUnits}}</small>
+                <small><b>Grade Units:</b> {{session.currentUser.gradeUnits}}</small>
               </div>
           </div>
         </p>

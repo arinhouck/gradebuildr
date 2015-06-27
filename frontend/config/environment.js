@@ -21,7 +21,7 @@ module.exports = function(environment) {
 
   ENV['simple-auth'] = {
     authorizer: 'simple-auth-authorizer:devise',
-    session: 'session:withCurrentUser',
+    session: 'session:custom',
     authenticationRoute: 'index',
     routeAfterAuthentication: 'dashboard'
   }

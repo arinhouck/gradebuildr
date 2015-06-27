@@ -6,14 +6,14 @@ export default Ember.Controller.extend({
   semesterNames: Ember.computed.alias('semesters.@each.name'),
   uniqueSemesters: Ember.computed.uniq('semesterNames'),
   sortedGrades: Ember.computed.sort('filteredGrades', 'sortProperties'),
-  courses: Ember.computed.alias('model.@each.course'),
+  courses: Ember.computed.alias('grades.@each.course'),
   names: Ember.computed.alias('courses.@each.name'),
   uniqueNames: Ember.computed.uniq('names'),
   selectedSemester: null,
   selectedCourse: null,
 
   filteredGrades: function(){
-    var grades = this.get('model');
+    var grades = this.get('grades');
     var selectedSemester = this.get('selectedSemester');
     var selectedCourse = this.get('selectedCourse');
     var matched;
@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
       matched = grades;
     }
     return matched;
- }.property('model', 'model.[]', 'selectedSemester', 'selectedCourse'),
+ }.property('grades', 'grades.[]', 'selectedSemester', 'selectedCourse'),
 
   // setup our query params
   queryParams: ["page", "perPage"],
@@ -44,6 +44,6 @@ export default Ember.Controller.extend({
 
   // binding the property on the paged array
   // to a property on the controller
-  totalPagesBinding: "model.totalPages"
+  totalPagesBinding: "grades.totalPages"
 
 });

@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import { initialize } from '../../../initializers/custom-session';
+import { initialize } from '../../../initializers/session-store';
 import { module, test } from 'qunit';
 
 var container, application;
 
-module('Unit | Initializer | custom session', {
+module('Unit | Initializer | session store', {
   beforeEach: function() {
     Ember.run(function() {
       application = Ember.Application.create();
