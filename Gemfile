@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
+gem 'puma'
 gem 'ember-cli-rails'
 gem 'devise', '~> 3.5.1'
 gem 'pry'
