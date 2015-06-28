@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  semesterNames: Ember.computed.alias('semesters.@each.name'),
+
 
   isOpenDidChange: function() {
     if (!this.get('isOpen') && !this.get('isSaving')) {

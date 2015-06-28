@@ -2,12 +2,16 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  model: function() {
-    return this.store.find('user', this.get('session.content.secure.id'));
-  },
   setupController: function(controller, model) {
-    controller.set('model', model);
+    this.get('session.currentUser').then(function(user) {
+      controller.set('model', user);
+    });
     controller.set('selectedCourse', void 0);
     controller.set('isSaving', false);
+  },
+  deactivate: function() {
+    this.get('controller.grades').filterProperty('isDirty').forEach(function(grade) {
+      grade.rollback();
+    });
   }
 });

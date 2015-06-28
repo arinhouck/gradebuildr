@@ -1,0 +1,63 @@
+{{#em-modal-form open-if=openModal configName="bs" id="registerModal" on-submit="register" in-async=async}}
+  {{#em-modal-title}}
+    {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+    <h4 class="modal-title">Register</h4>
+  {{/em-modal-title}}
+  {{#em-modal-body}}
+    {{#if model.async}}
+        Submitting, please wait...
+    {{else}}
+
+    <form role="form">
+      <div class="box-body">
+        <div class="form-group">
+          <label for="name">Name</label>
+          {{input value=model.name class='form-control' id="name" placeholder='Enter name'}}
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="gradePoints">Grade Points</label>
+              {{input value=model.gradePoints class='form-control' id="gradePoints" placeholder='Enter grade points'}}
+            </div>
+            <div class="col-sm-6">
+              <label for="gradeUnits">Grade Units towards GPA</label>
+              {{input value=model.gradeUnits class='form-control' id="gradeUnits" placeholder='Enter grade units'}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="semester">Active Semester</label>
+          {{view "select"
+             content=semesterNames
+             value=model.activeSemester
+             class='form-control'
+             prompt='Please select a semester'
+             required='true'
+          }}
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          {{input value=model.email type='email' class='form-control' id="email" placeholder='Enter email'}}
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          {{input value=model.password type='password' class='form-control' id="password"}}
+        </div>
+        <div class="form-group">
+          <label for="passwordConfirmation">Confirm Password</label>
+          {{input value=model.password_confirmation type='password' class='form-control' id="passwordConfirmation"}}
+        </div>
+        {{!-- <div class="checkbox">
+          <label>
+            <input type="checkbox" id="promote" checked> <span>Would you like to recieve emails with updates about Gradetrackr?</span>
+          </label>
+        </div> --}}
+      </div>
+    </form>
+    {{/if}}
+  {{/em-modal-body}}
+  {{#em-modal-footer}}
+    <button type="submit" class="btn btn-primary btn-flat" id="createUser" {{bind-attr disabled=async}} {{action "createUser"}}>Submit</button>
+  {{/em-modal-footer}}
+{{/em-modal-form}}

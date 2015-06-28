@@ -3,9 +3,14 @@ import UnauthenticatedRouteMixin from 'simple-auth/mixins/unauthenticated-route-
 
 export default Ember.Route.extend(UnauthenticatedRouteMixin, {
   model: function() {
-    return this.store.createRecord('user');
+    var store = this.store;
+    return Ember.RSVP.hash({
+      user: store.createRecord('user'),
+      semesters: store.find('semester')
+    });
   },
   setupController: function(controller, model){
-    controller.set('model', model);
+    controller.set('model', model.user);
+    controller.set('semesters', model.semesters)
   }
 });

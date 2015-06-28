@@ -2,10 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   model: {},
+  semesterNames: Ember.computed.alias('semesters.@each.name'),
 
   actions: {
     createUser: function() {
-      var user = this.store.createRecord('user', this.get('model'));
+      var user = this.get('model');
       var self = this;
       user.save().then(function() {
         self.get('session').authenticate('simple-auth-authenticator:devise', {
@@ -15,7 +16,6 @@ export default Ember.Controller.extend({
           self.transitionToRoute('dashboard');
         }));
       }, function(response) {
-        // self.set('errors', response.responseJSON.errors)
         user.rollback();
         var errors = response.responseJSON.errors;
         errors.forEach(function(error_message){

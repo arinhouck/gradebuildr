@@ -1,11 +1,14 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function() {
-    return this.store.find('user', this.get('session.content.secure.id'));
-  },
   setupController: function(controller, model) {
-    controller.set('model', model);
+    var store = controller.get('store');
+    this.get('session.currentUser').then(function(user) {
+      controller.set('model', user);
+      store.find('semester').then(function(semesters) {
+        controller.set('semesters', semesters);
+      });
+    });
     controller.set('isSaving', false);
   }
 });

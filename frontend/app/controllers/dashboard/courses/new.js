@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
       var course = this.get('model');
       var weights = this.get('weights');
       this.set('isSaving', true);
-      this.store.find('user', this.get('session.content.secure.id')).then(function(user) {
+      this.get('session.currentUser').then(function(user) {
         course.set('user', user);
         return course.save();
       }).then(function(course) {

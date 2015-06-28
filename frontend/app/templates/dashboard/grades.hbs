@@ -30,7 +30,7 @@
             </thead>
             <tbody>
               {{#each grade in pagedContent}}
-                {{grade-row grade=grade}}
+                {{grade-row parent=this grade=grade}}
               {{else}}
                 <tr class='lead'>
                   <td colspan='5' class='text-center'>

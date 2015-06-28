@@ -34,12 +34,14 @@ export default Ember.Controller.extend({
 
   // binding the property on the paged array
   // to a property on the controller
-  totalPagesBinding: 'courses.totalPages',
+  totalPagesBinding: 'sortedCourses.totalPages',
 
   actions: {
     deleteCourse: function(course) {
+      var controller = this;
       var courseName = course.get('name');
       course.destroyRecord().then(function() {
+        controller.get('courses').removeObject(course);
         $.growl.notice({ title: 'Course', message: "Sucessfully deleted " + courseName + "."})
       });
     }

@@ -6,9 +6,6 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('users', function() {
-    this.route('new');
-  });
   this.route('dashboard', function() {
     this.route('courses', function() {
       this.route('new');
@@ -18,11 +15,11 @@ Router.map(function() {
       this.route('new');
       this.route('edit', {path: 'edit/:grade_id'});
     });
-
     this.route('profile', function() {
       this.route('edit');
     });
   });
+  this.route('register');
 });
 
 export default Router;

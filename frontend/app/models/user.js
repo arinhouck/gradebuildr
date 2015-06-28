@@ -7,11 +7,12 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   gradePoints: DS.attr('number'),
   gradeUnits: DS.attr('number'),
+  activeSemester: DS.attr('string'),
   password: DS.attr('string'),
   password_confirmation: DS.attr('string'),
 
   semesterGradePoints: function() {
-    var courses = this.get('courses');
+    var courses = this.get('courses').filterBy('semester', this.get('activeSemester'));
     var gradePoints = 0;
     var self = this;
     courses.forEach(function(course){
@@ -21,7 +22,7 @@ export default DS.Model.extend({
   }.property('courses.@each.currentGrade', 'courses.@each.creditHours'),
 
   semesterCreditHours: function() {
-    var courses = this.get('courses');
+    var courses = this.get('courses').filterBy('semester', this.get('activeSemester'));
     var creditHours = 0;
     courses.forEach(function(course) {
       creditHours += course.get('creditHours')
@@ -38,9 +39,34 @@ export default DS.Model.extend({
     return semesterGpa.toFixed(2);
   }.property('courses.@each.currentGrade', 'courses.@each.creditHours'),
 
+  inactiveSemesterGradePoints: function() {
+    var model = this;
+    var courses = this.get('courses').filter(function(course) {
+      return course.get('semester') !== model.get('activeSemester')
+    });
+    var gradePoints = 0;
+    var self = this;
+    courses.forEach(function(course){
+      gradePoints += self.scoreToGradePoints(course.get('currentGrade'), course)*(course.get('creditHours'))
+    });
+    return gradePoints;
+  }.property('courses.@each.currentGrade', 'courses.@each.creditHours'),
+
+  inactiveSemesterCreditHours: function() {
+    var model = this;
+    var courses = this.get('courses').filter(function(course) {
+      return course.get('semester') !== model.get('activeSemester')
+    });
+    var creditHours = 0;
+    courses.forEach(function(course) {
+      creditHours += course.get('creditHours')
+    });
+    return creditHours;
+  }.property('courses.@each.creditHours'),
+
   cumulativeGpa: function() {
-    var totalPoints = this.get('gradePoints') + this.get('semesterGradePoints');
-    var totalUnits = this.get('gradeUnits') + this.get('semesterCreditHours');
+    var totalPoints = this.get('gradePoints') + this.get('semesterGradePoints') + this.get('inactiveSemesterGradePoints');
+    var totalUnits = this.get('gradeUnits') + this.get('semesterCreditHours') + this.get('inactiveSemesterCreditHours');
     if (totalUnits == 0) {
       return '—';
     }

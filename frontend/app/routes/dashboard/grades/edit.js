@@ -7,5 +7,8 @@ export default Ember.Route.extend({
     controller.set('courses', this.store.all('course'));
     controller.set('selectedCourse', model.get('course.id'));
     controller.set('model.selectedWeight', model.get('weight.id'));
+  },
+  deactivate: function() {
+    this.get('controller.model').rollback();
   }
 });

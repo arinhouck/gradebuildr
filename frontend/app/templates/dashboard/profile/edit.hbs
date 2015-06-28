@@ -26,6 +26,16 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="semester">Active Semester</label>
+        {{view "select"
+           content=semesterNames
+           value=model.activeSemester
+           class='form-control'
+           prompt='Please select a semester'
+           required='true'
+        }}
+      </div>
+      <div class="form-group">
         <label for="email">Email address</label>
         {{input value=model.email type='email' class='form-control' id="email" placeholder='Enter email'}}
       </div>
