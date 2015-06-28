@@ -5,30 +5,29 @@ export default Ember.Controller.extend({
   sortProperties: ['createdAt:desc'],
   semesterNames: Ember.computed.alias('semesters.@each.name'),
   uniqueSemesters: Ember.computed.uniq('semesterNames'),
-  sortedGrades: Ember.computed.sort('filteredGrades', 'sortProperties'),
+  sortedGrades: Ember.computed.sort('grades', 'sortProperties'),
+  filteredGrades: Ember.computed.defaultTo('sortedGrades'),
   courses: Ember.computed.alias('grades.@each.course'),
   names: Ember.computed.alias('courses.@each.name'),
   uniqueNames: Ember.computed.uniq('names'),
   selectedSemester: null,
   selectedCourse: null,
 
-  filteredGrades: function(){
-    var grades = this.get('grades');
+  gradesDidChange: function(){
+    var grades = this.get('sortedGrades');
     var selectedSemester = this.get('selectedSemester');
     var selectedCourse = this.get('selectedCourse');
-    var matched;
     if(selectedSemester && selectedCourse) {
-      var matched = grades.filterBy("course.semester", selectedSemester).
-                           filterBy('course.name', selectedCourse);
+      this.set('filteredGrades', grades.filterBy("course.semester", selectedSemester).
+                           filterBy('course.name', selectedCourse));
     } else if (selectedSemester) {
-      matched = grades.filterBy("course.semester", selectedSemester);
+      this.set('filteredGrades', grades.filterBy("course.semester", selectedSemester));
     } else if (selectedCourse) {
-      matched = grades.filterBy("course.name", selectedCourse);
+      this.set('filteredGrades', grades.filterBy("course.name", selectedCourse));
     } else {
-      matched = grades;
+      this.set('filteredGrades', grades);
     }
-    return matched;
- }.property('grades', 'grades.[]', 'selectedSemester', 'selectedCourse'),
+ }.observes('sortedGrades', 'sortedGrades.[]', 'selectedSemester', 'selectedCourse'),
 
   // setup our query params
   queryParams: ["page", "perPage"],
@@ -40,10 +39,10 @@ export default Ember.Controller.extend({
 
   // can be called anything, I've called it pagedContent
   // remember to iterate over pagedContent in your template
-  pagedContent: pagedArray('sortedGrades', {pageBinding: "page", perPageBinding: "perPage"}),
+  pagedContent: pagedArray('filteredGrades', {pageBinding: "page", perPageBinding: "perPage"}),
 
   // binding the property on the paged array
   // to a property on the controller
-  totalPagesBinding: "grades.totalPages"
+  totalPagesBinding: "pagedContent.totalPages"
 
 });

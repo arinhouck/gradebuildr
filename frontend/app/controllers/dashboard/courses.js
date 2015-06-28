@@ -3,22 +3,21 @@ import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
 export default Ember.Controller.extend({
   sortProperties: ['createdAt:desc'],
-  sortedCourses: Ember.computed.sort('filteredCourses', 'sortProperties'),
+  sortedCourses: Ember.computed.sort('courses', 'sortProperties'),
   semesterNames: Ember.computed.alias('semesters.@each.name'),
   uniqueSemesters: Ember.computed.uniq('semesterNames'),
   selectedSemester: null,
+  filteredCourses: Ember.computed.defaultTo('sortedCourses'),
 
-  filteredCourses: function(){
-    var courses = this.get('courses');
+  coursesDidChange: function() {
+    var courses = this.get('sortedCourses');
     var selectedSemester = this.get('selectedSemester');
-    var matched;
     if (selectedSemester) {
-      matched = courses.filterBy('semester', selectedSemester);
+      this.set('filteredCourses', courses.filterBy('semester', selectedSemester));
     } else {
-      matched = courses;
+      this.set('filteredCourses', courses);
     }
-    return matched;
- }.property('courses', 'courses.[]', 'selectedSemester'),
+ }.observes('sortedCourses', 'sortedCourses.[]', 'selectedSemester'),
 
   // setup our query params
   queryParams: ["page", "perPage"],
@@ -30,18 +29,18 @@ export default Ember.Controller.extend({
 
   // can be called anything, I've called it pagedContent
   // remember to iterate over pagedContent in your template
-  pagedContent: pagedArray('sortedCourses', {pageBinding: 'page', perPageBinding: 'perPage'}),
+  pagedContent: pagedArray('filteredCourses', {pageBinding: 'page', perPageBinding: 'perPage'}),
 
   // binding the property on the paged array
   // to a property on the controller
-  totalPagesBinding: 'sortedCourses.totalPages',
+  totalPagesBinding: 'pagedContent.totalPages',
 
   actions: {
     deleteCourse: function(course) {
       var controller = this;
       var courseName = course.get('name');
       course.destroyRecord().then(function() {
-        controller.get('courses').removeObject(course);
+        controller.get('pagedContent').removeObject(course);
         $.growl.notice({ title: 'Course', message: "Sucessfully deleted " + courseName + "."})
       });
     }
