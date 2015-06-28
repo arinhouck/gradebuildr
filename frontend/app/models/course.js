@@ -16,6 +16,7 @@ export default DS.Model.extend({
   }.property('subject', 'number'),
 
   currentGrade: function() {
+    var model = this;
     var weights = this.get('weights');
     var gradePoints = [], gradePointsTotal = [], weightGrades = [];
 
@@ -23,7 +24,7 @@ export default DS.Model.extend({
       gradePoints[i] = 0;
       gradePointsTotal[i] = 0;
 
-      var grades = weight.get('grades');
+      var grades = model.get('grades').filterBy('weight', weight);
 
       grades.forEach(function(grade) {
         gradePoints[i] += grade.get('score');
@@ -46,6 +47,6 @@ export default DS.Model.extend({
       return currentGrade.toFixed(2);
     }
 
-  }.property('grades.@each.score', 'grades.@each.scoreTotal', 'grades.@each.weight'),
+  }.property('grades.@each.score', 'grades.@each.scoreTotal', 'grades.@each.weight', 'weights.@each.percentage', 'semester'),
 
 });

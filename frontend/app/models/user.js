@@ -19,7 +19,7 @@ export default DS.Model.extend({
       gradePoints += self.scoreToGradePoints(course.get('currentGrade'), course)*(course.get('creditHours'))
     });
     return gradePoints;
-  }.property('courses.@each.currentGrade', 'courses.@each.creditHours'),
+  }.property('courses.@each.currentGrade', 'courses.@each.creditHours', 'activeSemester'),
 
   semesterCreditHours: function() {
     var courses = this.get('courses').filterBy('semester', this.get('activeSemester'));
@@ -37,7 +37,7 @@ export default DS.Model.extend({
 
     var semesterGpa = this.get('semesterGradePoints') / this.get('semesterCreditHours')
     return semesterGpa.toFixed(2);
-  }.property('courses.@each.currentGrade', 'courses.@each.creditHours'),
+  }.property('courses.@each.currentGrade', 'courses.@each.creditHours', 'activeSemester'),
 
   inactiveSemesterGradePoints: function() {
     var model = this;
@@ -50,7 +50,7 @@ export default DS.Model.extend({
       gradePoints += self.scoreToGradePoints(course.get('currentGrade'), course)*(course.get('creditHours'))
     });
     return gradePoints;
-  }.property('courses.@each.currentGrade', 'courses.@each.creditHours'),
+  }.property('courses.@each.currentGrade', 'courses.@each.creditHours', 'activeSemester'),
 
   inactiveSemesterCreditHours: function() {
     var model = this;
@@ -62,7 +62,7 @@ export default DS.Model.extend({
       creditHours += course.get('creditHours')
     });
     return creditHours;
-  }.property('courses.@each.creditHours'),
+  }.property('courses.@each.creditHours', 'activeSemester'),
 
   cumulativeGpa: function() {
     var totalPoints = this.get('gradePoints') + this.get('semesterGradePoints') + this.get('inactiveSemesterGradePoints');
@@ -73,7 +73,7 @@ export default DS.Model.extend({
 
     var cumulativeGpa = totalPoints / totalUnits;
     return cumulativeGpa.toFixed(2);
-  }.property('semesterGradePoints', 'semesterCreditHours', 'gradePoints', 'gradeUnits'),
+  }.property('semesterGradePoints', 'semesterCreditHours', 'gradePoints', 'gradeUnits', 'activeSemester'),
 
   scoreToGradePoints: function(score, course) {
     var gradingScale = course.get('gradingScale');

@@ -19,6 +19,11 @@
  [data-ember-action] {
    cursor: pointer;
  }
+
+ .navbar-nav>.user-menu>.dropdown-menu>li.user-header {
+  height: 200px;
+}
+
   .modal {
     overflow: none;
     max-height: none;
