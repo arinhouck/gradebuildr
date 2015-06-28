@@ -16,6 +16,9 @@
 
  @import "font-awesome";
 
+ [data-ember-action] {
+   cursor: pointer;
+ }
   .modal {
     overflow: none;
     max-height: none;
