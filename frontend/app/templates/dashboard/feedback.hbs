@@ -1,0 +1,22 @@
+{{#em-modal-form open-if=openModal is-open=isOpen configName="bs" id="feedbackModal" on-submit="submitFeedback"}}
+  {{#em-modal-title}}
+    {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+    <h4 class="modal-title">Feedback</h4>
+  {{/em-modal-title}}
+  {{#em-modal-body}}
+    <div class="box-body">
+      <div class="form-group">
+        <label for="email">Email</label>
+        {{input value=model.email class='form-control' type='email' id='email' required='true' disabled='true'}}
+      </div>
+      <div class="form-group">
+        <label for="body">Body</label>
+        {{textarea value=model.body id="body" class='form-control' rows="6"}}
+      </div>
+    </div>
+  {{/em-modal-body}}
+{{#em-modal-footer}}
+  <button type="submit" class="btn btn-primary btn-flat" id="submitFeedback">Send</button>
+{{/em-modal-footer}}
+
+{{/em-modal-form}}

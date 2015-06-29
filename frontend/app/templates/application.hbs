@@ -1,6 +1,11 @@
+
+
 {{partial 'partials/header'}}
 
 {{#if isDashboard}}
+  <div id="tab">
+    {{link-to 'Feedback' 'dashboard.feedback'}}
+  </div>
   {{partial 'partials/sidebar'}}
 {{/if}}
 

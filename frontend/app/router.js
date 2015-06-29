@@ -18,6 +18,7 @@ Router.map(function() {
     this.route('profile', function() {
       this.route('edit');
     });
+    this.route('feedback');
   });
   this.route('register');
 });
