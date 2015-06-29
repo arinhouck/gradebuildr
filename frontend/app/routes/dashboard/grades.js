@@ -6,6 +6,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     var store = controller.get('store');
     this.get('session.currentUser').then(function(user) {
       controller.set('grades', user.get('grades'));
+      controller.set('courses', user.get('courses'));
       store.find('semester').then(function(semesters) {
         controller.set('semesters', semesters);
       });
