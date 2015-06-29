@@ -1,6 +1,11 @@
 class FeedbacksController < ApplicationController
   before_filter :authenticate
 
+  def index
+    @feedbacks = Feedback.all
+    render json: @feedbacks
+  end
+
   def create
     @feedback = Feedback.new(feedback_params)
 
