@@ -17,6 +17,9 @@ export default Ember.Controller.extend({
     var grades = this.get('sortedGrades');
     var selectedSemester = this.get('selectedSemester');
     var selectedCourse = this.get('selectedCourse');
+    if( selectedCourse || selectedSemester) {
+      this.set('page', 1)
+    }
     if(selectedSemester && selectedCourse) {
       this.set('filteredGrades', grades.filterBy("course.semester", selectedSemester).
                            filterBy('course.name', selectedCourse));
