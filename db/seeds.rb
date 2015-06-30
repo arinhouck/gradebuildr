@@ -9,8 +9,8 @@ if Rails.env.development?
   puts "Load users"
   User.destroy_all
   users = [
-    User.create(name: 'Arin', email: 'arinhouck@gmail.com', password: 'password'),
-    User.create(name: 'User', email: 'user@example.com', password: 'password')
+    User.create(name: 'Arin', email: 'arinhouck@gmail.com', password: 'password', active_semester: 'Spring 2015'),
+    User.create(name: 'User', email: 'user@example.com', password: 'password', active_semester: 'Spring 2015')
   ]
 
   puts "Load courses"
