@@ -23,6 +23,7 @@ Router.map(function() {
       this.route('recieved-requests');
     });
     this.route('feedback');
+    this.route('students');
   });
   this.route('register');
 });
