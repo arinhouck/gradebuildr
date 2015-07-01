@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
     if @request.save
       render json: @request, status: :created
     else
-      render json: @request.errors, status: 500
+      render json: { errors: @request.errors.full_messages }, status: 500
     end
   end
 

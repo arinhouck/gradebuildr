@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
   # before_filter :authenticate
 
+  def index
+    @user = User
+    if params[:email].present?
+       @user = @user.where(email: params[:email])
+    end
+    @user = @user.all
+    render json: @user
+  end
+
   def create
     @user = User.new(user_params)
 

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'sessions', registrations: 'users'}
 
   resources :feedbacks
+  resources :requests
   resources :semesters
   resources :courses
   resources :weights

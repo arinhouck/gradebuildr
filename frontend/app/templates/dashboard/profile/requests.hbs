@@ -8,7 +8,7 @@
         <span class="product-title">
           {{request.student.email}}
           <span class="pull-right">
-            <button {{bind-attr class=":disabled :btn :btn-lg :btn-flat request.accepted:btn-primary:btn-warning"}}>
+            <button {{bind-attr class=":disabled :btn :btn-lg :btn-flat request.accepted:btn-success:btn-warning"}}>
               {{#if request.accepted}} Accepted {{else}} Pending {{/if}}
             </button>
             <button type="button" {{bind-attr class=":btn :btn-lg :btn-flat :btn-danger"}}>Delete</button>
@@ -28,9 +28,16 @@
       <p class="lead">
         No sent requests.
       </p>
-      <p>
-        <button type="button" name="button" class="btn btn-flat btn-primary btn-lg">Send New Request</button>
-      </p>
     </div>
   {{/each}}
 </ul>
+
+<div class="box-footer">
+  <p>
+    {{#link-to 'dashboard.profile.requests.new' class="btn pull-right btn-success btn-flat" id="newRequest"}}
+      Send New Request
+    {{/link-to}}
+  </p>
+</div>
+
+{{outlet}}
