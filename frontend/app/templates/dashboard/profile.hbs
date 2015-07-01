@@ -29,7 +29,11 @@
                 {{fa-icon 'user-plus'}} Sent Requests
               {{/link-to}}
             {{/link-li}}
-            <li><a href="#"><i class="fa fa-users"></i> Recieved Requests</a></li>
+            {{#link-li}}
+              {{#link-to 'dashboard.profile.recieved-requests'}}
+                {{fa-icon 'users'}} Recieved Requests
+              {{/link-to}}
+            {{/link-li}}
           </ul>
         </div>
       </div>

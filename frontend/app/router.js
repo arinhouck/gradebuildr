@@ -20,6 +20,7 @@ Router.map(function() {
         this.route('new');
       });
       this.route('password');
+      this.route('recieved-requests');
     });
     this.route('feedback');
   });

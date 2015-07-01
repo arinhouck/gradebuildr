@@ -1,0 +1,35 @@
+<ul class="products-list product-list-in-box">
+  {{#each requests as |receivedRequest|}}
+    <li class="item">
+      <div class="product-img">
+        {{gravatar-image email=receivedRequest.director.email class='img-circle'}}
+      </div>
+      <div class="product-info">
+        <span class="product-title">
+          {{receivedRequest.director.email}}
+          <span class="pull-right">
+            {{#unless receivedRequest.accepted}}
+              <button {{action 'accept' receivedRequest}} class="btn btn-lg btn-flat btn-success">
+                 Accept
+              </button>
+            {{/unless}}
+            <button type="button"{{action 'deleteRequest' receivedRequest}} {{bind-attr class=":btn :btn-lg :btn-flat :btn-danger"}}>Delete</button>
+          </span>
+        </span>
+        <span class="product-description">
+          {{#if receivedRequest.accepted}}
+            {{receivedRequest.director.name}} has view only access to your profile.
+          {{else}}
+            {{receivedRequest.director.name}} requested view only access to your profile.
+          {{/if}}
+        </span>
+      </div>
+    </li>
+  {{else}}
+    <div class="text-center well">
+      <p class="lead">
+        No requests recieved.
+      </p>
+    </div>
+  {{/each}}
+</ul>

@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   resources :weights
   resources :grades
 
+  resources :requests do
+    post :accept, :on => :collection
+  end
+
   root 'ember#index'
   get '/*path' => 'ember#index'
 

@@ -1,22 +1,30 @@
 class RequestsController < ApplicationController
   before_filter :authenticate
 
-  def index_requests
-    @requests = User.find(params[:user_id]).requests
-    render json: @requests
-  end
-
-  def index_recieved_requests
-    @requests = User.find(params[:user_id]).received_requests
-    render json: @requests
-  end
-
   def create
     @request = Request.new(request_params)
     if @request.save
       render json: @request, status: :created
     else
       render json: { errors: @request.errors.full_messages }, status: 500
+    end
+  end
+
+  def show
+    @request = Request.find(params[:id])
+    render json: @request
+  end
+
+  def show
+    @request = Request.find(params[:id])
+    render json: @request
+  end
+
+  def accept
+    if Request.accept(params[:director_id], params[:student_id])
+      render json: {}, status: 200
+    else
+      render json: {error: 'Error'}, status: 500
     end
   end
 
