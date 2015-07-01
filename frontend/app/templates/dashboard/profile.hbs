@@ -19,7 +19,11 @@
                 {{fa-icon 'user'}} Edit Profile
               {{/link-to}}
             {{/link-li}}
-            <li><a href="#"><i class="fa fa-key"></i> Change Password</a></li>
+            {{#link-li}}
+              {{#link-to 'dashboard.profile.password'}}
+                {{fa-icon 'key'}} Change Password
+              {{/link-to}}
+            {{/link-li}}
             {{#link-li}}
               {{#link-to 'dashboard.profile.requests'}}
                 {{fa-icon 'user-plus'}} Sent Requests

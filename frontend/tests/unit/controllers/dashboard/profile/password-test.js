@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('controller:dashboard/profile/edit', {
+moduleFor('controller:dashboard/profile/password', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

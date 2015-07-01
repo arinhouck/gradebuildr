@@ -5,10 +5,6 @@ export default Ember.Route.extend({
     var store = controller.get('store');
     this.get('session.currentUser').then(function(user) {
       controller.set('model', user);
-      store.find('semester').then(function(semesters) {
-        controller.set('semesters', semesters);
-      });
     });
-    controller.set('isSaving', false);
   }
 });
