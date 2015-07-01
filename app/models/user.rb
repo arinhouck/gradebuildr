@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
   has_many :courses, dependent: :destroy
   has_many :grades, dependent: :destroy
 
+  has_many :requests, foreign_key: :director_id, dependent: :destroy
+  has_many :received_requests, foreign_key: :student_id, class_name: 'Request', dependent: :destroy
+  has_many :directors, through: :received_requests, source: :director
+  has_many :students, through: :requests, source: :student
+
 
   private
   def set_auth_token

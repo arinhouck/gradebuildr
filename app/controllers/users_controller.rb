@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  # before_filter :authenticate
 
   def create
     @user = User.new(user_params)
@@ -28,6 +29,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :grade_points, :grade_units, :active_semester, :password, :password_confirmation)
+  end
+
+  def authenticate
+    authenticate_or_request_with_http_token do |token, options|
+      User.find_by(authentication_token: token)
+    end
   end
 
 end

@@ -1,0 +1,35 @@
+<div class="form-group">
+  <label for="name">Name</label>
+  {{input value=model.name class='form-control' id="name" placeholder='Enter name'}}
+</div>
+<div class="form-group">
+  <div class="row">
+    <div class="col-xs-6">
+      <label for="gradePoints">Grade Points</label>
+      {{input value=model.gradePoints class='form-control' id="gradePoints" placeholder='Enter grade points'}}
+    </div>
+    <div class="col-xs-6">
+      <label for="gradeUnits">Grade Units</label>
+      {{input value=model.gradeUnits class='form-control' id="gradeUnits" placeholder='Enter grade units'}}
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label for="semester">Active Semester</label>
+  {{view "select"
+     content=semesterNames
+     value=model.activeSemester
+     class='form-control'
+     prompt='Please select a semester'
+     required='true'
+  }}
+</div>
+<div class="form-group">
+  <label for="email">Email address</label>
+  {{input value=model.email type='email' class='form-control' id="email" placeholder='Enter email'}}
+</div>
+
+<div class="form-group pull-right">
+  <button type="submit" class="btn btn-default btn-flat" id="cancelUser">Cancel</button>
+  <button type="submit" class="btn btn-primary btn-flat" id="editUser">Save</button>
+</div>
