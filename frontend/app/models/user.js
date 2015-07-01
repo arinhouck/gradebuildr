@@ -6,7 +6,7 @@ export default DS.Model.extend({
   directors: DS.hasMany('user', {inverse: null}),
   students: DS.hasMany('user', {inverse: null}),
   requests: DS.hasMany('request', {inverse: null}),
-  // receivedRequests: DS.hasMany('request', {inverse: 'requests'}),
+  receivedRequests: DS.hasMany('request', {inverse: 'null'}),
   email: DS.attr('string'),
   name: DS.attr('string'),
   gradePoints: DS.attr('number'),
