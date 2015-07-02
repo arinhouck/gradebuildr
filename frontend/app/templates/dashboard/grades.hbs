@@ -30,7 +30,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each grade in pagedContent}}
+              {{#each pagedContent as |grade|}}
                 {{grade-row parent=this grade=grade}}
               {{else}}
                 <tr class='lead'>

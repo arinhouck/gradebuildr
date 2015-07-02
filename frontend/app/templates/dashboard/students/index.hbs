@@ -1,0 +1,40 @@
+<div class="box box-default">
+  <div class="box-body">
+  <div class="table-responsive">
+    <table class="table no-margin">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Active Semester</th>
+          <th># of Courses</th>
+          <th>Semester Credit Hours</th>
+          <th>Semester GPA</th>
+          <th>Cumulative GPA</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each students as |student|}}
+          <tr>
+            <td>{{link-to student.name 'dashboard.students.show' student}}</td>
+            <td>{{student.activeSemester}}</td>
+            <td>{{student.courses.length}}</td>
+            <td>{{student.semesterCreditHours}}</td>
+            <td>{{student.semesterGpa}}</td>
+            <td>{{student.cumulativeGpa}}</td>
+          </tr>
+        {{else}}
+          <tr class='lead'>
+            <td colspan='5' class='text-center'>
+              No students.
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{{!-- <div class="box-footer clearfix">
+  <span class='pull-right'>{{page-numbers content=pagedContent}}</span>
+</div> --}}
+</div>

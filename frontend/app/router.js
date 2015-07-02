@@ -23,7 +23,9 @@ Router.map(function() {
       this.route('received-requests');
     });
     this.route('feedback');
-    this.route('students');
+    this.route('students', function() {
+      this.route('show', {path: '/:user_id'});
+    });
   });
   this.route('register');
 });
