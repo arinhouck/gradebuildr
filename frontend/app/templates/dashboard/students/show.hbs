@@ -54,8 +54,8 @@
 
 <div class="nav-tabs-custom">
   <ul class="nav nav-tabs pull-right">
-    <li class="active"><a href="#courses" data-toggle="tab">Courses</a></li>
-    <li><a href="#grades" data-toggle="tab">Grades</a></li>
+    <li class="active"><a href="#courses" data-toggle="tab" {{action 'clearPage'}}>Courses</a></li>
+    <li><a href="#grades" data-toggle="tab" {{action 'clearPage'}}>Grades</a></li>
     <li class="pull-left header">
       <button type="button" name="button" class='btn btn-xs btn-default btn-flat' {{action 'back'}}>{{fa-icon 'reply'}}</button>
       {{gravatar-image email=model.email class='img-circle' title=model.email}}

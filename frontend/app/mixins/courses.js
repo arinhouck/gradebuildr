@@ -12,6 +12,9 @@ export default Ember.Mixin.create({
   coursesDidChange: function() {
     var courses = this.get('sortedCourses');
     var selectedSemester = this.get('selectedSemester');
+    if(selectedSemester) {
+      this.set('page', 1)
+    }
     if (selectedSemester) {
       this.set('filteredCourses', courses.filterBy('semester', selectedSemester));
     } else {

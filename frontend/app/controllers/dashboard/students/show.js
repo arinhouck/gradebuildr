@@ -8,6 +8,9 @@ export default Ember.Controller.extend(CoursesMixin, GradesMixin, {
   actions: {
     back: function() {
       this.transitionToRoute('dashboard.students');
+    },
+    clearPage: function() {
+      this.set('page', 1);
     }
   }
 });
