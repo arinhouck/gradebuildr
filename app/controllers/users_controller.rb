@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate
+  before_filter :authenticate, except: :create
 
   def index
     @user = User
