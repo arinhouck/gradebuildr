@@ -26,10 +26,16 @@
     box-shadow: none;
   }
 
-  li.header > img {
-    width: 100%;
-    max-width: 25px;
-    height: auto;
+  li.header {
+    img {
+      width: 100%;
+      max-width: 25px;
+      height: auto;
+    }
+    button {
+      margin-right: 10px;
+    }
+
   }
 
   .tab-pane {
