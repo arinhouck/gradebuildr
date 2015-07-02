@@ -30,7 +30,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each pagedContent as |grade|}}
+              {{#each pagedGradeContent as |grade|}}
                 {{grade-row parent=this grade=grade}}
               {{else}}
                 <tr class='lead'>
@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="box-footer clearfix">
-        <span class='pull-right'>{{page-numbers content=pagedContent}}</span>
+        <span class='pull-right'>{{page-numbers content=pagedGradeContent}}</span>
       </div>
     </div>
 

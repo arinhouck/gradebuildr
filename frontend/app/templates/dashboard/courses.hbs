@@ -30,12 +30,10 @@
               </tr>
             </thead>
             <tbody>
-              {{#each pagedContent as |course|}}
+              {{#each pagedCourseContent as |course|}}
                 <tr>
                   <td>
-                    {{!-- {{#link-to 'dashboard.courses.show' course}} --}}
-                      {{course.name}}
-                    {{!-- {{/link-to}} --}}
+                    {{course.name}}
                   </td>
                   <td>
                     {{course.creditHours}}
@@ -79,7 +77,7 @@
         </div>
       </div>
       <div class="box-footer clearfix">
-        <span class='pull-right'>{{page-numbers content=pagedContent}}</span>
+        <span class='pull-right'>{{page-numbers content=pagedCourseContent}}</span>
       </div>
     </div>
 

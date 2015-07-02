@@ -54,8 +54,8 @@
 
 <div class="nav-tabs-custom">
   <ul class="nav nav-tabs pull-right">
-    <li class="active"><a href="#tab_1-1" data-toggle="tab">Courses</a></li>
-    <li><a href="#tab_2-2" data-toggle="tab">Grades</a></li>
+    <li class="active"><a href="#courses" data-toggle="tab">Courses</a></li>
+    <li><a href="#grades" data-toggle="tab">Grades</a></li>
     <li class="pull-left header">
       <button type="button" name="button" class='btn btn-xs btn-default btn-flat' {{action 'back'}}>{{fa-icon 'reply'}}</button>
       {{gravatar-image email=model.email class='img-circle' title=model.email}}
@@ -64,7 +64,7 @@
     <li class='header'><span class='label label-default' title='Active Semester'>{{model.activeSemester}}</span></li>
   </ul>
   <div class="tab-content">
-    <div class="tab-pane active" id="tab_1-1">
+    <div class="tab-pane active" id="courses">
       <div class="table-responsive">
         <table class="table no-margin">
           <thead>
@@ -78,7 +78,7 @@
             </tr>
           </thead>
           <tbody>
-            {{#each model.courses as |course|}}
+            {{#each pagedCourseContent as |course|}}
               <tr>
                 <td>
                   {{course.name}}
@@ -113,8 +113,11 @@
           </tbody>
         </table>
       </div>
+      <div class="box-footer clearfix">
+        <span class='pull-right'>{{page-numbers content=pagedCourseContent}}</span>
+      </div>
     </div>
-    <div class="tab-pane" id="tab_2-2">
+    <div class="tab-pane" id="grades">
       <div class="table-responsive">
         <table class="table no-margin">
           <thead>
@@ -124,12 +127,11 @@
               <th>Semester</th>
               <th>Score</th>
               <th>Weight</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {{#each model.grades as |grade|}}
-              {{grade-row parent=this grade=grade}}
+            {{#each pagedGradeContent as |grade|}}
+              {{grade-row parent=this grade=grade hideActions=true}}
             {{else}}
               <tr class='lead'>
                 <td colspan='5' class='text-center'>
@@ -139,6 +141,9 @@
             {{/each}}
           </tbody>
         </table>
+      </div>
+      <div class="box-footer clearfix">
+        <span class='pull-right'>{{page-numbers content=pagedGradeContent}}</span>
       </div>
     </div>
   </div>
