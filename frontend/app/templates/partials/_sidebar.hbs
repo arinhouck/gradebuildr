@@ -11,26 +11,26 @@
 
     <ul class="nav sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
-      {{#link-li}}
+      {{#link-li-toggle}}
         {{#link-to 'dashboard.index'}}
           {{fa-icon 'dashboard'}}<span>Dashboard</span>
         {{/link-to}}
-      {{/link-li}}
-      {{#link-li}}
+      {{/link-li-toggle}}
+      {{#link-li-toggle}}
         {{#link-to 'dashboard.courses'}}
           {{fa-icon 'university'}}<span>Courses</span>
         {{/link-to}}
-      {{/link-li}}
-      {{#link-li}}
+      {{/link-li-toggle}}
+      {{#link-li-toggle}}
         {{#link-to 'dashboard.grades'}}
           {{fa-icon 'file-text-o'}}<span>Grades</span>
         {{/link-to}}
-      {{/link-li}}
-      {{#link-li}}
+      {{/link-li-toggle}}
+      {{#link-li-toggle}}
         {{#link-to 'dashboard.students'}}
           {{fa-icon 'users'}}<span>Students</span>
         {{/link-to}}
-      {{/link-li}}
+      {{/link-li-toggle}}
     </ul>
 
   </section>
