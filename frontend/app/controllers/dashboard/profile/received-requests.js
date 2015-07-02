@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
 
       promise.then(function(response) {
         receivedRequest.reload();
-        $.growl.notice({ title: 'Recieved Request', message: 'Accepted.' });
+        $.growl.notice({ title: 'Received Request', message: 'Accepted.' });
       }, function(error) {
         $.growl.error({ message: 'Error' });
       })

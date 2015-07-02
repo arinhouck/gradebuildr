@@ -20,7 +20,7 @@ Router.map(function() {
         this.route('new');
       });
       this.route('password');
-      this.route('recieved-requests');
+      this.route('received-requests');
     });
     this.route('feedback');
     this.route('students');
