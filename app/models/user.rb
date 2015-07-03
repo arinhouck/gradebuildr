@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
   has_many :directors, -> { where  "requests.accepted = true" }, through: :received_requests, source: :director
   has_many :students, -> { where  "requests.accepted = true" }, through: :requests, source: :student
 
+  def is_director
+    self.has_role?(:director)
+  end
 
   private
   def set_auth_token
