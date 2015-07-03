@@ -20,6 +20,7 @@ gem 'devise', '~> 3.5.1'
 gem 'pry'
 gem 'font-awesome-rails'
 gem 'active_model_serializers'
+gem 'rolify'
 
 gem 'rails_12factor', group: :production
 gem 'figaro'

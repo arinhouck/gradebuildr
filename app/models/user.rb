@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
   before_save :set_auth_token
 
   # validates :password, presence: true, length: {minimum: 5, maximum: 120}, on: :create
