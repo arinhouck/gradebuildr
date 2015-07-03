@@ -11,6 +11,7 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
   },
   setupController: function(controller, model){
     controller.set('model', model.user);
-    controller.set('semesters', model.semesters)
+    controller.set('semesters', model.semesters);
+    controller.set('isSaving', false);
   }
 });

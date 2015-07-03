@@ -4,6 +4,12 @@ export default Ember.Controller.extend({
   model: {},
   semesterNames: Ember.computed.alias('semesters.@each.name'),
 
+  isOpenDidChange: function() {
+    if (!this.get('isOpen') && !this.get('isSaving')) {
+      this.transitionToRoute('index');
+    }
+  }.observes('isOpen'),
+
   actions: {
     createUser: function() {
       var user = this.get('model');
