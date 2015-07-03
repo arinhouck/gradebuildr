@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users do
     get :show_student, :on => :collection
   end
+  
   devise_for :users, controllers: { sessions: 'sessions', registrations: 'users'}
 
   resources :feedbacks

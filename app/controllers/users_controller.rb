@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  # before_filter :authenticate, except: :create
-  # before_filter :is_director, only: :show_student
+  before_filter :authenticate, except: :create
+  before_filter :is_director, only: :show_student
 
   def index
     @user = User

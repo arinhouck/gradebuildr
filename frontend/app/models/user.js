@@ -3,8 +3,8 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   courses: DS.hasMany('course'),
   grades: DS.hasMany('grade'),
-  directors: DS.hasMany('user', {inverse: null}),
-  students: DS.hasMany('user', {inverse: null, async: true}),
+  directors: DS.hasMany('user', {inverse: 'students'}),
+  students: DS.hasMany('user', {inverse: 'directors', async: true}),
   requests: DS.hasMany('request'),
   receivedRequests: DS.hasMany('request', {async: true}),
   email: DS.attr('string'),
