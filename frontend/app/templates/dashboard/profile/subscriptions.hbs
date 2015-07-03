@@ -1,8 +1,6 @@
-
 <div class="row">
-
     <div class="col-xs-12 col-sm-4">
-        <div class="price-table text-center">
+        <div class="price-table text-center" id="basic">
             <div class="price-table-heading">
                 <h4 class="title">BASIC PLAN</h4>
             </div>
@@ -15,17 +13,7 @@
                 <li class="list-group-item"><i class="icon-ok text-success"></i> 24/7 support</li>
             </ul>
             <div class="price-table-footer">
-              {{stripe-checkout
-                class="btn btn-lg btn-success btn-flat"
-                image=logo
-                name=name
-                description=basicPlan.name
-                amount=basicPlan.to_cents
-                label="Subscribe now"
-                panelLabel="Subscribe for {{amount}}/mo"
-                isDisabled=payButtonDisabled
-                action="processStripeToken"
-              }}
+              <button type="button" name="button" class="btn btn-lg btn-success btn-flat" {{action 'selectPlan' basic}}>Select</button>
             </div>
         </div>
 
@@ -33,7 +21,7 @@
     </div>
 
     <div class="col-xs-12 col-sm-4">
-        <div class="price-table text-center">
+        <div class="price-table text-center" id="premium">
             <div class="price-table-heading">
                 <h4 class="title">PREMIUM PLAN</h4>
             </div>
@@ -46,17 +34,7 @@
                 <li class="list-group-item"><i class="icon-ok text-success"></i> 24/7 support</li>
             </ul>
             <div class="price-table-footer">
-              {{stripe-checkout
-                class="btn btn-lg btn-success btn-flat"
-                image=logo
-                name=name
-                description=premiumPlan.name
-                amount=premiumPlan.to_cents
-                label="Subscribe now"
-                panelLabel="Subscribe for {{amount}}/mo"
-                isDisabled=payButtonDisabled
-                action="processStripeToken"
-              }}
+              <button type="button" name="button" class="btn btn-lg btn-success btn-flat" {{action 'selectPlan' premium}}>Select</button>
             </div>
         </div>
 
@@ -64,7 +42,7 @@
     </div>
 
     <div class="col-xs-12 col-sm-4">
-        <div class="price-table text-center">
+        <div class="price-table text-center" id="ultimate">
             <div class="price-table-heading">
                 <h4 class="title">ULTIMATE</h4>
             </div>
@@ -77,21 +55,26 @@
                 <li class="list-group-item"><i class="icon-ok text-success"></i> 24/7 support</li>
             </ul>
             <div class="price-table-footer">
-              {{stripe-checkout
-                class="btn btn-lg btn-success btn-flat"
-                image=logo
-                name=name
-                description=ultimatePlan.name
-                amount=ultimatePlan.to_cents
-                label="Subscribe now"
-                panelLabel="Subscribe for {{amount}}/mo"
-                isDisabled=payButtonDisabled
-                action="processStripeToken"
-              }}
+              <button type="button" name="button" class="btn btn-lg btn-success btn-flat" {{action 'selectPlan' ultimate}}>Select</button>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 margin-bottom-20"></div>
     </div>
+</div>
 
+<div class="row">
+  <div class="col-sm-offset-4 col-sm-4 col-sm-offset-4 text-center">
+    {{stripe-checkout
+      class="btn btn-lg btn-success btn-flat"
+      image=logo
+      name=name
+      description=plan.name
+      amount=plan.to_cents
+      label="Subscribe now"
+      panelLabel="Subscribe for {{amount}}/mo"
+      isDisabled=noPlan
+      action="processStripeToken"
+    }}
+  </div>
 </div>

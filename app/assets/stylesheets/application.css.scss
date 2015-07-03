@@ -136,7 +136,11 @@ Price Table
 	-o-transition: all .3s ease;
 	-webkit-transition: all .3s ease;
 }
-.price-table:hover {
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+.price-table.active {
 	background: rgba(0,0,0, .03);
 	border-color: #0093DD;
 }
