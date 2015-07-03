@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
     createUser: function() {
       var user = this.get('model');
       var self = this;
+      this.set('isSaving', true)
       user.save().then(function() {
         self.get('session').authenticate('simple-auth-authenticator:devise', {
           identification: user.get('email'),
