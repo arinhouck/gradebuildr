@@ -3,6 +3,7 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   courses: DS.hasMany('course'),
   grades: DS.hasMany('grade'),
+  roles: DS.hasMany('role'),
   directors: DS.hasMany('user', {inverse: 'students'}),
   students: DS.hasMany('user', {inverse: 'directors', async: true}),
   requests: DS.hasMany('request'),
@@ -14,6 +15,11 @@ export default DS.Model.extend({
   activeSemester: DS.attr('string'),
   password: DS.attr('string'),
   password_confirmation: DS.attr('string'),
+
+  isDirector: function() {
+    var roles = this.get('roles');
+    return roles.filterBy('name', 'director').length == 1;
+  }.property('roles.[]'),
 
   semesterGradePoints: function() {
     var courses = this.get('courses').filterBy('semester', this.get('activeSemester'));
