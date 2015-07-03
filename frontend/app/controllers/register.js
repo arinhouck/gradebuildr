@@ -17,7 +17,6 @@ export default Ember.Controller.extend({
         }));
       }, function(response) {
         user.rollback();
-        debugger;
         var errors = response.responseJSON.errors;
         errors.forEach(function(error_message){
           $.growl.error({ message: error_message });

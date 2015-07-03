@@ -7,6 +7,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     this.get('session.currentUser').then(function(user) {
       controller.set('model', store.createRecord('request', {director: user}));
     });
+    controller.set('email', '');
     controller.set('isSaving', false);
   }
 });

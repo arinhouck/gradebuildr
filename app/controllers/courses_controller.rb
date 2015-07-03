@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_filter :authenticate
+  before_filter :require_permission, only: :show
 
   def index
     @courses = User.find(params[:user_id]).courses
@@ -45,6 +46,12 @@ class CoursesController < ApplicationController
   def authenticate
     authenticate_or_request_with_http_token do |token, options|
       User.find_by(authentication_token: token)
+    end
+  end
+
+  def require_permission
+    authenticate_or_request_with_http_token do |token, options|
+      User.find_by(authentication_token: token) == Course.find(params[:id]).user
     end
   end
 
