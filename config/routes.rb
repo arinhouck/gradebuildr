@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   mount EmberCLI::Engine => "ember-tests" if Rails.env.development?
 
-  resources :users
+  resources :users do
+    get :show_student, :on => :collection
+  end
   devise_for :users, controllers: { sessions: 'sessions', registrations: 'users'}
 
   resources :feedbacks

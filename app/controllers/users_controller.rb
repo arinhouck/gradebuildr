@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, except: :create
+  # before_filter :authenticate, except: :create
+  # before_filter :is_director, only: :show_student
 
   def index
     @user = User
@@ -25,6 +26,11 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def show_student
+    @user = User.find(params[:id])
+    render json: @user
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
@@ -43,6 +49,12 @@ class UsersController < ApplicationController
   def authenticate
     authenticate_or_request_with_http_token do |token, options|
       User.find_by(authentication_token: token)
+    end
+  end
+
+  def is_director
+    authenticate_or_request_with_http_token do |token, options|
+      User.find_by(authentication_token: token) == User.find(params[:id]).directors.find_by(authentication_token: token)
     end
   end
 
