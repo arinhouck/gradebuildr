@@ -31,6 +31,10 @@ module.exports = function(environment) {
     identificationAttributeName: 'email'
   }
 
+  ENV.stripe = {
+    key: "pk_test_i7DLT5bKxzxVFCJi5gmHE8Ys"
+  };
+
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;

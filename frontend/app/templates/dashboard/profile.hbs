@@ -24,6 +24,11 @@
                 {{fa-icon 'key'}} Change Password
               {{/link-to}}
             {{/link-li}}
+            {{#link-li}}
+              {{#link-to 'dashboard.profile.subscriptions'}}
+                {{fa-icon 'credit-card'}} Subscriptions
+              {{/link-to}}
+            {{/link-li}}
             {{#if session.currentUser.isDirector}}
               {{#link-li}}
                 {{#link-to 'dashboard.profile.requests'}}

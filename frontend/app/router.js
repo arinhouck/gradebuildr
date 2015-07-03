@@ -21,6 +21,7 @@ Router.map(function() {
       });
       this.route('password');
       this.route('received-requests');
+      this.route('subscriptions');
     });
     this.route('feedback');
     this.route('students', function() {
