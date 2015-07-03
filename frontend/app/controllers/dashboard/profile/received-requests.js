@@ -26,6 +26,11 @@ export default Ember.Controller.extend({
       }, function(error) {
         $.growl.error({ message: 'Error' });
       })
+    },
+    deleteRequest: function(request) {
+      request.destroyRecord().then(function() {
+        $.growl.notice({title: 'Request', message: 'Successfully deleted.'});
+      });
     }
   }
 });
