@@ -2,8 +2,8 @@ class Request < ActiveRecord::Base
   belongs_to :director, class_name: 'User'
   belongs_to :student, class_name: 'User'
 
-  validates :director_id, presence: true
-  validates :student_id, presence: true
+  validates_presence_of :director_id
+  validates_presence_of :student_id, message: "doesn't exist"
   validates_uniqueness_of :director_id, :scope => [:student_id]
   validate :check_director_and_student
 

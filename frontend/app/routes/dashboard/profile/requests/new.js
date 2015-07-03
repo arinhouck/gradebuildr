@@ -9,5 +9,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     });
     controller.set('email', '');
     controller.set('isSaving', false);
+  },
+  deactivate: function() {
+    if (!this.controller.get('isSaving')) {
+      this.controller.get('model').rollback();
+    }
   }
 });

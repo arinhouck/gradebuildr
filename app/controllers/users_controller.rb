@@ -3,8 +3,8 @@ class UsersController < ApplicationController
 
   def index
     @user = User
-    if params[:email].present?
-       @user = @user.where(email: params[:email])
+    if params[:email]
+      @user = @user.where(email: params[:email])
     end
     @user = @user.all
     render json: @user
