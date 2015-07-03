@@ -24,7 +24,7 @@ export default DS.Model.extend({
       gradePoints[i] = 0;
       gradePointsTotal[i] = 0;
 
-      var grades = model.get('grades').filterBy('weight', weight);
+      var grades = model.get('grades').filterBy('weight.name', weight.get('name'))
 
       grades.forEach(function(grade) {
         gradePoints[i] += grade.get('score');
