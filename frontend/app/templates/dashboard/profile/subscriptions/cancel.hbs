@@ -1,0 +1,22 @@
+{{#em-modal-form open-if=openModal is-open=isOpen configName="bs" id="cancelSubscriptionModal" on-submit="yes"}}
+  {{#em-modal-title}}
+    {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+    <h4 class="modal-title">Are you sure you want to cancel?</h4>
+  {{/em-modal-title}}
+
+  {{#em-modal-body}}
+    <div class="box-body">
+      <p class='lead'>
+        You will no longer be charged after cancellation takes effect.<br>
+        There will be no refund on current month's service.<br>
+        Your service will stay active until end of subscription.
+      </p>
+    </div>
+  {{/em-modal-body}}
+
+  {{#em-modal-footer}}
+    <button class="btn btn-default btn-flat" id="yes" {{action 'no'}}>No</button>
+    <button type="submit" class="btn btn-danger btn-flat" id="no">Yes</button>
+  {{/em-modal-footer}}
+
+{{/em-modal-form}}

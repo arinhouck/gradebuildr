@@ -4,8 +4,12 @@ Rails.application.routes.draw do
 
   resources :users do
     get :show_student, :on => :collection
+    post :process_payment, :on => :collection
+    post :cancel_subscription, :on => :collection
+    post :proration_price, :on => :collection
+    post :stripe_hook, :on => :collection
   end
-  
+
   devise_for :users, controllers: { sessions: 'sessions', registrations: 'users'}
 
   resources :feedbacks

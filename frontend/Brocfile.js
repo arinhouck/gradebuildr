@@ -29,5 +29,6 @@ app.import('bower_components/growl/stylesheets/jquery.growl.css');
 app.import('bower_components/admin-lte/bootstrap/js/bootstrap.min.js');
 app.import('bower_components/admin-lte/dist/js/app.min.js');
 app.import('bower_components/growl/javascripts/jquery.growl.js');
+app.import('bower_components/moment/moment.js');
 
 module.exports = app.toTree();

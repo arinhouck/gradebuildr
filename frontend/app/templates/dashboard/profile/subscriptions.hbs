@@ -13,7 +13,7 @@
                 <li class="list-group-item"><i class="icon-ok text-success"></i> 24/7 support</li>
             </ul>
             <div class="price-table-footer">
-              <button type="button" name="button" class="btn btn-lg btn-success btn-flat" {{action 'selectPlan' basic}}>Select</button>
+              <button {{bind-attr disabled=sameAsBasic}} type="button" name="button" class="btn btn-lg btn-success btn-flat" {{action 'selectPlan' basic}}>Select</button>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
                 <li class="list-group-item"><i class="icon-ok text-success"></i> 24/7 support</li>
             </ul>
             <div class="price-table-footer">
-              <button type="button" name="button" class="btn btn-lg btn-success btn-flat" {{action 'selectPlan' premium}}>Select</button>
+              <button {{bind-attr disabled=sameAsPremium}} type="button" name="button" class="btn btn-lg btn-success btn-flat" {{action 'selectPlan' premium}}>Select</button>
             </div>
         </div>
 
@@ -55,26 +55,63 @@
                 <li class="list-group-item"><i class="icon-ok text-success"></i> 24/7 support</li>
             </ul>
             <div class="price-table-footer">
-              <button type="button" name="button" class="btn btn-lg btn-success btn-flat" {{action 'selectPlan' ultimate}}>Select</button>
+              <button {{bind-attr disabled=sameAsUltimate}} type="button" name="button" class="btn btn-lg btn-success btn-flat" {{action 'selectPlan' ultimate}}>Select</button>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 margin-bottom-20"></div>
     </div>
 </div>
-
 <div class="row">
-  <div class="col-sm-offset-4 col-sm-4 col-sm-offset-4 text-center">
-    {{stripe-checkout
-      class="btn btn-lg btn-success btn-flat"
-      image=logo
-      name=name
-      description=plan.name
-      amount=plan.to_cents
-      label="Subscribe now"
-      panelLabel="Subscribe for {{amount}}/mo"
-      isDisabled=noPlan
-      action="processStripeToken"
-    }}
+  <div class="col-sm-offset-3 col-sm-6 col-sm-offset-3 text-center">
+    {{#if canceledSubscription}}
+      <p class='lead text-center'>
+        Your canceled subscription is active until <b>{{format-date session.currentUser.activeUntil 'LL'}}</b>.
+      </p>
+      {{stripe-checkout
+        class="btn btn-lg btn-success btn-flat"
+        image=logo
+        name=name
+        description=plan.name
+        amount=plan.to_cents
+        label="Change subscription"
+        panelLabel="Subscribe for {{amount}}/mo"
+        isDisabled=noPlan
+        action="processStripeToken"
+      }}
+    {{else}}
+      {{#if noSubscription}}
+        {{stripe-checkout
+          class="btn btn-lg btn-success btn-flat"
+          image=logo
+          name=name
+          description=plan.name
+          amount=plan.to_cents
+          label="Subscribe now"
+          panelLabel="Subscribe for {{amount}}/mo"
+          isDisabled=noPlan
+          action="processStripeToken"
+        }}
+      {{else}}
+        <p class='lead text-center'>
+          Your next payment is due on <b>{{format-date session.currentUser.activeUntil 'LL'}}</b>.
+        </p>
+        {{#link-to 'dashboard.profile.subscriptions.cancel' class="btn btn-lg btn-danger btn-flat" id="cancelSubscription"}}
+          Cancel Subscription
+        {{/link-to}}
+        {{stripe-checkout
+          class="btn btn-lg btn-success btn-flat"
+          image=logo
+          name=name
+          description=plan.name
+          amount=plan.to_cents
+          label="Change Subscription"
+          panelLabel="Subscribe for {{amount}}/mo"
+          isDisabled=noPlan
+          action="processStripeToken"
+        }}
+      {{/if}}
+    {{/if}}
   </div>
 </div>
+{{outlet}}

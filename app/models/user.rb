@@ -24,6 +24,22 @@ class User < ActiveRecord::Base
     self.has_role?(:director)
   end
 
+  def save_customer(id)
+    update_attribute :customer_id, id
+  end
+
+  def save_subscription(subscription)
+    update_attribute :subscription, subscription
+  end
+
+  def update_canceled_subscription(value)
+    update_attribute :canceled_subscription, value
+  end
+
+  def renew
+    update_attribute :active_until, Date.today + 1.month
+  end
+
   private
   def set_auth_token
     if self.authentication_token.blank?
