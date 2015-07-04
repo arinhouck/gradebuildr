@@ -21,6 +21,8 @@ gem 'pry'
 gem 'font-awesome-rails'
 gem 'active_model_serializers'
 gem 'rolify'
+gem 'pusher'
+gem 'pusherable'
 
 gem 'rails_12factor', group: :production
 gem 'figaro'
