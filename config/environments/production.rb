@@ -77,7 +77,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Action Mailer
-
+  config.action_mailer.default_url_options = { :host => 'gradebuildr.com' }
   config.action_mailer.smtp_settings = {
     :address   => "smtp.sendgrid.net",
     :port      => 587, # ports 587 and 2525 are also supported with STARTTLS

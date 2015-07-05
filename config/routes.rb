@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   mount EmberCLI::Engine => "ember-tests" if Rails.env.development?
 
+
+  devise_for :users, controllers: { sessions: 'sessions', registrations: 'users', confirmations: 'confirmations' }
+
   resources :users do
     get :show_student, :on => :collection
     post :process_payment, :on => :collection
@@ -9,9 +12,7 @@ Rails.application.routes.draw do
     post :proration_price, :on => :collection
     post :stripe_hook, :on => :collection
   end
-
-  devise_for :users, controllers: { sessions: 'sessions', registrations: 'users'}
-
+  
   resources :feedbacks
   resources :requests
   resources :semesters

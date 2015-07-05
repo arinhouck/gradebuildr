@@ -36,6 +36,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Action Mailer
+
+  config.action_mailer.default_url_options = { :host => 'localhost' }
   config.action_mailer.smtp_settings = {
     :address   => "smtp.sendgrid.net",
     :port      => 587, # ports 587 and 2525 are also supported with STARTTLS

@@ -31,6 +31,8 @@ Router.map(function() {
     });
   });
   this.route('register');
+  this.route('confirmation');
+  this.route('confirmed');
 });
 
 export default Router;

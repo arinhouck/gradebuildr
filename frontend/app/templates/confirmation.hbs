@@ -1,0 +1,35 @@
+{{#em-modal open-if=openModal is-open=isOpen configName="bs" id="confirmationModal"}}
+  {{#em-modal-title}}
+    {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+    <h4 class="modal-title">Sucessfully Registered</h4>
+  {{/em-modal-title}}
+
+  {{#em-modal-body}}
+    <div class="box-body text-center">
+      <p class='lead'>
+        We sent a confirmation email to <b>{{email}}</b>.<br>
+        Click the verification link to get started with Gradebuildr.<br>
+      </p>
+      <p class='lead'>
+        <small>
+          You should also like or share our facebook <br>
+          <div class="fb-like" data-href="https://www.facebook.com/gradebuildr/" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
+        </small>
+      </p>
+    </div>
+  {{/em-modal-body}}
+
+  {{#em-modal-footer}}
+    {{#em-modal-toggler class="btn btn-primary btn-flat"}}Okay{{/em-modal-toggler}}
+  {{/em-modal-footer}}
+
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=1441812812795175";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+{{/em-modal}}
