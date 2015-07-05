@@ -122,7 +122,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :grade_points, :grade_units, :active_semester, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :grade_points, :grade_units, :active_semester, :password, :password_confirmation, :is_director, :active_until, :subscription, :canceled_subscription, :unconfirmed_email)
   end
 
   def authenticate
