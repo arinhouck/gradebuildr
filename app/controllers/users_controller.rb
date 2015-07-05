@@ -48,7 +48,7 @@ class UsersController < ApplicationController
       @user.update_canceled_subscription(false)
     end
 
-    render json: @user, status: :ok
+    render json: {message: 'Successfully processed payment.'}, status: :ok
   end
 
   def proration_price
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     customer = Stripe::Customer.retrieve(@user.customer_id)
     customer.subscriptions.first.delete(:at_period_end => true)
     @user.update_canceled_subscription(true)
-    render json: {message: 'Canceled'}, status: :ok
+    render json: {message: 'Successfully canceled subscription.'}, status: :ok
   end
 
   def stripe_hook
@@ -87,7 +87,7 @@ class UsersController < ApplicationController
       @user.save_subscription(nil)
       @user.remove_role :director if @user.has_role? :director
     end
-    render status: :ok, json: 'success'
+    render status: :ok, json: 'Success'
   end
 
   def create

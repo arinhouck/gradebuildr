@@ -32,14 +32,14 @@ export default Ember.Controller.extend({
                 ' because you already have an existing subscription. These changes will reflect next bill cycle on ' +
                 moment(controller.get('session.currentUser.activeUntil')).format('LL') + '.');
           controller.set('prorationDate', response.proration_date)
-          console.log(response);
         }, function(error) {
-          // TODO: REMOVE THESE ON LIVE
-          console.log(error)
+          // TODO: REMOVE THESE ON LIVE STRIPE
+          console.log(error);
         });
       }
     },
     processStripeToken: function(token) {
+      var controller = this;
       token.plan = this.get('plan.identifier');
       if (this.get('prorationDate')) {
         token.proration_date = this.get('prorationDate');
@@ -49,10 +49,9 @@ export default Ember.Controller.extend({
         url: '/users/process_payment.json',
         data: {token: token, user_id: this.get('session.currentUser.id')}
       }).then(function (response) {
-        // TODO: REMOVE THESE ON LIVE
-        console.log(response)
+        $.growl.notice({title: 'Subscription' , message: response.message})
       }, function(error) {
-        // TODO: REMOVE THESE ON LIVE
+        // TODO: REMOVE THESE ON LIVE STRIPE
         console.log(error)
       });
     }

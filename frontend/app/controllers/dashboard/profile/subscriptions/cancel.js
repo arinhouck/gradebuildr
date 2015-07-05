@@ -15,6 +15,11 @@ export default Ember.Controller.extend({
         type: 'POST',
         url: '/users/cancel_subscription.json',
         data: {user_id: this.get('session.currentUser.id')}
+      }).then(function (response) {
+        $.growl.notice({title: 'Subscription' , message: response.message})
+      }, function(error) {
+        // TODO: REMOVE THESE ON LIVE STRIPE
+        console.log(error)
       });
     },
     no: function() {
