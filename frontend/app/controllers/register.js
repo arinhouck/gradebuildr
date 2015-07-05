@@ -23,7 +23,6 @@ export default Ember.Controller.extend({
           self.transitionToRoute('dashboard');
         }));
       }, function(response) {
-        user.rollback();
         var errors = response.responseJSON.errors;
         errors.forEach(function(error_message){
           $.growl.error({ message: error_message });
