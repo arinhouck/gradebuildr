@@ -53,6 +53,8 @@
     </form>
   {{/em-modal-body}}
   {{#em-modal-footer}}
-    <button type="submit" class="btn btn-primary btn-flat" id="createUser" {{action "createUser"}}>Submit</button>
+    <button type="submit" class="btn btn-primary btn-flat" id="createUser" {{action "createUser"}} {{bind-attr disabled=isSaving}}>
+      Submit {{#if isSaving}} {{fa-icon 'spinner spin' spin=isSaving}} {{/if}}
+    </button>
   {{/em-modal-footer}}
 {{/em-modal-form}}

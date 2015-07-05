@@ -30,7 +30,7 @@ export default Ember.Controller.extend({
           $.growl.error({ message: error_message });
         });
 
-        this.set('isSaving', false)
+        self.set('isSaving', false)
       });
     }
   }
