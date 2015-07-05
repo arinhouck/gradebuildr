@@ -9,10 +9,7 @@ class SessionsController < Devise::SessionsController
       data = {
         token: user.authentication_token,
         id: user.id,
-        email: user.email,
-        name: user.name,
-        gradePoints: user.grade_points,
-        gradeUnits: user.grade_units
+        email: user.email
       }
       render json: data, status: 201
     else
