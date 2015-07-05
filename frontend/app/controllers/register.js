@@ -29,6 +29,8 @@ export default Ember.Controller.extend({
         errors.forEach(function(error_message){
           $.growl.error({ message: error_message });
         });
+
+        this.set('isSaving', false)
       });
     }
   }
