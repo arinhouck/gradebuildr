@@ -2,6 +2,7 @@ class SessionsController < Devise::SessionsController
   require 'active_support/core_ext'
 
   def create
+    binding.pry
     user = User.find_for_database_authentication(email: params[:user][:email])
 
     if user && user.valid_password?(params[:user][:password])

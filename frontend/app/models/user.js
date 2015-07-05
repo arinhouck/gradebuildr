@@ -12,6 +12,7 @@ export default DS.Model.extend({
   requests: DS.hasMany('request'),
   receivedRequests: DS.hasMany('request', {async: true}),
   email: DS.attr('string'),
+  unconfirmedEmail: DS.attr('string'),
   name: DS.attr('string'),
   gradePoints: DS.attr('number'),
   gradeUnits: DS.attr('number'),
