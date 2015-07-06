@@ -1,0 +1,47 @@
+{{#em-modal open-if=openModal is-open=isOpen configName="bs" id="showCourseModal"}}
+  {{#em-modal-title}}
+    {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+    <h4 class="modal-title">{{model.name}} <small class='btn-sm btn-default'>{{model.semester}}</small></h4>
+  {{/em-modal-title}}
+
+{{#em-modal-body}}
+    <div class="box-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="info-box bg-green">
+            <span class="info-box-icon">{{fa-icon 'bar-chart'}}</span>
+            <div class="info-box-content">
+              <div class="col-sm-4">
+                <span class="info-box-text">Current Grade</span>
+                <span class="info-box-number">{{model.currentGrade}} %</span>
+              </div>
+              <div class="col-sm-4">
+                <span class="info-box-text">Credit Hours</span>
+                <span class="info-box-number"><small></small> {{model.creditHours}}</span>
+              </div>
+              <div class="col-sm-4" style="margin-bottom:20px;">
+                <span class="info-box-text">Grading Scale</span>
+                <span class="info-box-number">{{model.gradingScale}}</span>
+              </div>
+              <div class="col-sm-12">
+                <div class="progress">
+                  <div class="progress-bar" style="width: {{model.currentGrade}}%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 text-center">
+        {{c3-chart data=chartData donut=donut size=size}}
+      </div>
+
+
+    </div>
+{{/em-modal-body}}
+
+{{#em-modal-footer}}
+  {{#em-modal-toggler class="btn btn-primary btn-flat"}}Close{{/em-modal-toggler}}
+{{/em-modal-footer}}
+
+{{/em-modal}}

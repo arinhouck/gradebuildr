@@ -33,7 +33,9 @@
               {{#each pagedCourseContent as |course|}}
                 <tr>
                   <td>
-                    {{course.name}}
+                    {{#link-to 'dashboard.courses.show' course}}
+                      {{course.name}}
+                    {{/link-to}}
                   </td>
                   <td>
                     {{course.creditHours}}
@@ -48,14 +50,10 @@
                     {{course.semester}}
                   </td>
                   <td>
-                    <div class="progress">
-                      {{#each course.weights as |weight|}}
-                        {{progress-bar name=weight.name percentage=weight.percentage}}
-                      {{/each}}
-                    </div>
+                    {{course.weights.length}}
                   </td>
                   <td class='label-group'>
-                    {{#link-to 'dashboard.courses.edit' course class="btn btn-default btn-flat btn-xs"}}
+                    {{#link-to 'dashboard.courses.edit' course class="btn btn-default btn-flat btn-xs" title='Edit'}}
                       {{fa-icon 'edit'}}
                     {{/link-to}}
                     {{#bs-popover title='Are you sure?' icon='trash' class="btn btn-danger btn-flat btn-xs" action='deleteCourse' model=course}}
