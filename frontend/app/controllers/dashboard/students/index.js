@@ -3,13 +3,16 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   averageSemesterGPA: function() {
     var students = this.get('students');
-    var studentLength = students.get('length');
-    var sum = 0;
+    var sum = 0, count = 0;
     students.forEach(function(student) {
-      sum += student.get('semesterGpa')
+      var gpa = student.get('semesterGpa');
+      if (!isNaN(parseFloat(gpa)) && isFinite(gpa)) {
+        sum += gpa
+        count += 1;
+      }
     })
-    if (studentLength > 0) {
-      return (sum/studentLength).toFixed(2);
+    if (count > 0) {
+      return (sum/count).toFixed(2);
     } else {
       return '—'
     }
@@ -17,13 +20,16 @@ export default Ember.Controller.extend({
 
   averageCumulativeGPA: function() {
     var students = this.get('students');
-    var studentLength = students.get('length');
-    var sum = 0;
+    var sum = 0, count = 0;
     students.forEach(function(student) {
-      sum += student.get('cumulativeGpa')
+      var gpa = student.get('cumulativeGpa');
+      if (!isNaN(parseFloat(gpa)) && isFinite(gpa)) {
+        sum += gpa;
+        count += 1;
+      }
     })
-    if (studentLength > 0) {
-      return (sum/studentLength).toFixed(2);
+    if (count > 0) {
+      return (sum/count).toFixed(2);
     } else {
       return '—'
     }
