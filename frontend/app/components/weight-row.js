@@ -23,9 +23,7 @@ export default Ember.Component.extend({
   deleteWeight: function() {
     var weight = this.get('weightToDelete');
     var weights = this.get('parent.weights');
-    if (this.get('editMode')) {
-      weight.destroyRecord();
-    }
+    weight.destroyRecord();
     $.growl.notice({title: 'Weight', message: 'Successfully deleted.'});
     weights.removeObject(weight);
   }.observes('confirm'),
@@ -39,11 +37,7 @@ export default Ember.Component.extend({
     },
     removeWeight: function(weight) {
       this.set('weightToDelete', weight);
-      if (this.get('editMode')) {
-        this.set('alertBox', true);
-      } else {
-        this.set('confirm', true);
-      }
+      this.set('alertBox', true);
     }
   }
 });
