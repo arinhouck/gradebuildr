@@ -1,21 +1,9 @@
 <div class="row">
   <div class="col-sm-6 col-xs-12">
-    <div class="info-box">
-      <span class="info-box-icon bg-aqua">{{fa-icon 'pie-chart'}}</span>
-      <div class="info-box-content">
-        <span class="info-box-text">Average Semester GPA</span>
-        <span class="info-box-number">{{averageSemesterGPA}}</span>
-      </div>
-    </div>
+    {{info-box color='aqua' icon='pie-chart' text='Average Semester GPA' values=students value='semesterGpa'}}
   </div>
   <div class="col-sm-6 col-xs-12">
-    <div class="info-box">
-      <span class="info-box-icon bg-orange">{{fa-icon 'bar-chart'}}</span>
-      <div class="info-box-content">
-        <span class="info-box-text">Average Cumulative GPA</span>
-        <span class="info-box-number">{{averageCumulativeGPA}}</span>
-      </div>
-    </div>
+    {{info-box color='orange' icon='bar-chart' text='Average Cumulative GPA' values=students value='cumulativeGpa'}}
   </div>
 </div>
 <div class="box box-default">
