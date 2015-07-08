@@ -13,6 +13,6 @@ export default DS.Model.extend({
     var weightedSum = this.get('weight.scoreTotalSum');
     var percentage = (this.get('score')/weightedSum)*(this.get('weight.percentage'))
     return percentage.toFixed(2);
-  }.property('weight', 'score', 'scoreTotal')
+  }.property('score', 'weight.scoreTotalSum', 'weight.percentage')
 
 });
