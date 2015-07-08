@@ -34,6 +34,11 @@ Router.map(function() {
   this.route('register');
   this.route('confirmation');
   this.route('confirmed');
+
+  this.route('password', function() {
+    this.route('new');
+    this.route('edit');
+  });
 });
 
 export default Router;
