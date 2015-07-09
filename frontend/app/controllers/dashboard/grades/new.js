@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   grades: [],
+  noGrades: Ember.computed.empty('grades'),
 
   isOpenDidChange: function() {
     if (!this.get('isOpen') && !this.get('isSaving')) {

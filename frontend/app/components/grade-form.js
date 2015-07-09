@@ -9,6 +9,15 @@ export default Ember.Component.extend({
     this.store.find('weight', grade.get('selectedWeight')).then(function(weight) {
       grade.set('weight', weight)
     });
-  }.observes('grade.selectedWeight')
+  }.observes('grade.selectedWeight'),
+
+  actions: {
+    removeGrade: function(grade) {
+      var grades = this.get('parent.grades');
+      grade.destroyRecord();
+      $.growl.notice({title: 'Grade', message: 'Successfully deleted.'});
+      grades.removeObject(grade);
+    }
+  }
 
 });

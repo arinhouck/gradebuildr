@@ -30,7 +30,7 @@
           Grades
         </label>
         {{#each grade in grades}}
-          {{grade-form grade=grade gradeWeights=gradeWeights}}
+          {{grade-form parent=this grade=grade gradeWeights=gradeWeights}}
         {{else}}
           <p class='text-muted'> No grades. </p>
         {{/each}}
@@ -39,7 +39,7 @@
   {{/if}}
 {{/em-modal-body}}
 {{#em-modal-footer}}
-  <button type="submit" class="btn btn-primary btn-flat" id="createGrade" {{bind-attr disabled=async}}>New</button>
+  <button type="submit" class="btn btn-primary btn-flat" id="createGrade" {{bind-attr disabled=noGrades}}>New</button>
 {{/em-modal-footer}}
 
 {{/em-modal-form}}
