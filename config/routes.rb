@@ -10,10 +10,6 @@ Rails.application.routes.draw do
     passwords: 'passwords'
   }
 
-  # devise_scope :user do
-  # match 'password/edit', to: 'devise/passwords#edit', via: :get
-  # end
-
 
   resources :users do
     get :show_student, :on => :collection

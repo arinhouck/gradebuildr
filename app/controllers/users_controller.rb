@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, except: [:create, :stripe_hook, :generate_new_password_email]
+  before_filter :authenticate, except: [:create, :stripe_hook]
   skip_before_filter :verify_authenticity_token, only: :stripe_hook
   before_filter :is_director, only: :show_student
 
@@ -45,7 +45,6 @@ class UsersController < ApplicationController
       )
       @user.save_customer(customer.id)
       @user.save_subscription(params[:token][:plan])
-      @user.update_canceled_subscription(false)
     end
 
     render json: {message: 'Successfully processed payment.'}, status: :ok
