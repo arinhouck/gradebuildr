@@ -75,16 +75,17 @@ class UsersController < ApplicationController
   def stripe_hook
     event = Stripe::Event.retrieve(params[:id])
 
-    case event.type
-    when 'charge.succeeded'
-      @user = User.find_by_customer_id(event.data.object.customer)
-      @user.add_role :director unless @user.has_role? :director
-    when 'invoice.payment_succeeded'
-      User.find_by_customer_id(event.data.object.customer).renew
-    when 'invoice.payment_failed', 'customer.subscription.deleted'
-      @user = User.find_by_customer_id(event.data.object.customer)
-      @user.save_subscription(nil)
-      @user.remove_role :director if @user.has_role? :director
+    @user = User.find_by_customer_id(event.data.object.customer)
+    if @user
+      case event.type
+      when 'charge.succeeded'
+        @user.add_role :director unless @user.has_role? :director
+      when 'invoice.payment_succeeded'
+        @user.renew
+      when 'invoice.payment_failed', 'customer.subscription.deleted'
+        @user.save_subscription(nil)
+        @user.remove_role :director if @user.has_role? :director
+      end
     end
     render status: :ok, json: 'Success'
   end
