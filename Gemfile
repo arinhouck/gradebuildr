@@ -24,6 +24,7 @@ gem 'rolify'
 gem 'pusher'
 gem 'pusherable'
 gem 'stripe'
+gem 'newrelic_rpm'
 
 gem 'rails_12factor', group: :production
 gem 'figaro'
