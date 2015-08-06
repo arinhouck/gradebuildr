@@ -9,5 +9,14 @@ export default Ember.Route.extend({
         controller.set('semesters', semesters);
       });
     });
+  },
+  actions: {
+    willTransition: function() {
+      var isDirty = this.get('controller.model.isDirty');
+      if (isDirty) {
+        this.get('controller').send('rollbackUser');
+      }
+      return true;
+    }
   }
 });
