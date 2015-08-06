@@ -32,8 +32,12 @@
           </tr>
         {{else}}
           <tr class='lead'>
-            <td colspan='5' class='text-center'>
-              No students.
+            <td colspan='6' class='text-center'>
+              {{#if isLoading}}
+                {{fa-icon 'spinner' spin=true size=2}}
+              {{else}}
+                No students.
+              {{/if}}
             </td>
           </tr>
         {{/each}}
