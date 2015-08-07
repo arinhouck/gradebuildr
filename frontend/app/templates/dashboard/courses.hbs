@@ -23,6 +23,7 @@
                 <th>Name</th>
                 <th>Credit Hours</th>
                 <th>Current Grade</th>
+                <th>Letter Grade</th>
                 <th>Grading Scale</th>
                 <th>Semester</th>
                 <th>Weights</th>
@@ -42,6 +43,9 @@
                   </td>
                   <td>
                     {{course.currentGrade}}<small>%</small>
+                  </td>
+                  <td>
+                    {{course.letterGrade}}
                   </td>
                   <td>
                     {{course.gradingScale}}
@@ -65,7 +69,7 @@
                 </tr>
                 {{else}}
                   <tr class='lead'>
-                    <td colspan='7' class='text-center'>
+                    <td colspan='8' class='text-center'>
                       No courses.
                     </td>
                   </tr>
