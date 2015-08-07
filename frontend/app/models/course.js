@@ -134,6 +134,6 @@ export default DS.Model.extend({
       this.set('letterGrade', 'F');
       this.set('score', 0);
     }
-  }.observes('currentGrade', 'creditHours', 'user.activeSemester')
+  }.observes('currentGrade', 'gradingScale')
 
 });
