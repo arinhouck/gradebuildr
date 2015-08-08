@@ -18,6 +18,7 @@ This application was made to help you track your grades in your college curricul
 
 #### Ember CLI
   * Go to `cd frontend`
+  * Run `npm install -g ember-cli`
   * Run `npm install`
   * Run `bower install`
 
