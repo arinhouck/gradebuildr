@@ -1,3 +1,0 @@
-== GradeBuildr
-
-This application was made to help you track your grades in your college curriculum and properly weigh grades based on your criteria.

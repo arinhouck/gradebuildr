@@ -12,6 +12,8 @@ if Rails.env.development?
     User.create(name: 'Arin', email: 'arinhouck@gmail.com', password: 'password', active_semester: 'Spring 2015'),
     User.create(name: 'User', email: 'user@example.com', password: 'password', active_semester: 'Spring 2015')
   ]
+  users.each { |user| user.confirm! }
+
 
   puts "Load courses"
   Course.destroy_all
