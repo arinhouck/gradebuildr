@@ -53,7 +53,6 @@ export default DS.Model.extend({
     var gradingScale = this.get('gradingScale');
     var plus = gradingScale.indexOf('Plus') >= 0;
     var minus = gradingScale.indexOf('Minus') >= 0;
-    debugger;
     if (score >= 97) { // A+
       if (plus) {
         this.set('letterGrade', 'A+');
