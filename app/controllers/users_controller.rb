@@ -84,6 +84,7 @@ class UsersController < ApplicationController
         @user.renew
       when 'invoice.payment_failed', 'customer.subscription.deleted'
         @user.save_subscription(nil)
+        @user.update_canceled_subscription(nil)
         @user.remove_role :director if @user.has_role? :director
       end
     end
