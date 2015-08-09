@@ -12,7 +12,7 @@ class FeedbacksController < ApplicationController
     if @feedback.save
       render json: @feedback, status: :created
     else
-      render json: @feedback.errors, status: 500
+      render json: { errors: @feedback.errors.full_messages }, status: 500
     end
   end
 
