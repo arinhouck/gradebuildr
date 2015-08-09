@@ -21,4 +21,16 @@ describe "Users", type: :feature, :js => true do
     wait_for_ajax
     expect(current_path).to eq '/confirmation'
   end
+
+  it "can login" do
+    user = User.create(name: 'John doe', email: 'john@example.com', password: 'password', active_semester: 'Spring 2015')
+    user.confirm!
+    visit '/'
+    click_link 'login-nav'
+    fill_in 'email', with: 'john@example.com'
+    fill_in 'password', with: 'password'
+    click_button 'Log in'
+    wait_for_ajax
+    expect(current_path).to eq '/dashboard'
+  end
 end
