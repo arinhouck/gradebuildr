@@ -33,4 +33,20 @@ describe "Users", type: :feature, :js => true do
     wait_for_ajax
     expect(current_path).to eq '/dashboard'
   end
+
+  xit "can edit profile" do
+  end
+
+  xit "can change password" do
+  end
+
+  xit "can recieve an request" do
+  end
+
+  xit "can accept an received request" do
+  end
+
+  xit "can submit feedback" do
+  end
+
 end
