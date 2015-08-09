@@ -88,6 +88,15 @@ describe "Users", type: :feature, :js => true do
     end
 
     xit "and send a request to student" do
+
+    end
+
+    xit "and can view student analytics" do
+
+    end
+
+    xit "and can view individual student" do
+
     end
 
   end
@@ -112,7 +121,7 @@ describe "Users", type: :feature, :js => true do
 
     it "and submit feedback" do
       body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi blandit turpis massa, quis elementum mi ultrices a.'
-      
+
       click_link 'Feedback'
       fill_in 'body', with: body
       click_button 'Send'
@@ -123,6 +132,47 @@ describe "Users", type: :feature, :js => true do
       expect(feedback.body).to eq(body)
       expect(feedback.email).to eq(@student.email)
     end
+
+    xit "and view dashboard analytics" do
+
+    end
+
+    xit "and create a course" do
+
+    end
+
+    xit "and edit a course" do
+
+    end
+
+    xit "and delete a course" do
+
+    end
+
+    xit "and create multiple grade" do
+
+    end
+
+    xit "and edit a grade" do
+
+    end
+
+    xit "and delete a grade" do
+
+    end
+
+    xit "and filter on courses" do
+
+    end
+
+    xit "and filter on grades" do
+
+    end
+
+    xit "and change between pagination" do
+
+    end
+
   end
 
 end
