@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, presence: true
+  validates :active_semester, presence: true
 
   has_many :courses, dependent: :destroy
   has_many :grades, dependent: :destroy
