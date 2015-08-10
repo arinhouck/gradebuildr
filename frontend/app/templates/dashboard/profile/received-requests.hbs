@@ -9,7 +9,7 @@
           {{receivedRequest.director.email}}
           <span class="pull-right">
             {{#unless receivedRequest.accepted}}
-              <button {{action 'accept' receivedRequest}} class="btn btn-lg btn-flat btn-success">
+              <button {{action 'accept' receivedRequest}} class="btn btn-lg btn-flat btn-success" id="accept">
                  Accept
               </button>
             {{/unless}}

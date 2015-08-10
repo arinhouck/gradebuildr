@@ -26,6 +26,13 @@ gem 'pusherable'
 gem 'stripe'
 gem 'newrelic_rpm'
 
+gem 'capybara'
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'database_cleaner'
+  gem 'selenium-webdriver'
+end
+
 gem 'rails_12factor', group: :production
 gem 'figaro'
 

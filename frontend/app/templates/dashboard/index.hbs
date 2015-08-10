@@ -11,7 +11,7 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-aqua">
           <div class="inner">
-            <h3>{{courses.length}}</h3>
+            <h3 id='course-count'>{{courses.length}}</h3>
             <p>{{h-pluralize courses.length "Course" omitCount=true}}</p>
           </div>
           <div class="icon">
@@ -25,7 +25,7 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3>{{grades.length}}</h3>
+            <h3 id='grade-count'>{{grades.length}}</h3>
             <p>{{h-pluralize grades.length "Grade" omitCount=true}}</p>
           </div>
           <div class="icon">
@@ -40,7 +40,7 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-green">
           <div class="inner">
-            <h3>{{session.currentUser.semesterGpa}}</h3>
+            <h3 id='semester-gpa'>{{session.currentUser.semesterGpa}}</h3>
             <p>Semester GPA</p>
           </div>
           <div class="icon">
@@ -51,7 +51,7 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-red">
           <div class="inner">
-            <h3>{{session.currentUser.cumulativeGpa}}</h3>
+            <h3 id='cumulative-gpa'>{{session.currentUser.cumulativeGpa}}</h3>
             <p>Cumulative GPA</p>
           </div>
           <div class="icon">

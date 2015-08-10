@@ -1,5 +1,5 @@
 {{#if session.isAuthenticated}}
-    <a {{action "toggleDropdown"}} class="rl-dropdown-toggle">
+    <a {{action "toggleDropdown"}} class="rl-dropdown-toggle" id="user-menu-link">
       {{gravatar-image email=session.currentUser.email class='user-image'}}
       <span class="hidden-xs">{{session.currentUser.name}}</span>
     </a>
@@ -33,7 +33,7 @@
     </ul>
     {{/if}}
 {{else}}
-  <a {{action 'toggleDropdown' }} href="#" class="rl-dropdown-toggle">
+  <a {{action 'toggleDropdown' }} href="#" id="login-nav" class="rl-dropdown-toggle">
     <span>Login</span>
   </a>
 

@@ -57,7 +57,7 @@
                     {{course.weights.length}}
                   </td>
                   <td class='label-group'>
-                    {{#link-to 'dashboard.courses.edit' course class="btn btn-default btn-flat btn-xs" title='Edit'}}
+                    {{#link-to 'dashboard.courses.edit' course class="btn btn-default btn-flat btn-xs edit-btn" title='Edit'}}
                       {{fa-icon 'edit'}}
                     {{/link-to}}
                     {{#bs-popover title='Are you sure?' icon='trash' class="btn btn-danger btn-flat btn-xs" action='deleteCourse' model=course}}

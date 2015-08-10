@@ -2,16 +2,16 @@
 
   <div class="row">
     <div class="col-xs-6">
-      {{input value=weight.name class='form-control input-sm' required='true' placeholder='Enter weight name'}}
+      {{input value=weight.name class='form-control input-sm weight-name' required='true' placeholder='Enter weight name'}}
     </div>
     <div class="col-xs-5">
       <div {{bind-attr class=":input-group parent.isntValid:has-error"}}>
-        {{input value=weight.percentage class='form-control input-sm' required='true' type='number' placeholder='Enter weight percentage'}}
+        {{input value=weight.percentage class='form-control input-sm weight-percentage' required='true' type='number' placeholder='Enter weight percentage'}}
         <div class="input-group-addon">%</div>
       </div>
     </div>
     <div class="col-xs-1 center-button-sm">
-      <button type="button" {{action 'removeWeight' weight}} {{bind-attr disabled=onlyWeight}} class="btn btn-xs btn-default btn-flat text-red" name="button" title="Remove">{{fa-icon 'minus-circle'}}</button>
+      <button type="button" {{action 'removeWeight' weight}} {{bind-attr disabled=onlyWeight}} class="btn btn-xs btn-default btn-flat text-red remove-weight" name="button" title="Remove">{{fa-icon 'minus-circle'}}</button>
     </div>
   </div>
 

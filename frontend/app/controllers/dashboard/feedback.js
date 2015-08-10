@@ -11,9 +11,16 @@ export default Ember.Controller.extend({
   actions: {
     submitFeedback: function() {
       var controller = this;
+      this.set('isSaving', true);
       this.get('model').save().then(function() {
-        controller.transitionToRoute('dashboard.index')
-        $.growl.notice({title: 'Feedback', message: 'Sucessfully sent.'})
+        controller.transitionToRoute('dashboard.index');
+        $.growl.notice({title: 'Feedback', message: 'Sucessfully sent.'});
+      }, function(response) {
+        var errors = response.responseJSON.errors;
+        errors.forEach(function(error_message){
+          $.growl.error({ message: error_message });
+        });
+        controller.set('isSaving', false);
       });
     }
   }

@@ -12,13 +12,14 @@ export default Ember.Controller.extend({
     }
   }.property('currentPath'),
 
-  isAuthenticatedChanged: function() {
-    if (this.get('session.isAuthenticated')) {
-      $.growl.notice({message: 'Sucessfully logged in.'})
-    } else {
-      $.growl.notice({message: 'Sucessfully logged out.'})
-    }
-  }.observes('session.isAuthenticated'),
+  // TODO: Messes up testing when clicking user menu
+  // isAuthenticatedChanged: function() {
+  //   if (this.get('session.isAuthenticated')) {
+  //     $.growl.notice({message: 'Sucessfully logged in.'})
+  //   } else {
+  //     $.growl.notice({message: 'Sucessfully logged out.'})
+  //   }
+  // }.observes('session.isAuthenticated'),
 
   containerClass: function() {
     if(this.get('isDashboard')) {
