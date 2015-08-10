@@ -16,6 +16,14 @@
 
  @import "font-awesome";
 
+  .navbar-nav {
+    a {
+      font-weight: 500;
+      border-left: none!important;
+      border-right: none!important;
+    }
+  }
+
    [data-ember-action] {
      cursor: pointer;
    }
