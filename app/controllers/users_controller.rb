@@ -79,9 +79,9 @@ class UsersController < ApplicationController
     if @user
       case event.type
       when 'charge.succeeded'
-        @user.add_role :director unless @user.has_role? :director
+        @user.add_role :director if @user.subscription
       when 'invoice.payment_succeeded'
-        @user.renew
+        @user.renew if @user.subscription
       when 'invoice.payment_failed', 'customer.subscription.deleted'
         @user.save_subscription(nil)
         @user.update_canceled_subscription(nil)
