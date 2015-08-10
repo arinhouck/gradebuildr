@@ -41,7 +41,7 @@ describe "Users", type: :feature, :js => true do
       }
 
       open_user_menu
-      click_link 'Profile'
+      click_button 'Profile'
 
       fill_in 'name', with: edit_params[:name]
       fill_in 'gradePoints', with: edit_params[:grade_points]
@@ -64,7 +64,7 @@ describe "Users", type: :feature, :js => true do
       }
 
       open_user_menu
-      click_link 'Profile'
+      click_button 'Profile'
 
       click_link 'Change Password'
       fill_in 'password', with: 'secretpassword'
@@ -118,7 +118,7 @@ describe "Users", type: :feature, :js => true do
 
     it "and accept a received request" do
       open_user_menu
-      click_link 'Profile'
+      click_button 'Profile'
       click_link 'Received Requests'
       click_button 'accept'
       expect(page).to have_no_selector('#accept')
