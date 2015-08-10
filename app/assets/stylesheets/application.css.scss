@@ -24,6 +24,10 @@
     }
   }
 
+  .small-box {
+    box-shadow: none;
+  }
+
    [data-ember-action] {
      cursor: pointer;
    }
