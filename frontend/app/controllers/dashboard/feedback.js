@@ -3,7 +3,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   isOpenDidChange: function() {
-    debugger;
     if (!this.get('isOpen') && !this.get('isSaving')) {
       this.transitionToRoute('dashboard.index');
     }
