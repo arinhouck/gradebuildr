@@ -10,6 +10,31 @@ module FeatureHelper
     find(:css, '#user-menu-link').click
   end
 
+  def delete_all_weights
+    all(:css, '.remove-weight').each_with_index do |element, i|
+      if i != 0
+        element.click
+        click_button 'Yes'
+        wait_for_ajax
+        find(:css, '.growl-close').click
+      end
+    end
+  end
+
+  def fill_in_course(course_params)
+    fill_in 'subject', with: course_params[:subject]
+    fill_in 'subjectNumber', with: course_params[:number]
+    fill_in 'creditHours', with: course_params[:credit_hours]
+    select course_params[:semester], :from => 'semester'
+    select course_params[:grading_scale], :from => 'grading-scale'
+
+    course_params[:weights].each_with_index do |weight, i|
+      find(:id, 'add-weight').click if i != 0
+      all(:css, '.weight-name')[i].set(weight[:name])
+      all(:css, '.weight-percentage')[i].set(weight[:percentage])
+    end
+  end
+
   def student_data(user)
     courses = [
       Course.create(user_id: user.id, subject: 'EEE', number: 230, credit_hours: 3, grading_scale: 'Plus', semester: 'Fall 2015'),
