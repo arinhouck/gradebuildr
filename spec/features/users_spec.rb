@@ -145,12 +145,59 @@ describe "Users", type: :feature, :js => true do
       expect(find(:id, 'cumulative-gpa').text.to_f).to eq(3.74)
     end
 
-    xit "and create a course" do
+    it "and create a course" do
+      course_params = {
+        subject: 'MAT', number: '101',
+        credit_hours: '3', semester: 'Fall 2015',
+        grading_scale: 'Plus', weights: [
+          { name: 'Assignments', percentage: 20 },
+          { name: 'Quizzes', percentage: 20 },
+          { name: 'Midterm', percentage: 20 },
+          { name: 'Final', percentage: 40 }
+        ]
+      }
+      click_link 'Courses'
+      click_link 'New Course'
 
+      fill_in_course(course_params)
+
+      click_button 'New'
+      columns = first(:css, 'tbody tr').all(:css, 'td')
+      expect(columns[0].text).to eq(course_params[:subject] + ' ' + course_params[:number])
+      expect(columns[1].text).to eq(course_params[:credit_hours])
+      expect(columns[2].text).to eq('100.00%') # Current Grade
+      expect(columns[3].text).to eq('A+') # Letter Grade
+      expect(columns[4].text).to eq(course_params[:grading_scale])
+      expect(columns[5].text).to eq(course_params[:semester])
+      expect(columns[6].text.to_i).to eq(course_params[:weights].length)
     end
 
-    xit "and edit a course" do
+    it "and edit a course" do
+      course_params = {
+        subject: 'CSE', number: '101',
+        credit_hours: '3', semester: 'Fall 2015',
+        grading_scale: 'Minus', weights: [
+          { name: 'Assignments', percentage: 20 },
+          { name: 'Quizzes', percentage: 20 },
+          { name: 'Midterm', percentage: 60 }
+        ]
+      }
 
+      click_link 'Courses'
+      first(:css, '.edit-btn').click
+
+      delete_all_weights
+      fill_in_course(course_params)
+      click_button 'Save'
+
+      columns = first(:css, 'tbody tr').all(:css, 'td')
+      expect(columns[0].text).to eq(course_params[:subject] + ' ' + course_params[:number])
+      expect(columns[1].text).to eq(course_params[:credit_hours])
+      expect(columns[2].text).to eq('93.20%') # Current Grade
+      expect(columns[3].text).to eq('A') # Letter Grade
+      expect(columns[4].text).to eq(course_params[:grading_scale])
+      expect(columns[5].text).to eq(course_params[:semester])
+      expect(columns[6].text.to_i).to eq(course_params[:weights].length)
     end
 
     xit "and delete a course" do
