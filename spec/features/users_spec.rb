@@ -7,7 +7,7 @@ describe "Users", type: :feature, :js => true do
     end
     @director = User.create(name: 'Director', email: 'director@example.com', password: 'password', active_semester: 'Spring 2015')
     @director.confirm
-    @student = User.create(name: 'Student', email: 'student@example.com', password: 'password', active_semester: 'Fall 2015')
+    @student = User.create(name: 'Student', email: 'student@example.com', password: 'password', active_semester: 'Fall 2015', grade_points: 167, grade_units: 44)
     @student.confirm
   end
 
@@ -91,6 +91,10 @@ describe "Users", type: :feature, :js => true do
 
     end
 
+    xit "and can't see student with unaccepted request" do
+
+    end
+
     xit "and can view student analytics" do
 
     end
@@ -104,6 +108,7 @@ describe "Users", type: :feature, :js => true do
   context "can login as student" do
     before :each do
       @request = Request.create({director_id: @director.id, student_id: @student.id})
+      student_data(@student)
 
       visit '/'
       click_link 'login-nav'
@@ -116,7 +121,7 @@ describe "Users", type: :feature, :js => true do
       click_link 'Profile'
       click_link 'Received Requests'
       click_button 'accept'
-      page.should have_no_selector('#accept')
+      expect(page).to have_no_selector('#accept')
     end
 
     it "and submit feedback" do
@@ -133,8 +138,11 @@ describe "Users", type: :feature, :js => true do
       expect(feedback.email).to eq(@student.email)
     end
 
-    xit "and view dashboard analytics" do
-
+    it "and view dashboard analytics" do
+      expect(find(:id, 'course-count').text.to_i).to eq(@student.courses.length)
+      expect(find(:id, 'grade-count').text.to_i).to eq(@student.grades.length)
+      expect(find(:id, 'semester-gpa').text.to_f).to eq(3.33)
+      expect(find(:id, 'cumulative-gpa').text.to_f).to eq(3.74)
     end
 
     xit "and create a course" do
