@@ -15,8 +15,6 @@ module FeatureHelper
       if i != 0
         element.click
         click_button 'Yes'
-        wait_for_ajax
-        find(:css, '.growl-close').click
       end
     end
   end
@@ -25,8 +23,8 @@ module FeatureHelper
     fill_in 'subject', with: course_params[:subject]
     fill_in 'subjectNumber', with: course_params[:number]
     fill_in 'creditHours', with: course_params[:credit_hours]
-    select course_params[:semester], :from => 'semester'
-    select course_params[:grading_scale], :from => 'grading-scale'
+    select course_params[:semester], from: 'semester'
+    select course_params[:grading_scale], from: 'grading-scale'
 
     course_params[:weights].each_with_index do |weight, i|
       find(:id, 'add-weight').click if i != 0
