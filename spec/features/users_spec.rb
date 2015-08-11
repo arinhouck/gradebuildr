@@ -145,6 +145,11 @@ describe "Users", type: :feature, :js => true do
       expect(find(:id, 'cumulative-gpa').text.to_f).to eq(3.74)
     end
 
+    it "and can view courses on index" do
+      click_link 'Courses'
+      expect(all(:css, '.table tbody tr').length).to eq(@student.courses.length)
+    end
+
     it "and create a course" do
       course_params = {
         subject: 'MAT', number: '101',
@@ -200,12 +205,57 @@ describe "Users", type: :feature, :js => true do
       expect(columns[6].text.to_i).to eq(course_params[:weights].length)
     end
 
-    xit "and delete a course" do
+    it "and delete a course" do
+      click_link 'Courses'
+      first(:css, '.fa-trash').click
+      expect(all(:css, '.table tbody tr').length).to eq(1)
+      visit current_path # Check delete persists on refresh
+      expect(all(:css, '.table tbody tr').length).to eq(1)
+      expect(first(:css, '.table tbody td').text).to eq('EEE 230')
+    end
+
+    it "and can view grades on index" do
+      click_link 'Grades'
+      expect(all(:css, '.table tbody tr').length).to eq(@student.grades.length)
+    end
+
+    xit "and can view correct courses on grade" do
 
     end
 
-    xit "and create multiple grade" do
+    xit "and can view correct weights on grade" do
 
+    end
+
+    it "and create multiple grades" do
+      grades = [
+        {name: 'Testing #1', weight: 'Assignments', score: '5', total: '10'},
+        {name: 'Testing #2', weight: 'Assignments', score: '9', total: '10'},
+        {name: 'Quiz #1', weight: 'Quizzes', score: '11.2', total: '15'}
+      ]
+      click_link 'Grades'
+      click_link 'New Grade'
+      select 'EEE 230', from: 'select-course'
+
+      grades.each_with_index do |grade, i|
+        find(:css, '#add-grade').click if i != 0
+        all(:css, 'input[name=name]')[i].set(grade[:name])
+        all(:css, '.grade-weight')[i].select(grade[:weight])
+        all(:css, 'input[name=score]')[i].set(grade[:score])
+        all(:css, 'input[name=total]')[i].set(grade[:total])
+      end
+      click_button 'New'
+
+      grades = grades.reverse # Reverse order for assertions
+
+      all(:css, 'tbody tr')[0..2].each_with_index do |row, i|
+        columns = row.all(:css, 'td')
+        expect(columns[0].text).to eq(grades[i][:name])
+        expect(columns[1].text).to eq('EEE 230')
+        expect(columns[2].text).to eq('Fall 2015')
+        expect(columns[3].text).to eq(grades[i][:score] + ' /' + grades[i][:total])
+        expect(columns[5].text).to include(grades[i][:weight])
+      end
     end
 
     xit "and edit a grade" do
