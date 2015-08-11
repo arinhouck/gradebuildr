@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-3 col-xs-6">
-    {{input value=grade.name class='form-control input-sm' required='true' placeholder='Enter grade name'}}
+    {{input value=grade.name class='form-control input-sm' required='true' placeholder='Enter grade name' name='name'}}
   </div>
   <div class="col-sm-4 col-xs-6">
       {{view "select"
@@ -8,16 +8,16 @@
          value=grade.selectedWeight
          optionValuePath="content.id"
          optionLabelPath="content.name"
-         class='form-control input-sm'
+         class='form-control input-sm grade-weight'
          prompt='Please select a grade weight'
          required='true'
       }}
   </div>
   <div class="col-sm-4 col-xs-12">
     <div class="input-group">
-      {{input value=grade.score class='form-control input-sm no-border' type='number' required='true' step='any' placeholder='Score'}}
+      {{input value=grade.score class='form-control input-sm no-border' type='number' required='true' step='any' placeholder='Score' name='score'}}
       <div class="input-group-addon lead no-border">/</div>
-      {{input value=grade.scoreTotal class='form-control input-sm no-border' type='number' required='true' step='any' placeholder='Total'}}
+      {{input value=grade.scoreTotal class='form-control input-sm no-border' type='number' required='true' step='any' placeholder='Total' name='total'}}
     </div>
   </div>
   <div class="col-sm-1 center-button-sm">

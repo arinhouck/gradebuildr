@@ -18,14 +18,14 @@
            optionValuePath="content.id"
            optionLabelPath="content.name"
            class='form-control'
-           id='selectCourse'
+           id='select-course'
            prompt='Please select a course'
            required='true'
         }}
       </div>
 
       <div class="form-group">
-        <a {{bind-attr class=":label :bg-green :pull-right selectedCourse::hide"}} {{action 'addGrade'}}><small>{{fa-icon 'plus'}} Add Grade</small></a>
+        <a {{bind-attr class=":label :bg-green :pull-right selectedCourse::hide"}} {{action 'addGrade'}} id='add-grade'><small>{{fa-icon 'plus'}} Add Grade</small></a>
         <label for="grades">
           Grades
         </label>
