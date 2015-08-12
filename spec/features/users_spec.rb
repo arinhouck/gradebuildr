@@ -198,7 +198,7 @@ describe "Users", type: :feature, :js => true do
       columns = first(:css, 'tbody tr').all(:css, 'td')
       expect(columns[0].text).to eq(course_params[:subject] + ' ' + course_params[:number])
       expect(columns[1].text).to eq(course_params[:credit_hours])
-      expect(columns[2].text).to eq('93.20%') # Current Grade
+      expect(columns[2].text).to eq('96.80%') # Current Grade
       expect(columns[3].text).to eq('A') # Letter Grade
       expect(columns[4].text).to eq(course_params[:grading_scale])
       expect(columns[5].text).to eq(course_params[:semester])
