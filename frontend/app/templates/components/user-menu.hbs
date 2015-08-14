@@ -1,24 +1,38 @@
 {{#if session.isAuthenticated}}
     <a {{action "toggleDropdown"}} class="rl-dropdown-toggle" id="user-menu-link">
       {{gravatar-image email=session.currentUser.email class='user-image'}}
-      <span class="hidden-xs">{{session.currentUser.name}}</span>
+      <span class="hidden-xs">{{session.currentUser.firstName}}</span>
     </a>
     {{#if dropdownExpanded}}
     <ul class="dropdown-menu rl-dropdown">
       <li class="user-header text-center">
         {{gravatar-image email=session.currentUser.email class='img-circle'}}
-
-        <p>
-          <p>{{session.currentUser.activeSemester}}</p>
-          <div class="row">
-            <div class="col-xs-6">
-              <small><b>Grade Points:</b> {{session.currentUser.gradePoints}}</small>
-            </div>
+        {{#if session.currentUser.isStudent}}
+          <p>
+            <p>{{session.currentUser.activeSemester}}</p>
+            <div class="row">
               <div class="col-xs-6">
-                <small><b>Grade Units:</b> {{session.currentUser.gradeUnits}}</small>
+                <small><b>Grade Points:</b> {{session.currentUser.gradePoints}}</small>
               </div>
-          </div>
-        </p>
+                <div class="col-xs-6">
+                  <small><b>Grade Units:</b> {{session.currentUser.gradeUnits}}</small>
+                </div>
+            </div>
+          </p>
+        {{/if}}
+        {{#if session.currentUser.isOrganization}}
+          <p>
+            <p>{{session.currentUser.activeSemester}}</p>
+            <div class="row">
+                <div class="col-xs-6">
+                  <small><b>Organization:</b> {{session.currentUser.organization}}</small>
+                </div>
+                <div class="col-xs-6">
+                  <small><b>Students:</b> {{session.currentUser.students.length}}</small>
+                </div>
+            </div>
+          </p>
+        {{/if}}
       </li>
       <li class="user-footer">
         <div class="pull-left" {{action 'toggleDropdown' }}>
