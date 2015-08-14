@@ -25,6 +25,7 @@ gem 'pusher'
 gem 'pusherable'
 gem 'stripe'
 gem 'newrelic_rpm'
+gem 'groupify'
 
 gem 'capybara'
 group :development, :test do
