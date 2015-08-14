@@ -59,7 +59,7 @@
     <li class="pull-left header">
       <button type="button" name="button" class='btn btn-xs btn-default btn-flat' {{action 'back'}}>{{fa-icon 'reply'}}</button>
       {{gravatar-image email=model.email class='img-circle' title=model.email}}
-      {{model.name}}
+      {{model.fullName}}
     </li>
     <li class='header'><span class='label label-default' title='Active Semester'>{{model.activeSemester}}</span></li>
   </ul>

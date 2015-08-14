@@ -23,7 +23,7 @@
       <tbody>
         {{#each students as |student|}}
           <tr>
-            <td>{{link-to student.name 'dashboard.students.show' student}}</td>
+            <td>{{link-to student.fullName 'dashboard.students.show' student}}</td>
             <td>{{student.activeSemester}}</td>
             <td>{{student.courses.length}}</td>
             <td>{{student.semesterCreditHours}}</td>
