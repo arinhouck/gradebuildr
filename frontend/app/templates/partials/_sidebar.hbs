@@ -16,17 +16,19 @@
           {{fa-icon 'dashboard'}}<span>Dashboard</span>
         {{/link-to}}
       {{/link-li-toggle}}
-      {{#link-li-toggle}}
-        {{#link-to 'dashboard.courses'}}
-          {{fa-icon 'university'}}<span>Courses</span>
-        {{/link-to}}
-      {{/link-li-toggle}}
-      {{#link-li-toggle}}
-        {{#link-to 'dashboard.grades'}}
-          {{fa-icon 'file-text-o'}}<span>Grades</span>
-        {{/link-to}}
-      {{/link-li-toggle}}
-      {{#if session.currentUser.isDirector}}
+      {{#if session.currentUser.isStudent}}
+        {{#link-li-toggle}}
+          {{#link-to 'dashboard.courses'}}
+            {{fa-icon 'university'}}<span>Courses</span>
+          {{/link-to}}
+        {{/link-li-toggle}}
+        {{#link-li-toggle}}
+          {{#link-to 'dashboard.grades'}}
+            {{fa-icon 'file-text-o'}}<span>Grades</span>
+          {{/link-to}}
+        {{/link-li-toggle}}
+      {{/if}}
+      {{#if session.currentUser.isOrganization}}
         {{#link-li-toggle}}
           {{#link-to 'dashboard.students'}}
             {{fa-icon 'users'}}<span>Students</span>
