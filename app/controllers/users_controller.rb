@@ -93,12 +93,17 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    add_role if user_params[:account_type] == 'organization'
 
     if @user.save
       render json: @user, status: :created
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def add_role
+    @user.add_role :director
   end
 
   def show
@@ -123,7 +128,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :grade_points, :grade_units, :active_semester, :password, :password_confirmation, :active_until, :subscription, :canceled_subscription)
+    params.require(:user).permit(:first_name, :last_name, :email, :grade_points, :grade_units, :active_semester, :password, :password_confirmation, :active_until, :subscription, :canceled_subscription, :organization, :account_type)
   end
 
   def authenticate
