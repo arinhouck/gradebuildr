@@ -1,61 +1,127 @@
-{{#em-modal-form open-if=openModal is-open=isOpen configName="bs" id="registerModal" on-submit="register"}}
-  {{#em-modal-title}}
-    {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
-    <h4 class="modal-title">Register</h4>
-  {{/em-modal-title}}
-  {{#em-modal-body}}
-    <form role="form">
-      <div class="box-body">
+<section class="content">
+  <div class="container">
+
+
+
+    <div class="row space">
+
+      <div class="col-sm-6 border-right">
+        {{#if isStudent}}
+          <img src="assets/student-profile-computer.png" style="width: 100%;">
+        {{else}}
+          <img src="assets/organization-profile-computer.png" style="width: 100%;">
+        {{/if}}
+      </div>
+      <div class="col-sm-6">
+
+        {{#unless registration}}
+        <h1>Sign up for free.</h1>
+        <p class='lead'>
+          Choose from two types of accounts:
+        </p>
         <div class="form-group">
-          <label for="name">Name</label>
-          {{input value=model.name class='form-control' id="name" placeholder='Enter name'}}
-        </div>
-        <div class="form-group">
-          <div class="row">
-            <div class="col-sm-6">
-              <label for="gradePoints">Grade Points</label>
-              {{input value=model.gradePoints class='form-control' id="gradePoints" step='any' placeholder='Enter grade points'}}
-            </div>
-            <div class="col-sm-6">
-              <label for="gradeUnits">Grade Units towards GPA</label>
-              {{input value=model.gradeUnits class='form-control' id="gradeUnits" step='any' placeholder='Enter grade units'}}
-            </div>
+          <div class="radio">
+            <label>
+              {{radio-button value='student' checked=model.accountType}}
+              <span class='radio-option'>Student Account</span>
+            </label>
+            <p class='p-radio'>
+              Manage weighted courses, grades, or grade point averages both semester and cumulatively. Save yourself time by keeping track of your coursework and all for free.
+            </p>
+          </div>
+          <div class="radio">
+            <label>
+              {{radio-button value='organization' checked=model.accountType}}
+            <span class='radio-option'>Organization Account</span>
+            </label>
+            <p class='p-radio'>
+              Monitor all your student's coursework in your organization securely. Our tool provides charts, graphs, and tables to analyze metrics on your members and options to filter results
+              to your liking.
+            </p>
           </div>
         </div>
-        <div class="form-group">
-          <label for="semester">Active Semester</label>
-          {{view "select"
-             content=semesterNames
-             value=model.activeSemester
-             class='form-control'
-             id='activeSemester'
-             prompt='Please select a semester'
-             required='true'
-          }}
-        </div>
-        <div class="form-group">
-          <label for="email">Email address</label>
-          {{input value=model.email type='email' class='form-control' id="email" placeholder='Enter email'}}
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          {{input value=model.password type='password' class='form-control' id="password"}}
-        </div>
-        <div class="form-group">
-          <label for="passwordConfirmation">Confirm Password</label>
-          {{input value=model.password_confirmation type='password' class='form-control' id="passwordConfirmation"}}
-        </div>
-        {{!-- <div class="checkbox">
-          <label>
-            <input type="checkbox" id="promote" checked> <span>Would you like to recieve emails with updates about Gradetrackr?</span>
-          </label>
-        </div> --}}
+        <button type="button" name="button" class="btn btn-lg bg-green btn-flat pull-right" {{action 'continue'}}>Continue</button>
+
+        {{else}}
+
+        <form role="form">
+          <div class="box-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="firstName">First Name</label>
+                  {{input value=model.firstName class='form-control' id="firstName" placeholder='Enter first name'}}
+                </div>
+                <div class="col-sm-6">
+                  <label for="lastName">Last Name</label>
+                  {{input value=model.lastName class='form-control' id="lastName" placeholder='Enter last name'}}
+                </div>
+              </div>
+            </div>
+            {{#if isStudent}}
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label for="gradePoints">Grade Points</label>
+                    {{input value=model.gradePoints class='form-control' id="gradePoints" step='any' placeholder='Enter grade points'}}
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="gradeUnits">Grade Units towards GPA</label>
+                    {{input value=model.gradeUnits class='form-control' id="gradeUnits" step='any' placeholder='Enter grade units'}}
+                  </div>
+                </div>
+              </div>
+            {{else}}
+              <div class="form-group">
+                <label for="oranization">Organization</label>
+                {{input value=model.organization class='form-control' id="organization" step='any' placeholder='Enter organization name' required='true'}}
+              </div>
+            {{/if}}
+            <div class="form-group">
+              <label for="semester">Active Semester</label>
+              {{view "select"
+                 content=semesterNames
+                 value=model.activeSemester
+                 class='form-control'
+                 id='activeSemester'
+                 prompt='Please select a semester'
+                 required='true'
+              }}
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              {{input value=model.email type='email' class='form-control' id="email" placeholder='Enter email'}}
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              {{input value=model.password type='password' class='form-control' id="password"}}
+            </div>
+            <div class="form-group">
+              <label for="passwordConfirmation">Confirm Password</label>
+              {{input value=model.password_confirmation type='password' class='form-control' id="passwordConfirmation"}}
+            </div>
+            {{!-- <div class="checkbox">
+              <label>
+                <input type="checkbox" id="promote" checked> <span>Would you like to recieve emails with updates about Gradetrackr?</span>
+              </label>
+            </div> --}}
+            <div class="form-group pull-right">
+              <button class="btn btn-default btn-lg btn-flat" id="createUser" {{action "back"}} {{bind-attr disabled=isSaving}}>
+                Back
+              </button>
+              <button type="submit" class="btn btn-lg btn-primary btn-flat" id="createUser" {{action "createUser"}} {{bind-attr disabled=isSaving}}>
+                Submit {{#if isSaving}} {{fa-icon 'spinner spin' spin=isSaving}} {{/if}}
+              </button>
+            </div>
+          </div>
+        </form>
+
+        {{/unless}}
       </div>
-    </form>
-  {{/em-modal-body}}
-  {{#em-modal-footer}}
-    <button type="submit" class="btn btn-primary btn-flat" id="createUser" {{action "createUser"}} {{bind-attr disabled=isSaving}}>
-      Submit {{#if isSaving}} {{fa-icon 'spinner spin' spin=isSaving}} {{/if}}
-    </button>
-  {{/em-modal-footer}}
-{{/em-modal-form}}
+
+    </div>
+
+
+
+  </div>
+</section>
