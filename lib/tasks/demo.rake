@@ -3,23 +3,25 @@ namespace :demo do
   task create: :environment do
     puts "Loading demo users..."
     users = [
-      User.create(name: 'Sparky', email: 'sparky@example.com', password: 'password', active_semester: 'Summer 2015'),
-      User.create(name: 'John Doe', email: 'john@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 167, grade_units: 44),
-      User.create(name: 'Arnold Smith', email: 'arnold@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 132, grade_units: 44),
-      User.create(name: 'George Davis', email: 'george@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 153, grade_units: 45),
-      User.create(name: 'Jake Miller', email: 'jake@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 161, grade_units: 47),
-      User.create(name: 'Andrew Williams', email: 'andrew@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 178, grade_units: 44)
+      User.create(first_name: 'Sparky', last_name: '1', email: 'sparky@example.com', password: 'password', active_semester: 'Summer 2015', account_type: 'organization', organization: 'Gradebuildr'),
+      User.create(first_name: 'John', last_name: 'Doe', email: 'john@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 167, grade_units: 44, account_type: 'student'),
+      User.create(first_name: 'Arnold', last_name: 'Smith', email: 'arnold@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 132, grade_units: 44, account_type: 'student'),
+      User.create(first_name: 'George', last_name: 'Davis', email: 'george@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 153, grade_units: 45, account_type: 'student'),
+      User.create(first_name: 'Jake', last_name: 'Miller', email: 'jake@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 161, grade_units: 47, account_type: 'student'),
+      User.create(first_name: 'Andrew', last_name: 'Williams', email: 'andrew@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 178, grade_units: 44, account_type: 'student')
     ]
 
-    users[0].add_role :director
-    (1..5).each_with_index do |val|
-      Request.create(director_id: users[0].id, student_id: users[val].id)
-      Request.accept(users[0].id, users[val].id)
-    end
+    # (1..5).each_with_index do |val|
+    #   Request.create(director_id: users[0].id, student_id: users[val].id)
+    #   Request.accept(users[0].id, users[val].id)
+    # end
 
+    code = users[0].groups.first.code
 
-    users.each do |user|
+    users.each_with_index do |user, i|
       user.confirm!
+      Group.find_by_code(code).add(user, as: 'student') if i != 0
+
       courses = [
         Course.create(user_id: user.id, subject: 'EEE', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Plus', semester: 'Summer 2015'),
         Course.create(user_id: user.id, subject: 'CSE', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Regular', semester: 'Summer 2015'),
