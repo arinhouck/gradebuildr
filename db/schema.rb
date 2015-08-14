@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150705172933) do
+ActiveRecord::Schema.define(version: 20150812060001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,23 @@ ActiveRecord::Schema.define(version: 20150705172933) do
   add_index "grades", ["user_id"], name: "index_grades_on_user_id", using: :btree
   add_index "grades", ["weight_id"], name: "index_grades_on_weight_id", using: :btree
 
+  create_table "group_memberships", force: :cascade do |t|
+    t.string  "member_type"
+    t.integer "member_id"
+    t.integer "group_id"
+    t.string  "group_name"
+    t.string  "membership_type"
+  end
+
+  add_index "group_memberships", ["group_id"], name: "index_group_memberships_on_group_id", using: :btree
+  add_index "group_memberships", ["group_name"], name: "index_group_memberships_on_group_name", using: :btree
+  add_index "group_memberships", ["member_id", "member_type"], name: "index_group_memberships_on_member_id_and_member_type", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string "type"
+    t.string "code"
+  end
+
   create_table "requests", force: :cascade do |t|
     t.integer  "director_id"
     t.integer  "student_id"
@@ -88,7 +105,10 @@ ActiveRecord::Schema.define(version: 20150705172933) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "authentication_token",   default: "",  null: false
-    t.string   "name",                   default: "",  null: false
+    t.string   "first_name",             default: "",  null: false
+    t.string   "last_name",              default: "",  null: false
+    t.string   "organization",           default: ""
+    t.string   "account_type"
     t.float    "grade_points",           default: 0.0
     t.float    "grade_units",            default: 0.0
     t.datetime "created_at"
