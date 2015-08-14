@@ -10,20 +10,44 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validates :active_semester, presence: true
+  validates :account_type, presence: true
 
   has_many :courses, dependent: :destroy
   has_many :grades, dependent: :destroy
 
   has_many :requests, foreign_key: :director_id, dependent: :destroy
   has_many :received_requests, foreign_key: :student_id, class_name: 'Request', dependent: :destroy
-  has_many :directors, -> { where  "requests.accepted = true" }, through: :received_requests, source: :director
-  has_many :students, -> { where  "requests.accepted = true" }, through: :requests, source: :student
 
-  def is_director
-    self.has_role?(:director)
+  groupify :group_member
+  groupify :named_group_member
+
+  after_create :create_organization, if: :is_organization
+
+  def create_organization
+    group = Group.create
+    group.add(self, as: 'director')
   end
+
+  def is_student
+    self.account_type == 'student'
+  end
+
+  # def directors
+  #   User.shares_any_group(self).as(:director)
+  # end
+
+  def students
+    User.shares_any_group(self).as(:student)
+  end
+
+  def is_organization
+    self.account_type == 'organization'
+  end
+
+  # TODO: Payed member boolean
 
   def save_customer(id)
     update_attribute :customer_id, id
