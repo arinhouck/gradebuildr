@@ -3,14 +3,15 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   model: {},
   semesterNames: Ember.computed.alias('semesters.@each.name'),
-
-  isOpenDidChange: function() {
-    if (!this.get('isOpen') && !this.get('isSaving')) {
-      this.transitionToRoute('index');
-    }
-  }.observes('isOpen'),
+  isStudent: Ember.computed.equal('model.accountType', 'student'),
 
   actions: {
+    continue: function() {
+      this.set('registration', true);
+    },
+    back: function() {
+      this.set('registration', false);
+    },
     createUser: function() {
       var user = this.get('model');
       var self = this;
