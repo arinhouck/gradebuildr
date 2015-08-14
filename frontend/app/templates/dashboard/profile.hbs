@@ -24,12 +24,12 @@
                 {{fa-icon 'key'}} Change Password
               {{/link-to}}
             {{/link-li}}
-            {{#link-li class='disabled'}}
-              {{#link-to 'dashboard.profile.subscriptions' disabled=true title='Currently unavailable.'}}
-                {{fa-icon 'credit-card'}} Subscriptions
-              {{/link-to}}
-            {{/link-li}}
-            {{#if session.currentUser.isDirector}}
+            {{#if session.currentUser.isOrganization}}
+              {{#link-li class='disabled'}}
+                {{#link-to 'dashboard.profile.subscriptions' disabled=true title='Currently unavailable.'}}
+                  {{fa-icon 'credit-card'}} Subscriptions
+                {{/link-to}}
+              {{/link-li}}
               {{#link-li}}
                 {{#link-to 'dashboard.profile.requests'}}
                   {{fa-icon 'user-plus'}} Sent Requests

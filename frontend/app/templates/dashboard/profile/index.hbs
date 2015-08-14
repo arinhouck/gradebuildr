@@ -1,19 +1,34 @@
 <div class="form-group">
-  <label for="name">Name</label>
-  {{input value=model.name class='form-control' id="name" placeholder='Enter name'}}
-</div>
-<div class="form-group">
   <div class="row">
     <div class="col-xs-6">
-      <label for="gradePoints">Grade Points</label>
-      {{input value=model.gradePoints class='form-control' id="gradePoints" placeholder='Enter grade points'}}
+      <label for="firstName">First Name</label>
+      {{input value=model.firstName class='form-control' id="firstName" placeholder='Enter first name'}}
     </div>
     <div class="col-xs-6">
-      <label for="gradeUnits">Grade Units</label>
-      {{input value=model.gradeUnits class='form-control' id="gradeUnits" placeholder='Enter grade units'}}
+      <label for="lastName">Last Name</label>
+      {{input value=model.lastName class='form-control' id="lastName" placeholder='Enter last name'}}
     </div>
   </div>
 </div>
+{{#if session.currentUser.isStudent}}
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-6">
+        <label for="gradePoints">Grade Points</label>
+        {{input value=model.gradePoints class='form-control' id="gradePoints" placeholder='Enter grade points'}}
+      </div>
+      <div class="col-xs-6">
+        <label for="gradeUnits">Grade Units</label>
+        {{input value=model.gradeUnits class='form-control' id="gradeUnits" placeholder='Enter grade units'}}
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class="form-group">
+    <label for="organization">Organization</label>
+    {{input value=model.organization class='form-control' id="organization" placeholder='Enter organization name'}}
+  </div>
+{{/if}}
 <div class="form-group">
   <label for="semester">Active Semester</label>
   {{view "select"
