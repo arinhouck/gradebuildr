@@ -1,0 +1,39 @@
+<ul class="products-list product-list-in-box">
+  {{#each uniqueOrganizations as |organization|}}
+    <li class="item">
+      {{!-- <div class="product-img">
+        {{gravatar-image email=receivedRequest.director.email class='img-circle'}}
+      </div> --}}
+      <div class="product-info">
+        <span class="product-title">
+          Organization Name
+          {{#if session.currentUser.isStudent}}
+          <span class="pull-right">
+            <button type="button"{{action 'leaveOrganization' organization}} {{bind-attr class=":btn :btn-lg :btn-flat :btn-danger"}}>Leave</button>
+          </span>
+          {{/if}}
+        </span>
+        <span class="product-description">
+          {{#if session.currentUser.isStudent}} Organization name has view only access to your profile. {{/if}}
+        </span>
+      </div>
+    </li>
+  {{else}}
+    <div class="text-center well">
+      <p class="lead">
+        No joined organizations.
+      </p>
+    </div>
+  {{/each}}
+</ul>
+
+{{#if session.currentUser.isStudent}}
+<div class="box-footer">
+  <p>
+    {{#link-to 'dashboard.profile.organizations.join' class="btn pull-right btn-success btn-flat" id="joinOrganization"}}
+      Join Organization
+    {{/link-to}}
+  </p>
+</div>
+{{/if}}
+{{outlet}}
