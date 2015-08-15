@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   # end
 
   def students
-    User.shares_any_group(self).as(:student)
+    self.is_organization ? User.shares_any_group(self).as(:student) : []
   end
 
   def is_organization
