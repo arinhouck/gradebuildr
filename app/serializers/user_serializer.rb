@@ -6,4 +6,5 @@ class UserSerializer < ActiveModel::Serializer
   has_many :students, :serializer => StudentSerializer
   has_many :courses
   has_many :grades
+  has_many :group_memberships
 end
