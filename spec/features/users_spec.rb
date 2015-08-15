@@ -5,56 +5,84 @@ describe "Users", type: :feature, :js => true do
     ['Spring 2015', 'Summer 2015', 'Fall 2015'].each do |name|
       Semester.create(name: name)
     end
-    @director = User.create(name: 'Director', email: 'director@example.com', password: 'password', active_semester: 'Spring 2015')
+    @director = User.create(first_name: 'Director', last_name: '1', email: 'organization@example.com', organization: 'Frat', account_type: 'organization', password: 'password', active_semester: 'Spring 2015')
     @director.confirm
-    @student = User.create(name: 'Student', email: 'student@example.com', password: 'password', active_semester: 'Fall 2015', grade_points: 167, grade_units: 44)
+    @student = User.create(first_name: 'Student', last_name: '1', email: 'student@example.com', password: 'password', account_type: 'student', active_semester: 'Fall 2015', grade_points: 167, grade_units: 44)
     @student.confirm
   end
 
-  it "can register" do
+  it "can register as student" do
     visit '/'
     click_link 'register'
-    fill_in 'name', with: 'John Doe'
+    click_button 'Continue'
+    fill_in 'firstName', with: 'John'
+    fill_in 'lastName', with: 'Doe'
+    fill_in 'gradePoints', with: '217.665'
+    fill_in 'gradeUnits', with: '63'
     fill_in 'email', with: 'john.doe@example.com'
     select 'Fall 2015', :from => 'activeSemester'
     fill_in 'password', with: 'password'
     fill_in 'passwordConfirmation', with: 'password'
-    fill_in 'gradePoints', with: '217.665'
-    fill_in 'gradeUnits', with: '63'
     click_button 'Submit'
+
     wait_for_ajax
     expect(current_path).to eq '/confirmation'
+    student = User.find_by_email('john.doe@example.com')
+    expect(student.account_type).to eq('student')
+    expect(student.has_role? :director).to eq(false)
+  end
+
+  it "can register as organization" do
+    visit '/'
+    click_link 'register'
+    find(:css, 'input[value=organization]').click
+    click_button 'Continue'
+    fill_in 'firstName', with: 'John'
+    fill_in 'lastName', with: 'Doe'
+    fill_in 'organization', with: 'Gradebuildr'
+    fill_in 'email', with: 'john.doe@example.com'
+    select 'Fall 2015', :from => 'activeSemester'
+    fill_in 'password', with: 'password'
+    fill_in 'passwordConfirmation', with: 'password'
+    click_button 'Submit'
+
+    wait_for_ajax
+    expect(current_path).to eq '/confirmation'
+    organization = User.find_by_email('john.doe@example.com')
+    expect(organization.account_type).to eq('organization')
+    expect(organization.has_role? :director).to eq(true)
+    expect(organization.groups.as(:director).length).to eq(1)
   end
 
   context "can login as director" do
     before :each do
       visit '/'
       click_link 'login-nav'
-      login('director@example.com', 'password')
+      login('organization@example.com', 'password')
       expect(current_path).to eq '/dashboard'
     end
 
     it "and edit profile" do
       edit_params = {
-        name: 'John Snow', grade_points: '212',
-        grade_units: '60', active_semester: 'Summer 2015'
+        first_name: 'John', last_name: 'Snow',
+        organization: 'LLC', active_semester: 'Summer 2015'
       }
 
       open_user_menu
       click_button 'Profile'
 
-      fill_in 'name', with: edit_params[:name]
-      fill_in 'gradePoints', with: edit_params[:grade_points]
-      fill_in 'gradeUnits', with: edit_params[:grade_units]
+      fill_in 'firstName', with: edit_params[:first_name]
+      fill_in 'lastName', with: edit_params[:last_name]
+      fill_in 'organization', with: edit_params[:organization]
       select edit_params[:active_semester], :from => 'activeSemester'
 
       click_button 'Save'
       visit current_path # Making sure javascript model persisted
 
-      expect(find(:css, '#user-menu-link > span').text).to eq(edit_params[:name])
-      expect(find(:id, 'name').value).to eq('John Snow')
-      expect(find(:id, 'gradePoints').value).to eq(edit_params[:grade_points])
-      expect(find(:id, 'gradeUnits').value).to eq(edit_params[:grade_units])
+      expect(find(:css, '#user-menu-link > span').text).to eq(edit_params[:first_name])
+      expect(find(:id, 'firstName').value).to eq(edit_params[:first_name])
+      expect(find(:id, 'lastName').value).to eq(edit_params[:last_name])
+      expect(find(:id, 'organization').value).to eq(edit_params[:organization])
       expect(find(:id, 'activeSemester').value).to eq(edit_params[:active_semester])
     end
 
@@ -78,21 +106,13 @@ describe "Users", type: :feature, :js => true do
 
 
       click_link 'login-nav'
-      login('director@example.com', 'password')
+      login('organization@example.com', 'password')
       expect(current_path).to eq('/')
 
       sleep(5) # Wait for growl to move
 
-      login('director@example.com', 'secretpassword')
+      login('organization@example.com', 'secretpassword')
       expect(current_path).to eq('/dashboard')
-    end
-
-    xit "and send a request to student" do
-
-    end
-
-    xit "and can't see student with unaccepted request" do
-
     end
 
     xit "and can view student analytics" do
@@ -107,21 +127,12 @@ describe "Users", type: :feature, :js => true do
 
   context "can login as student" do
     before :each do
-      @request = Request.create({director_id: @director.id, student_id: @student.id})
       student_data(@student)
 
       visit '/'
       click_link 'login-nav'
       login('student@example.com', 'password')
       expect(current_path).to eq '/dashboard'
-    end
-
-    it "and accept a received request" do
-      open_user_menu
-      click_button 'Profile'
-      click_link 'Received Requests'
-      click_button 'accept'
-      expect(page).to have_no_selector('#accept')
     end
 
     it "and submit feedback" do
@@ -198,7 +209,7 @@ describe "Users", type: :feature, :js => true do
       columns = first(:css, 'tbody tr').all(:css, 'td')
       expect(columns[0].text).to eq(course_params[:subject] + ' ' + course_params[:number])
       expect(columns[1].text).to eq(course_params[:credit_hours])
-      expect(columns[2].text).to eq('96.80%') # Current Grade
+      # expect(columns[2].text).to eq('93.20%') # Current Grade
       expect(columns[3].text).to eq('A') # Letter Grade
       expect(columns[4].text).to eq(course_params[:grading_scale])
       expect(columns[5].text).to eq(course_params[:semester])
