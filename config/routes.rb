@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     passwords: 'passwords'
   }
 
-
   resources :users do
     get :show_student, :on => :collection
     post :process_payment, :on => :collection
@@ -20,14 +19,16 @@ Rails.application.routes.draw do
   end
 
   resources :feedbacks
-  resources :requests
   resources :semesters
   resources :courses
   resources :weights
   resources :grades
+  resources :group_memberships do
+    post :remove, :on => :collection
+  end
 
-  resources :requests do
-    post :accept, :on => :collection
+  resources :groups do
+    post :join, :on => :collection
   end
 
   root 'ember#index'
