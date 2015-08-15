@@ -1,12 +1,11 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('controller:dashboard/profile/requests', {
+moduleFor('route:dashboard/profile/organizations/join', 'Unit | Route | dashboard/profile/organizations/join', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
 
-// Replace this with your real tests.
 test('it exists', function(assert) {
-  var controller = this.subject();
-  assert.ok(controller);
+  var route = this.subject();
+  assert.ok(route);
 });

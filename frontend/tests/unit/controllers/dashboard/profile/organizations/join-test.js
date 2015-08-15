@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('controller:dashboard/profile/received-requests', {
+moduleFor('controller:dashboard/profile/organizations/join', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

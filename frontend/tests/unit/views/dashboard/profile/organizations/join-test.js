@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('view:dashboard/profile/requests/new', 'Unit | View | dashboard/profile/requests/new');
+moduleFor('view:dashboard/profile/organizations/join', 'Unit | View | dashboard/profile/organizations/join');
 
 // Replace this with your real tests.
 test('it exists', function(assert) {
