@@ -11,11 +11,6 @@ namespace :demo do
       User.create(first_name: 'Andrew', last_name: 'Williams', email: 'andrew@example.com', password: 'password', active_semester: 'Summer 2015', grade_points: 178, grade_units: 44, account_type: 'student')
     ]
 
-    # (1..5).each_with_index do |val|
-    #   Request.create(director_id: users[0].id, student_id: users[val].id)
-    #   Request.accept(users[0].id, users[val].id)
-    # end
-
     code = users[0].groups.first.code
 
     users.each_with_index do |user, i|

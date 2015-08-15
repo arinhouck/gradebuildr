@@ -17,13 +17,12 @@ Router.map(function() {
       this.route('edit', {path: 'edit/:grade_id'});
     });
     this.route('profile', function() {
-      this.route('requests', function() {
-        this.route('new');
-      });
       this.route('password');
-      this.route('received-requests');
       this.route('subscriptions', function() {
         this.route('cancel');
+      });
+      this.route('organizations', function() {
+        this.route('join');
       });
     });
     this.route('feedback');
