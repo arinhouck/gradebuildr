@@ -1,7 +1,11 @@
-<div class="jumbotron bg-green">
+<div class="jumbotron bg-green vertical-align">
+  <video loop muted autoplay poster="assets/intro.jpg" class="fullscreen-video">
+    <source src="assets/intro.mp4" type="video/mp4">
+    <source src="assets/intro.webm" type="video/webm">
+  </video>
   <div class="container">
     <div class="col-sm-9 col-xs-12">
-      <h2>Welcome, fellow students!</h2>
+      <h1>Welcome, fellow students!</h1>
       <p>This application was made to help you track your grades in your college curriculum and properly weigh grades based on your course criteria.</p>
       <p>
         {{#if session.isAuthenticated}}
@@ -9,12 +13,11 @@
             Go to Dashboard
           {{/link-to}}
         {{else}}
-          <a class="btn btn-flat btn-outline" href="#" role="button">Learn more</a>
+          {{#link-to 'register' class="btn btn-flat btn-outline btn-lg"}}
+            Register now
+          {{/link-to}}
         {{/if}}
       </p>
-    </div>
-    <div class="col-sm-3 hidden-xs">
-      <h1 class='container-icon'>{{fa-icon 'file-text-o' size=2}}</h1>
     </div>
   </div>
 </div>
