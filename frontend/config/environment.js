@@ -14,11 +14,11 @@ module.exports = function(environment) {
     },
 
     APP: {
-      PUSHER_OPTS: {
-        key: '35f68e1cdec6b4d06b14',
-        connection: {},
-        logAllEvents: false
-      }
+      // PUSHER_OPTS: {
+      //   key: '35f68e1cdec6b4d06b14',
+      //   connection: {},
+      //   logAllEvents: false
+      // }
     }
   };
 
