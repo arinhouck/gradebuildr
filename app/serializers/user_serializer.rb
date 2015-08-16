@@ -4,6 +4,7 @@ class UserSerializer < ActiveModel::Serializer
    :is_student, :is_organization, :grade_points, :grade_units, :active_semester,
    :active_until, :subscription, :canceled_subscription, :unconfirmed_email
   has_many :students, :serializer => StudentSerializer
+  has_many :directors, :serializer => DirectorSerializer
   has_many :courses
   has_many :grades
   has_many :group_memberships

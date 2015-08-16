@@ -6,7 +6,7 @@
       </div> --}}
       <div class="product-info">
         <span class="product-title">
-          Organization Name
+          {{director.organization}}
           {{#if session.currentUser.isStudent}}
           <span class="pull-right">
             <button type="button"{{action 'leaveOrganization' organization}} {{bind-attr class=":btn :btn-lg :btn-flat :btn-danger"}}>Leave</button>
@@ -14,7 +14,8 @@
           {{/if}}
         </span>
         <span class="product-description">
-          {{#if session.currentUser.isStudent}} Organization name has view only access to your profile. {{/if}}
+          {{#if session.currentUser.isStudent}}
+            {{director.organization}} has view only access to your profile. {{/if}}
         </span>
       </div>
     </li>

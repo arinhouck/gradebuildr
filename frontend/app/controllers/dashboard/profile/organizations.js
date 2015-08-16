@@ -9,6 +9,8 @@ export default Ember.Controller.extend({
     }
   }),
 
+
+
   actions: {
     leaveOrganization: function(organization) {
       var controller = this;

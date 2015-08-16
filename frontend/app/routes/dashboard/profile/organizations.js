@@ -5,6 +5,7 @@ export default Ember.Route.extend( {
     var store = controller.get('store');
     this.get('session.currentUser').then(function(user) {
       controller.set('organizations', user.get('groupMemberships'));
+      controller.set('director', user.get('directors.firstObject'))
     });
   },
   actions: {

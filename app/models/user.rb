@@ -35,9 +35,9 @@ class User < ActiveRecord::Base
     self.account_type == 'student'
   end
 
-  # def directors
-  #   User.shares_any_group(self).as(:director)
-  # end
+  def directors
+    User.shares_any_group(self).as(:director)
+  end
 
   def students
     self.is_organization ? User.shares_any_group(self).as(:student) : []

@@ -12,6 +12,7 @@ export default DS.Model.extend(UserMixin, {
   subscription: DS.attr('string'),
   canceledSubscription: DS.attr('boolean'),
   students: DS.hasMany('student', {async: true}),
+  directors: DS.hasMany('director', {async: true}),
   groupMemberships: DS.hasMany('groupMembership'),
   email: DS.attr('string'),
   unconfirmedEmail: DS.attr('string'),
