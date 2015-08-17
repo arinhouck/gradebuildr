@@ -21,8 +21,7 @@
     overflow: hidden;
   }
   .vertical-align {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-    min-height: 100vh; /* These two lines are counted as one :-)       */
+    min-height: 300px;
     display: flex;
     align-items: center;
   }
@@ -36,8 +35,15 @@
      background-size: cover;
      transition: 1s opacity;
      opacity: 0.5;
-         width: 100%;
+     width: 100%;
   }
+
+
+  @media (min-width: 1200px) {
+    .jumbotron {
+      height: 650px;
+    }
+   }
   .navbar-nav {
     a {
       font-weight: 500;
