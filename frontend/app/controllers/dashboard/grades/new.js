@@ -30,7 +30,11 @@ export default Ember.Controller.extend({
         this.set('isSaving', true);
 
         var promises = grades.map(function(grade) {
-            return grade.save();
+            return grade.save().then(function(grade) {
+              controller.store.find('user', controller.get('session.currentUser.id')).then(function(user) {
+                user.reload();
+              })
+            });
         }, []);
 
         Ember.RSVP.all(promises).then(function(grades) {

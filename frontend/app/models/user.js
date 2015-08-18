@@ -2,8 +2,8 @@ import DS from 'ember-data';
 import UserMixin from 'frontend/mixins/user';
 
 export default DS.Model.extend(UserMixin, {
-  courses: DS.hasMany('course'),
-  grades: DS.hasMany('grade'),
+  courses: DS.hasMany('course', {async: true}),
+  grades: DS.hasMany('grade', {async: true}),
   isOrganization: DS.attr('boolean'),
   isStudent: DS.attr('boolean'),
   organization: DS.attr('string'),

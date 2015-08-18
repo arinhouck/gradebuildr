@@ -2,6 +2,7 @@ import Ember from 'ember';
 import CoursesMixin from 'frontend/mixins/courses';
 
 export default Ember.Controller.extend(CoursesMixin, {
+  courses: Ember.computed.map('model.courses', item => item),
   actions: {
     deleteCourse: function(course) {
       var controller = this;

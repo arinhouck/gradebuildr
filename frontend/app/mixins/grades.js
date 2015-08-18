@@ -6,7 +6,7 @@ export default Ember.Mixin.create({
   semesterNames: Ember.computed.alias('semesters.@each.name'),
   uniqueSemesters: Ember.computed.uniq('semesterNames'),
   sortedGrades: Ember.computed.sort('grades', 'sortProperties'),
-  filteredGrades: Ember.computed.defaultTo('sortedGrades'),
+  filteredGrades: Ember.computed.oneWay('sortedGrades'),
   names: Ember.computed.alias('courses.@each.name'),
   uniqueNames: Ember.computed.uniq('names'),
   selectedSemester: null,

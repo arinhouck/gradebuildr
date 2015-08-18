@@ -29,6 +29,10 @@ export default Ember.Controller.extend({
         grade.set('course', controller.get('course'));
         grade.set('weight', weight);
         grade.save().then(function() {
+          controller.get('course').reload();
+          controller.store.find('user', controller.get('session.currentUser.id')).then(function(user) {
+            user.reload();
+          })
           controller.transitionToRoute('dashboard.grades');
           $.growl.notice({title: 'Grade', message: 'Sucessfully updated.'});
         });
