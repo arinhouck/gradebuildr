@@ -6,7 +6,7 @@ class UserSerializer < ActiveModel::Serializer
    :semester_gpa, :cumulative_gpa
   has_many :students, :serializer => StudentSerializer
   has_many :directors, :serializer => DirectorSerializer
-  has_many :courses, include: false
-  has_many :grades, include: false
+  has_many :courses
+  has_many :grades
   has_many :group_memberships
 end
