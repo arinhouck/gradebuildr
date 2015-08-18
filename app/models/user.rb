@@ -125,6 +125,8 @@ class User < ActiveRecord::Base
   end
 
   def cumulative_gpa
+    self.grade_points = 0 if self.grade_points.nil?
+    self.grade_units = 0 if self.grade_units.nil?
     total_points = self.grade_points + self.semester_grade_points + self.inactive_semester_grade_points
     total_units = self.grade_units + self.semester_credit_hours + self.inactive_semester_credit_hours
     return '—' if total_units == 0
