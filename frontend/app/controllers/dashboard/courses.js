@@ -8,6 +8,9 @@ export default Ember.Controller.extend(CoursesMixin, {
       var controller = this;
       var courseName = course.get('name');
       course.destroyRecord().then(function() {
+        controller.store.find('user', controller.get('session.currentUser.id')).then(function(user) {
+          user.reload();
+        })
         controller.get('pagedCourseContent').removeObject(course);
         $.growl.notice({ title: 'Course', message: "Sucessfully deleted " + courseName + "."})
       });

@@ -26,6 +26,13 @@ export default Ember.Controller.extend({
           });
         }
       }).then(function() {
+        course.reload();
+        course.get('grades').forEach(function(grade) {
+          grade.reload();
+        })
+        controller.store.find('user', controller.get('session.currentUser.id')).then(function(user) {
+          user.reload();
+        })
         controller.transitionToRoute('dashboard.courses');
         $.growl.notice({title: 'Course', message: 'Sucessfully updated.'});
       });

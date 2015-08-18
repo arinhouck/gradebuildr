@@ -21,11 +21,17 @@ export default Ember.Component.extend({
   }.observes('weight.percentage', 'parent.weights.length'),
 
   deleteWeight: function() {
+    var component = this;
     var weight = this.get('weightToDelete');
     var weights = this.get('parent.weights');
-    weight.destroyRecord();
-    $.growl.notice({title: 'Weight', message: 'Successfully deleted.'});
-    weights.removeObject(weight);
+    weight.destroyRecord().then(function() {
+      component.store.find('user', component.get('session.currentUser.id')).then(function(user) {
+        user.reload();
+      })
+      $.growl.notice({title: 'Weight', message: 'Successfully deleted.'});
+      weights.removeObject(weight);
+    });
+
   }.observes('confirm'),
 
   actions: {
