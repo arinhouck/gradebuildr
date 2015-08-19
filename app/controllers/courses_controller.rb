@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   before_filter :require_permission, only: :show
 
   def index
-    @courses = User.find(params[:user_id]).courses
+    @courses = User.find(params[:user_id]).courses.page(params[:page_number]).per(params[:per_page])
     render json: @courses
   end
 
