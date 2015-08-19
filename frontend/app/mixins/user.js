@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  semesterGpa: DS.attr('number'),
-  cumulativeGpa: DS.attr('number'),
+  semesterGpa: DS.attr('string'),
+  cumulativeGpa: DS.attr('string'),
   semesterCreditHours: DS.attr('number'),
 
   fullName: function() {
