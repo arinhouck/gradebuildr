@@ -71,6 +71,14 @@ class User < ActiveRecord::Base
 
   # Student Calculations
 
+  def grade_count
+    self.grades.count
+  end
+
+  def course_count
+    self.courses.count
+  end
+
   def active_courses
     self.courses.select { |course| course.semester == self.active_semester }
   end
@@ -125,7 +133,7 @@ class User < ActiveRecord::Base
 
   def semester_gpa
     return '—' if semester_credit_hours == 0
-    return (self.semester_grade_points / semester_credit_hours).round(2)
+    return '%.2f' % [(self.semester_grade_points / semester_credit_hours).round(2)]
   end
 
   def cumulative_gpa
@@ -134,7 +142,7 @@ class User < ActiveRecord::Base
     total_points = self.grade_points + self.semester_grade_points + self.inactive_semester_grade_points
     total_units = self.grade_units + self.semester_credit_hours + self.inactive_semester_credit_hours
     return '—' if total_units == 0
-    return (total_points / total_units).round(2)
+    return '%.2f' % [(total_points / total_units).round(2)]
   end
 
   private
