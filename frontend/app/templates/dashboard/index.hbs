@@ -11,8 +11,8 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-aqua">
           <div class="inner">
-            <h3 id='course-count'>{{courses.length}}</h3>
-            <p>{{h-pluralize courses.length "Course" omitCount=true}}</p>
+            <h3 id='course-count'>{{model.courseCount}}</h3>
+            <p>{{h-pluralize model.courseCount "Course" omitCount=true}}</p>
           </div>
           <div class="icon">
             <i class="ion ion-university"></i>
@@ -25,7 +25,7 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3 id='grade-count'>{{grades.length}}</h3>
+            <h3 id='grade-count'>{{model.gradeCount}}</h3>
             <p>{{h-pluralize grades.length "Grade" omitCount=true}}</p>
           </div>
           <div class="icon">
@@ -40,7 +40,7 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-green">
           <div class="inner">
-            <h3 id='semester-gpa'>{{session.currentUser.semesterGpa}}</h3>
+            <h3 id='semester-gpa'>{{model.semesterGpa}}</h3>
             <p>Semester GPA</p>
           </div>
           <div class="icon">
@@ -51,7 +51,7 @@
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-red">
           <div class="inner">
-            <h3 id='cumulative-gpa'>{{session.currentUser.cumulativeGpa}}</h3>
+            <h3 id='cumulative-gpa'>{{model.cumulativeGpa}}</h3>
             <p>Cumulative GPA</p>
           </div>
           <div class="icon">
@@ -62,16 +62,14 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
+
+      <div class="col-lg-6 col-md-12">
         <div class="box box-default">
           <div class="box-header with-border">
             <h3 class="box-title">Latest Grades</h3>
-            <div class="box-tools pull-right">
-              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            </div>
           </div>
-          <div class="box-body">
-            <div class="table-responsive">
+          <div class="box-body equal-height">
+            <div class="table-responsive table-condensed">
               <table class="table no-margin">
                 <thead>
                   <tr>
@@ -84,7 +82,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{#each grade in pagedGradeContent}}
+                  {{#each grades as |grade|}}
                     {{grade-row grade=grade hideActions=true}}
                   {{else}}
                     <tr class='lead'>
@@ -98,13 +96,72 @@
             </div>
           </div>
           <div class="box-footer clearfix">
-            {{#link-to 'dashboard.grades' class="btn btn-sm btn-default btn-flat pull-right" id="newGrade"}}
+            {{#link-to 'dashboard.grades' class="btn btn-sm btn-default btn-flat pull-right" id="allGrades"}}
               View All Grades
             {{/link-to}}
           </div>
         </div>
-
       </div>
+
+      <div class="col-lg-6 col-md-12">
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <h3 class="box-title">Latest Courses</h3>
+          </div>
+          <div class="box-body equal-height">
+            <div class="table-responsive table-condensed">
+              <table class="table no-margin">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Credit Hours</th>
+                    <th>Current Grade</th>
+                    <th>Letter Grade</th>
+                    <th>Grading Scale</th>
+                    <th>Semester</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each courses as |course|}}
+                    <tr>
+                      <td>
+                        {{course.name}}
+                      </td>
+                      <td>
+                        {{course.creditHours}}
+                      </td>
+                      <td>
+                        {{course.currentGrade}}<small>%</small>
+                      </td>
+                      <td>
+                        {{course.letterGrade}}
+                      </td>
+                      <td>
+                        {{course.gradingScale}}
+                      </td>
+                      <td>
+                        {{course.semester}}
+                      </td>
+                    </tr>
+                    {{else}}
+                      <tr class='lead'>
+                        <td colspan='6' class='text-center'>
+                          No courses.
+                        </td>
+                      </tr>
+                    {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="box-footer clearfix">
+            {{#link-to 'dashboard.courses' class="btn btn-sm btn-default btn-flat pull-right" id="allCourses"}}
+              View All Courses
+            {{/link-to}}
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </section>
