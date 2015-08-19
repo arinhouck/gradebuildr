@@ -14,7 +14,6 @@
         <tr>
           <th>Name</th>
           <th>Active Semester</th>
-          <th># of Courses</th>
           <th>Semester Credit Hours</th>
           <th>Semester GPA</th>
           <th>Cumulative GPA</th>
@@ -25,19 +24,14 @@
           <tr>
             <td>{{link-to student.fullName 'dashboard.students.show' student}}</td>
             <td>{{student.activeSemester}}</td>
-            <td>{{student.courses.length}}</td>
             <td>{{student.semesterCreditHours}}</td>
             <td>{{student.semesterGpa}}</td>
             <td>{{student.cumulativeGpa}}</td>
           </tr>
         {{else}}
           <tr class='lead'>
-            <td colspan='6' class='text-center'>
-              {{#if isLoading}}
-                {{fa-icon 'spinner' spin=true size=2}}
-              {{else}}
+            <td colspan='5' class='text-center'>
                 No students.
-              {{/if}}
             </td>
           </tr>
         {{/each}}

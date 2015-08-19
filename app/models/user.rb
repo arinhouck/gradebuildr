@@ -65,6 +65,74 @@ class User < ActiveRecord::Base
     update_attribute :active_until, Date.today + 1.month
   end
 
+  # Student Calculations
+
+  def active_courses
+    self.courses.select { |course| course.semester == self.active_semester }
+  end
+
+  def inactive_courses
+    self.courses.select { |course| course.semester != self.active_semester }
+  end
+
+  def semester_grade_points
+    active_courses = self.active_courses
+    result = 0
+
+    active_courses.each do |course|
+      result += course.score * course.credit_hours
+    end
+
+    result
+  end
+
+  def semester_credit_hours
+    active_courses = self.active_courses
+    result = 0
+
+    active_courses.each do |course|
+      result += course.credit_hours
+    end
+
+    result
+  end
+
+  def inactive_semester_grade_points
+    inactive_courses = self.inactive_courses
+    result = 0
+
+    inactive_courses.each do |course|
+      result += course.score * course.credit_hours
+    end
+
+    result
+  end
+
+  def inactive_semester_credit_hours
+    inactive_courses = self.inactive_courses
+    result = 0
+
+    inactive_courses.each do |course|
+      result += course.credit_hours
+    end
+
+    result
+  end
+
+  def semester_gpa
+    return '—' if semester_credit_hours == 0
+    return (self.semester_grade_points / semester_credit_hours).round(2)
+  end
+
+  def cumulative_gpa
+    self.grade_points = 0 if self.grade_points.nil?
+    self.grade_units = 0 if self.grade_units.nil?
+    total_points = self.grade_points + self.semester_grade_points + self.inactive_semester_grade_points
+    total_units = self.grade_units + self.semester_credit_hours + self.inactive_semester_credit_hours
+    return '—' if total_units == 0
+    return (total_points / total_units).round(2)
+  end
+
   private
   def set_auth_token
     if self.authentication_token.blank?

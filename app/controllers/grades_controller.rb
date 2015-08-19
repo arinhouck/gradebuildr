@@ -1,6 +1,6 @@
 class GradesController < ApplicationController
     before_filter :authenticate
-    # before_filter :require_permission, only: :show
+    before_filter :require_permission, only: :show
 
     def index
       @grades = User.find(params[:user_id]).grades
@@ -51,7 +51,7 @@ class GradesController < ApplicationController
 
     def require_permission
       authenticate_or_request_with_http_token do |token, options|
-        User.find_by(authentication_token: token) == Grade.find(params[:id]).user
+        User.find_by(authentication_token: token) == Grade.find(params[:id]).user || Grade.find(params[:id]).user.directors.include?(User.find_by(authentication_token: token))
       end
     end
 

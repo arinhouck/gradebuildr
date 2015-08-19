@@ -7,7 +7,7 @@ export default Ember.Mixin.create({
   semesterNames: Ember.computed.alias('semesters.@each.name'),
   uniqueSemesters: Ember.computed.uniq('semesterNames'),
   selectedSemester: null,
-  filteredCourses: Ember.computed.defaultTo('sortedCourses'),
+  filteredCourses: Ember.computed.oneWay('sortedCourses'),
 
   coursesDidChange: function() {
     var courses = this.get('sortedCourses');

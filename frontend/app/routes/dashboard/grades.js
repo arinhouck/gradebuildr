@@ -2,14 +2,20 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+  model() {
+    return this.get('session.currentUser');
+  },
+  afterModel(model) {
+    return Ember.RSVP.hash({
+      grades: model.get('grades'),
+      courses: model.get('courses')
+    });
+  },
   setupController: function(controller, model) {
     var store = controller.get('store');
-    this.get('session.currentUser').then(function(user) {
-      controller.set('grades', user.get('grades'));
-      controller.set('courses', user.get('courses'));
-      store.find('semester').then(function(semesters) {
-        controller.set('semesters', semesters);
-      });
+    controller.set('model', model);
+    store.find('semester').then(function(semesters) {
+      controller.set('semesters', semesters);
     });
   },
   actions: {

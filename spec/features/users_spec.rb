@@ -54,7 +54,7 @@ describe "Users", type: :feature, :js => true do
     expect(organization.groups.as(:director).length).to eq(1)
   end
 
-  context "can login as director" do
+  context "can login as organization" do
     before :each do
       visit '/'
       click_link 'login-nav'
@@ -181,7 +181,7 @@ describe "Users", type: :feature, :js => true do
       columns = first(:css, 'tbody tr').all(:css, 'td')
       expect(columns[0].text).to eq(course_params[:subject] + ' ' + course_params[:number])
       expect(columns[1].text).to eq(course_params[:credit_hours])
-      expect(columns[2].text).to eq('100.00%') # Current Grade
+      expect(columns[2].text).to eq('100%') # Current Grade
       expect(columns[3].text).to eq('A+') # Letter Grade
       expect(columns[4].text).to eq(course_params[:grading_scale])
       expect(columns[5].text).to eq(course_params[:semester])

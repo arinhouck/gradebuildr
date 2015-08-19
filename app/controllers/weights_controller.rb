@@ -46,7 +46,7 @@ class WeightsController < ApplicationController
 
   def require_permission
     authenticate_or_request_with_http_token do |token, options|
-      User.find_by(authentication_token: token) == Weight.find(params[:id]).user
+      User.find_by(authentication_token: token) == Weight.find(params[:id]).course.user || Weight.find(params[:id]).course.user.directors.include?(User.find_by(authentication_token: token))
     end
   end
 
