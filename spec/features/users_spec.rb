@@ -45,7 +45,7 @@ describe "Users", type: :feature, :js => true do
     fill_in 'password', with: 'password'
     fill_in 'passwordConfirmation', with: 'password'
     click_button 'Submit'
-    
+
     wait_for_ajax
     expect(current_path).to eq '/confirmation'
     organization = User.find_by_email('john.doe@example.com')
@@ -54,7 +54,7 @@ describe "Users", type: :feature, :js => true do
     expect(organization.groups.as(:director).length).to eq(1)
   end
 
-  context "can login as director" do
+  context "can login as organization" do
     before :each do
       visit '/'
       click_link 'login-nav'
