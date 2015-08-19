@@ -3,7 +3,7 @@ class GradesController < ApplicationController
     before_filter :require_permission, only: :show
 
     def index
-      @grades = User.find(params[:user_id]).grades
+      @grades = User.find(params[:user_id]).grades.page(params[:page_number]).per(params[:per_page])
       render json: @grades
     end
 
