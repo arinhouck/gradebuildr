@@ -1,17 +1,21 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend( {
-  setupController: function(controller, model) {
-    var store = controller.get('store');
-    this.get('session.currentUser').then(function(user) {
-      controller.set('organizations', user.get('groupMemberships'));
-      controller.set('director', user.get('directors.firstObject'))
+export default Ember.Route.extend({
+  model() {
+    return this.get('session.currentUser');
+  },
+  afterModel(model) {
+    return Ember.RSVP.hash({
+      groupMemberships: model.get('groupMemberships'),
+      directors: model.get('directors')
     });
   },
   actions: {
-    updateIndex: function(response) {
-      this.controller.store.pushPayload('groupMembership', response);
-      this.controller.set('organizations', response.group_memberships);
+    pushMemberships: function(response) {
+      this.controller.set('uniqueOrganizations', _.uniq(response, 'groupId'));
+    },
+    updateIndex: function() {
+      this.transitionTo('dashboard.profile.organizations');
     }
   }
 });

@@ -6,6 +6,6 @@ class UserSerializer < ActiveModel::Serializer
   has_many :students, :serializer => StudentSerializer
   has_many :directors, :serializer => DirectorSerializer
   has_many :courses
-  has_many :grades
+  has_many :grades, embed_in_root: false
   has_many :group_memberships
 end

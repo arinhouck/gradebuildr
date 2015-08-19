@@ -11,5 +11,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       courses: model.get('courses'),
       weights: model.get('weights')
     });
-  },
+  }
 });

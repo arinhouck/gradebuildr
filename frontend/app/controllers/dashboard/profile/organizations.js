@@ -2,14 +2,19 @@ import Ember from 'ember';
 import ajax from 'ic-ajax';
 
 export default Ember.Controller.extend({
+  directors: Ember.computed.map('model.directors', item => item),
+  director: Ember.computed('model.groupMemberships', function() {
+    return this.get('directors.firstObject');
+  }),
+
+  organizations: Ember.computed.map('model.groupMemberships', item => item),
   uniqueOrganizations: Ember.computed('organizations', function() {
-    var organizations = this.get('organizations');
+    var organizations = this.get('model.groupMemberships');
     if (organizations) {
       return _.uniq(organizations.toArray() , 'groupId');
     }
   }),
-
-
+  inOrganization: Ember.computed.equal('uniqueOrganizations.length', 1),
 
   actions: {
     leaveOrganization: function(organization) {
@@ -29,7 +34,8 @@ export default Ember.Controller.extend({
           if (!condition) { org.deleteRecord(); }
           return condition;
         });
-        controller.set('organizations', remove);
+        // controller.set('model.groupMemberships', remove);
+        controller.send('updateIndex');
         $.growl.notice({title: 'Organization', message: 'Successfully deleted.'});
       });
     }

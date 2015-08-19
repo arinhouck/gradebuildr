@@ -1,3 +1,3 @@
 class DirectorSerializer < ActiveModel::Serializer
-  attributes :id, :organization
+  attributes :id, :organization, :email, :group_code
 end

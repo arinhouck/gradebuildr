@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
     group.add(self, as: 'director')
   end
 
+  def group_code
+    self.groups.first.code
+  end
+
   def is_student
     self.account_type == 'student'
   end

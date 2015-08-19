@@ -18,11 +18,8 @@ export default Ember.Controller.extend({
         url: '/groups/join.json',
         data: data
       }).then(function (response) {
-        response = { group_memberships: response.groups }
-        controller.transitionToRoute('dashboard.profile.organizations').then(function() {
-          controller.send('updateIndex', response);
-          $.growl.notice({title: 'Organization', message: 'Successfully joined.'});
-        });
+        controller.send('pushMemberships', response.groups);
+        $.growl.notice({title: 'Organization', message: 'Successfully joined.'});
       }, function(response) {
         controller.set('code', null);
         $.growl.error({title: 'Organization', message: response.jqXHR.responseJSON.error});

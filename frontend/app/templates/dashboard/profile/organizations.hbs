@@ -1,9 +1,9 @@
 <ul class="products-list product-list-in-box">
   {{#each uniqueOrganizations as |organization|}}
     <li class="item">
-      {{!-- <div class="product-img">
-        {{gravatar-image email=receivedRequest.director.email class='img-circle'}}
-      </div> --}}
+      <div class="product-img">
+        {{gravatar-image email=director.email class='img-circle'}}
+      </div>
       <div class="product-info">
         <span class="product-title">
           {{director.organization}}
@@ -15,7 +15,11 @@
         </span>
         <span class="product-description">
           {{#if session.currentUser.isStudent}}
-            {{director.organization}} has view only access to your profile. {{/if}}
+            {{director.organization}} has view only access to your profile.
+          {{/if}}
+          {{#if session.currentUser.isOrganization}}
+            Organization code: <code>{{director.groupCode}}</code>
+          {{/if}}
         </span>
       </div>
     </li>
@@ -31,7 +35,7 @@
 {{#if session.currentUser.isStudent}}
 <div class="box-footer">
   <p>
-    {{#link-to 'dashboard.profile.organizations.join' class="btn pull-right btn-success btn-flat" id="joinOrganization"}}
+    {{#link-to 'dashboard.profile.organizations.join' class="btn pull-right btn-success btn-flat" id="joinOrganization" disabled=inOrganization}}
       Join Organization
     {{/link-to}}
   </p>
