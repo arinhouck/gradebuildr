@@ -63,10 +63,24 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <label for="gradePoints">Grade Points</label>
+                    {{#bs-popover title='Grade Points' icon='info-circle' tagName='span' placement='top'}}
+                      <p>
+                        This is a measurement that helps us calculate your current
+                        GPA. This number can be found in your university portal or
+                        on your unofficial/official transcript.
+                      </p>
+                    {{/bs-popover}}
                     {{input value=model.gradePoints class='form-control' id="gradePoints" step='any' placeholder='Enter grade points'}}
                   </div>
                   <div class="col-sm-6">
                     <label for="gradeUnits">Grade Units towards GPA</label>
+                    {{#bs-popover title='Grade Units' icon='info-circle' tagName='span' placement='top'}}
+                      <p>
+                        This is a measurement that helps us calculate your current
+                        GPA. This number is your total units taken at your university.
+                        This can be found in your university portal or on your unofficial/official transcript.
+                      </p>
+                    {{/bs-popover}}
                     {{input value=model.gradeUnits class='form-control' id="gradeUnits" step='any' placeholder='Enter grade units'}}
                   </div>
                 </div>
