@@ -15,32 +15,34 @@ namespace :demo do
 
     users.each_with_index do |user, i|
       user.confirm!
-      Group.find_by_code(code).add(user, as: 'student') if i != 0
-
-      courses = [
-        Course.create(user_id: user.id, subject: 'EEE', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Plus', semester: 'Summer 2015'),
-        Course.create(user_id: user.id, subject: 'CSE', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Regular', semester: 'Summer 2015'),
-        Course.create(user_id: user.id, subject: 'COM', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Plus/Minus', semester: 'Summer 2015'),
-        Course.create(user_id: user.id, subject: 'GLG', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Regular', semester: 'Summer 2015'),
-        Course.create(user_id: user.id, subject: 'GLG', number: Random.new.rand(101..394), credit_hours: 1, grading_scale: 'Plus/Minus', semester: 'Summer 2015'),
-        Course.create(user_id: user.id, subject: 'MAT', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Plus/Minus', semester: 'Summer 2015')
-      ]
-      courses.each do |course|
-        weights = [
-          Weight.create(course_id: course.id, name: 'Assignments', percentage: 30),
-          Weight.create(course_id: course.id, name: 'Quizzes', percentage: 10),
-          Weight.create(course_id: course.id, name: 'Midterm Exams', percentage: 40),
-          Weight.create(course_id: course.id, name: 'Final Exam', percentage: 20)
+      if i != 0
+        Group.find_by_code(code).add(user, as: 'student')
+        courses = [
+          Course.create(user_id: user.id, subject: 'EEE', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Plus', semester: 'Summer 2015'),
+          Course.create(user_id: user.id, subject: 'CSE', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Regular', semester: 'Summer 2015'),
+          Course.create(user_id: user.id, subject: 'COM', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Plus/Minus', semester: 'Summer 2015'),
+          Course.create(user_id: user.id, subject: 'GLG', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Regular', semester: 'Summer 2015'),
+          Course.create(user_id: user.id, subject: 'GLG', number: Random.new.rand(101..394), credit_hours: 1, grading_scale: 'Plus/Minus', semester: 'Summer 2015'),
+          Course.create(user_id: user.id, subject: 'MAT', number: Random.new.rand(101..394), credit_hours: 3, grading_scale: 'Plus/Minus', semester: 'Summer 2015')
         ]
+        courses.each do |course|
 
-        weights.each do |weight|
-          grades = [
-            Grade.create(user_id: user.id, course_id: course.id, weight_id: weight.id, name: "#{weight.name} 1", score: Random.new.rand(8..10), score_total: Random.new.rand(10..12)),
-            Grade.create(user_id: user.id, course_id: course.id, weight_id: weight.id, name: "#{weight.name} 2", score: Random.new.rand(8..10), score_total: Random.new.rand(10..12)),
-            Grade.create(user_id: user.id, course_id: course.id, weight_id: weight.id, name: "#{weight.name} 3", score: Random.new.rand(8..10), score_total: Random.new.rand(10..12)),
-            Grade.create(user_id: user.id, course_id: course.id, weight_id: weight.id, name: "#{weight.name} 4", score: Random.new.rand(8..10), score_total: Random.new.rand(10..12)),
-            Grade.create(user_id: user.id, course_id: course.id, weight_id: weight.id, name: "#{weight.name} 5", score: Random.new.rand(8..10), score_total: Random.new.rand(10..12))
+          weights = [
+            Weight.create(course_id: course.id, name: 'Assignments', percentage: 30),
+            Weight.create(course_id: course.id, name: 'Quizzes', percentage: 10),
+            Weight.create(course_id: course.id, name: 'Midterm Exams', percentage: 40),
+            Weight.create(course_id: course.id, name: 'Final Exam', percentage: 20)
           ]
+
+          weights.each do |weight|
+            grades = [
+              Grade.create(user_id: user.id, course_id: course.id, weight_id: weight.id, name: "#{weight.name} 1", score: Random.new.rand(8..10), score_total: Random.new.rand(10..12)),
+              Grade.create(user_id: user.id, course_id: course.id, weight_id: weight.id, name: "#{weight.name} 2", score: Random.new.rand(8..10), score_total: Random.new.rand(10..12)),
+              Grade.create(user_id: user.id, course_id: course.id, weight_id: weight.id, name: "#{weight.name} 3", score: Random.new.rand(8..10), score_total: Random.new.rand(10..12)),
+              Grade.create(user_id: user.id, course_id: course.id, weight_id: weight.id, name: "#{weight.name} 4", score: Random.new.rand(8..10), score_total: Random.new.rand(10..12)),
+              Grade.create(user_id: user.id, course_id: course.id, weight_id: weight.id, name: "#{weight.name} 5", score: Random.new.rand(8..10), score_total: Random.new.rand(10..12))
+            ]
+          end
         end
       end
     end
