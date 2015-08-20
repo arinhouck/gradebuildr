@@ -12,5 +12,9 @@ export default Ember.Route.extend({
       grades: model.get('grades'),
       courses: model.get('courses')
     });
-  }
+  },
+  setupController: function(controller, model) {
+    controller.set('model', model);
+    this.controllerFor('dashboard.students').set('isLoading', false);
+  },
 });

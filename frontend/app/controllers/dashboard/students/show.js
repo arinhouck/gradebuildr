@@ -6,10 +6,6 @@ export default Ember.Controller.extend(CoursesMixin, GradesMixin, {
   courses: Ember.computed.alias('model.courses'),
   grades: Ember.computed.alias('model.grades'),
 
-  init: function() {
-    this.controllerFor('dashboard.students').set('isLoading', false);
-  },
-  
   actions: {
     back: function() {
       this.transitionToRoute('dashboard.students');
