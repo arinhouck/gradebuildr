@@ -30,16 +30,15 @@
     align-items: center;
   }
   .jumbotron video {
-    position: fixed;
-     top: 0;
-     left: 0;
-     bottom: 0;
-     right: 0;
-     z-index: -1;
-     background-size: cover;
-     transition: 1s opacity;
-     opacity: 0.5;
-     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -999;
+    background-size: cover;
+    transition: 1s opacity;
+    opacity: 0.5;
+    width: 100%;
+    height: auto;
   }
 
 
@@ -55,7 +54,6 @@
       border-right: none!important;
     }
   }
-
 
   .space {
     margin: 100px 0;
