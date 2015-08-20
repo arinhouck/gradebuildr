@@ -38,6 +38,7 @@ Router.map(function() {
     this.route('new');
     this.route('edit');
   });
+  this.route('faq');
 });
 
 export default Router;
