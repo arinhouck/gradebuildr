@@ -9,5 +9,5 @@ class Grade < ActiveRecord::Base
 
     percentage.round(2)
   end
-  
+
 end

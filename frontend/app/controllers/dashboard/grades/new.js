@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
   setCourse: function() {
     var controller = this;
     var course = this.get('selectedCourse');
-    this.set('grade', []); // Reset grades
+    this.set('grades', []); // Reset grades
     this.set('gradeWeights', []); // Reset gradeWeights
     if (course) {
       controller.send('addGrade'); // Push first grade
@@ -37,6 +37,7 @@ export default Ember.Controller.extend({
             user.reload();
           })
           controller.get('selectedCourse').reload();
+          controller.send('updateIndex');
           controller.transitionToRoute('dashboard.grades');
           $.growl.notice({title: 'Grades', message: 'Sucessfully created.'});
         });
