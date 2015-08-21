@@ -16,19 +16,22 @@
 
  @import "font-awesome";
 
- .equal-height {
-   min-height: 375px;
- }
+   .equal-height {
+     min-height: 375px;
+   }
+
   .jumbotron {
     z-index: 0;
     position: relative;
     overflow: hidden;
   }
+
   .vertical-align {
     min-height: 300px;
     display: flex;
     align-items: center;
   }
+
   .jumbotron video {
     position: absolute;
     top: 0;
@@ -38,7 +41,13 @@
     transition: 1s opacity;
     opacity: 0.5;
     width: 100%;
-    height: auto;
+  }
+
+  @media (max-width: 320px) {
+    .jumbotron video {
+      width: auto;
+      height: 100%;
+    }
   }
 
 

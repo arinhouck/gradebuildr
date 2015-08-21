@@ -3,7 +3,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   grades: Ember.computed.map('model.grades', item => item),
   courses: Ember.computed.map('model.courses', item => item),
-  grades: [],
   noGrades: Ember.computed.empty('grades'),
 
   isOpenDidChange: function() {
