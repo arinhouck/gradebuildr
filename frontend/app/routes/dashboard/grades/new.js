@@ -12,7 +12,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     });
   },
   setupController: function(controller, model) {
-    controller.set('model', model)
+    controller.set('model', model);
+    controller.set('grades', []);
     controller.set('selectedCourse', void 0);
     controller.set('isSaving', false);
   },
