@@ -206,14 +206,18 @@ describe "Users", type: :feature, :js => true do
       fill_in_course(course_params)
       click_button 'Save'
 
-      columns = first(:css, 'tbody tr').all(:css, 'td')
-      expect(columns[0].text).to eq(course_params[:subject] + ' ' + course_params[:number])
-      expect(columns[1].text).to eq(course_params[:credit_hours])
-      # expect(columns[2].text).to eq('93.20%') # Current Grade
-      expect(columns[3].text).to eq('A') # Letter Grade
-      expect(columns[4].text).to eq(course_params[:grading_scale])
-      expect(columns[5].text).to eq(course_params[:semester])
-      expect(columns[6].text.to_i).to eq(course_params[:weights].length)
+
+      within(:css, 'tbody tr:nth-child(1)') do
+        columns = all(:css, 'td')
+        expect(columns[0].text).to eq(course_params[:subject] + ' ' + course_params[:number])
+        expect(columns[1].text).to eq(course_params[:credit_hours])
+        # expect(columns[2].text).to eq('93.20%') # Current Grade
+        expect(columns[3].text).to eq('A') # Letter Grade
+        expect(columns[4].text).to eq(course_params[:grading_scale])
+        expect(columns[5].text).to eq(course_params[:semester])
+        expect(columns[6].text.to_i).to eq(course_params[:weights].length)
+      end
+
     end
 
     it "and delete a course" do
@@ -247,6 +251,7 @@ describe "Users", type: :feature, :js => true do
       click_link 'Grades'
       click_link 'New Grade'
       select 'EEE 230', from: 'select-course'
+      wait_for_ajax
 
       grades.each_with_index do |grade, i|
         find(:css, '#add-grade').click if i != 0
@@ -269,16 +274,58 @@ describe "Users", type: :feature, :js => true do
       end
     end
 
-    xit "and edit a grade" do
+    it "and edit a grade" do
+      grade = {
+        name: 'Edited #1', weight: 'Assignments', score: '1', total: '10'
+      }
 
+      click_link 'Grades'
+      wait_for_ajax
+
+      first(:css, '.edit-btn').click
+      fill_in 'name', with: grade[:name]
+      find(:css, '.grade-weight').select(grade[:weight])
+      fill_in 'score', with: grade[:score]
+      fill_in 'total', with: grade[:total]
+
+      click_button 'Save'
+      wait_for_ajax
+
+      within(:css, 'tbody tr:nth-child(1)') do
+        columns = all(:css, 'td')
+        expect(columns[0].text).to eq(grade[:name])
+        expect(columns[1].text).to eq('MAT 343') # Seeded as first
+        expect(columns[2].text).to eq('Fall 2015')
+        expect(columns[3].text).to eq(grade[:score] + ' /' + grade[:total])
+        expect(columns[4].text).to eq('0.33%')
+        expect(columns[5].text).to include(grade[:weight])
+      end
     end
 
-    xit "and delete a grade" do
+    it "and delete a grade" do
+      click_link 'Grades'
+      wait_for_ajax
 
+      first(:css, '.fa-trash').click
+      expect(all(:css, 'tbody tr').length).to eq(7)
+      visit current_path # Check delete persists on refresh
+      wait_for_ajax
+
+      expect(all(:css, 'tbody tr').length).to eq(7)
+      expect(first(:css, 'tbody td').text).to eq('Exam 1')
     end
 
-    xit "and filter on courses" do
+    it "and filter by semester on courses" do
+      @new_semester_courses = [
+        Course.create(user_id: @student.id, subject: 'CSE', number: 101, credit_hours: 3, grading_scale: 'Minus', semester: 'Spring 2015'),
+        Course.create(user_id: @student.id, subject: 'IEE', number: 380, credit_hours: 3, grading_scale: 'Plus', semester: 'Spring 2015')
+      ]
+      visit current_path
 
+      click_link 'Courses'
+      find(:css, '.caret').click
+      all(:css, '.dropdown-menu a').each { |option| option.click if option.text == 'Spring 2015' }
+      expect(all(:css, 'tbody tr').length).to eq(2)
     end
 
     xit "and filter on grades" do

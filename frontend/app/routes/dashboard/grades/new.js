@@ -7,7 +7,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
   afterModel(model) {
     return Ember.RSVP.hash({
-      grades: model.get('grades'),
       courses: model.get('courses'),
       weights: model.get('weights')
     });

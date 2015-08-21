@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  grades: Ember.computed.map('model.grades', item => item),
   courses: Ember.computed.map('model.courses', item => item),
+  grades: [],
   noGrades: Ember.computed.empty('grades'),
 
   isOpenDidChange: function() {
@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
   setCourse: function() {
     var controller = this;
     var course = this.get('selectedCourse');
-    this.set('grades', []); // Reset grades
+    this.set('grade', []); // Reset grades
     this.set('gradeWeights', []); // Reset gradeWeights
     if (course) {
       controller.send('addGrade'); // Push first grade
@@ -30,17 +30,15 @@ export default Ember.Controller.extend({
         this.set('isSaving', true);
 
         var promises = grades.map(function(grade) {
-            return grade.save().then(function(grade) {
-              grade.get('course').reload();
-            });
+            return grade.save();
         }, []);
 
         Ember.RSVP.all(promises).then(function(grades) {
           controller.store.find('user', controller.get('session.currentUser.id')).then(function(user) {
             user.reload();
           })
+          controller.get('selectedCourse').reload();
           controller.transitionToRoute('dashboard.grades');
-          controller.send('updateIndex');
           $.growl.notice({title: 'Grades', message: 'Sucessfully created.'});
         });
 

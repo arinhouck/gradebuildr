@@ -6,7 +6,7 @@
 <td><span class="label label-primary">{{grade.weight.name}} {{grade.weight.percentage}}<small>%</small></span></td>
 {{#unless hideActions}}
 <td>
-  {{#link-to 'dashboard.grades.edit' grade class="btn btn-default btn-flat btn-xs"}}
+  {{#link-to 'dashboard.grades.edit' grade class="btn btn-default btn-flat btn-xs edit-btn"}}
     {{fa-icon 'edit'}}
   {{/link-to}}
   <button type="button" name="button" class="btn btn-danger btn-flat btn-xs" title="Delete" {{action 'deleteGrade' grade}}>{{fa-icon 'trash'}}</button>
