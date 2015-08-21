@@ -13,7 +13,8 @@ export default Ember.Controller.extend({
   setCourse: function() {
     var controller = this;
     var course = this.get('selectedCourse');
-    this.set('grades', []); // Reset grades
+    this.send('rollbackGrades', this.get('grades')); // Reset grades
+    this.set('grades', []);
     this.set('gradeWeights', []); // Reset gradeWeights
     if (course) {
       controller.send('addGrade'); // Push first grade

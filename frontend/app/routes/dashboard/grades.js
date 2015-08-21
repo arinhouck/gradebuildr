@@ -21,6 +21,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   actions: {
     updateIndex: function() {
       this.refresh();
+    },
+    rollbackGrades: function(grades) {
+      grades.filterProperty('isDirty').forEach(function(grade) {
+        grade.rollback();
+      });
     }
   }
 });

@@ -18,8 +18,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     controller.set('isSaving', false);
   },
   deactivate: function() {
-    this.get('controller.grades').filterProperty('isDirty').forEach(function(grade) {
-      grade.rollback();
-    });
+    this.send('rollbackGrades', this.get('controller.grades'));
   }
 });
