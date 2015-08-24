@@ -234,11 +234,11 @@ describe "Users", type: :feature, :js => true do
       expect(all(:css, '.table tbody tr').length).to eq(@student.grades.length)
     end
 
-    xit "and can view correct courses on grade" do
+    xit "and can view correct courses on grade show page" do
 
     end
 
-    xit "and can view correct weights on grade" do
+    xit "and can view correct weights on grade show page" do
 
     end
 
