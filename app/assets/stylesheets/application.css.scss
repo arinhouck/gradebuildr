@@ -16,6 +16,11 @@
 
  @import "font-awesome";
 
+    .sub {
+      vertical-align: sub;
+      font-size: 12.5px;
+    }
+
    .equal-height {
      min-height: 375px;
    }
