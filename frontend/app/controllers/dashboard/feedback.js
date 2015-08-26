@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
         controller.transitionToRoute('dashboard.index');
         $.growl.notice({title: 'Feedback', message: 'Sucessfully sent.'});
       }, function(response) {
-        var errors = response.responseJSON.errors;
+        var errors = response.errors;
         errors.forEach(function(error_message){
           $.growl.error({ message: error_message });
         });

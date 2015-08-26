@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
         });
         // }));
       }, function(response) {
-        var errors = response.responseJSON.errors;
+        var errors = response.errors;
         errors.forEach(function(error_message){
           $.growl.error({ message: error_message });
         });
