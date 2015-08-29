@@ -1,6 +1,21 @@
 class WeightsController < ApplicationController
   before_filter :authenticate
-  # before_filter :require_permission_show, only: :show
+  before_filter :require_permission_index, only: :index
+  before_filter :require_permission_show, only: :show
+
+  def index
+    @weights = []
+    if !!(params[:page] && params[:per_page])
+      User.find(params[:user_id]).courses.page(params[:page_number]).per(params[:per_page]).each do |course|
+        @weights << course.weights
+      end
+    else
+      User.find(params[:user_id]).courses.each do |course|
+        @weights << course.weights
+      end
+    end
+    render json: @weights
+  end
 
   def show
     @weight = Weight.find(params[:id])
@@ -41,6 +56,15 @@ class WeightsController < ApplicationController
   def authenticate
     authenticate_or_request_with_http_token do |token, options|
       User.find_by(authentication_token: token)
+    end
+  end
+
+
+  def require_permission_index
+    authenticate_or_request_with_http_token do |token, options|
+      @user = User.find_by(authentication_token: token)
+      @student = User.find_by_id(params[:user_id])
+      @user == @student || @student.directors.include?(@user)
     end
   end
 
