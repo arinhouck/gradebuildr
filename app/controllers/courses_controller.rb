@@ -1,9 +1,14 @@
 class CoursesController < ApplicationController
   before_filter :authenticate
-  before_filter :require_permission, only: :show
+  before_filter :require_permission_index, only: :index
+  before_filter :require_permission_show, only: :show
 
   def index
-    @courses = User.find(params[:user_id]).courses.page(params[:page_number]).per(params[:per_page])
+    if !!(params[:page] && params[:per_page])
+      @courses = User.find(params[:user_id]).courses.page(params[:page_number]).per(params[:per_page])
+    else
+      @courses = User.find(params[:user_id]).courses
+    end
     render json: @courses
   end
 
@@ -49,9 +54,19 @@ class CoursesController < ApplicationController
     end
   end
 
-  def require_permission
+  def require_permission_index
     authenticate_or_request_with_http_token do |token, options|
-      User.find_by(authentication_token: token) == Course.find(params[:id]).user || Course.find(params[:id]).user.directors.include?(User.find_by(authentication_token: token))
+      @user = User.find_by(authentication_token: token)
+      @student = User.find_by_id(params[:user_id])
+      @user == @student || @student.directors.include?(@user)
+    end
+  end
+
+  def require_permission_show
+    authenticate_or_request_with_http_token do |token, options|
+      @user = User.find_by(authentication_token: token)
+      @course_user = Course.find(params[:id]).user
+      @user == @course_user || @course_user.directors.include?(@user)
     end
   end
 
