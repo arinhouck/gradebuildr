@@ -9,8 +9,8 @@ export default Ember.Route.extend({
   },
   afterModel(model) {
     return Ember.RSVP.hash({
-      grades: model.get('grades'),
-      courses: model.get('courses')
+      courses: this.store.find('course', {user_id: model.get('id')}),
+      grades: this.store.find('grade', {user_id: model.get('id')})
     });
   },
   setupController: function(controller, model) {

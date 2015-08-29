@@ -11,14 +11,13 @@ export default Ember.Controller.extend({
   }.observes('isOpen'),
 
   setCourse: function() {
-    var controller = this;
     var course = this.get('selectedCourse');
-    this.send('rollbackGrades', this.get('grades')); // Reset grades
-    this.set('grades', []);
-    this.set('gradeWeights', []); // Reset gradeWeights
     if (course) {
-      controller.send('addGrade'); // Push first grade
-      controller.set('gradeWeights', course.get('weights'));
+      this.send('rollbackGrades', this.get('grades')); // Reset grades
+      this.set('grades', []);
+      this.set('gradeWeights', []); // Reset gradeWeights
+      this.send('addGrade'); // Push first grade
+      this.set('gradeWeights', course.get('weights'));
     }
   }.observes('selectedCourse'),
 
@@ -47,8 +46,8 @@ export default Ember.Controller.extend({
     },
     addGrade: function() {
       var grade = this.store.createRecord('grade');
-      grade.set('user', this.get('model'));
       grade.set('course', this.get('selectedCourse'));
+      grade.set('user', this.get('model'));
       this.get('grades').pushObject(grade);
     },
     removeGrade: function(grade) {
