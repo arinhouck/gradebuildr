@@ -85,10 +85,9 @@ class User < ActiveRecord::Base
   end
 
   def semester_grade_points
-    active_courses = self.active_courses
     result = 0
 
-    active_courses.each do |course|
+    self.active_courses.each do |course|
       result += course.score * course.credit_hours
     end
 
@@ -96,10 +95,9 @@ class User < ActiveRecord::Base
   end
 
   def semester_credit_hours
-    active_courses = self.active_courses
     result = 0
 
-    active_courses.each do |course|
+    self.active_courses.each do |course|
       result += course.credit_hours
     end
 
@@ -107,10 +105,9 @@ class User < ActiveRecord::Base
   end
 
   def inactive_semester_grade_points
-    inactive_courses = self.inactive_courses
     result = 0
 
-    inactive_courses.each do |course|
+    self.inactive_courses.each do |course|
       result += course.score * course.credit_hours
     end
 
@@ -118,10 +115,9 @@ class User < ActiveRecord::Base
   end
 
   def inactive_semester_credit_hours
-    inactive_courses = self.inactive_courses
     result = 0
 
-    inactive_courses.each do |course|
+    self.inactive_courses.each do |course|
       result += course.credit_hours
     end
 
