@@ -6,7 +6,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return this.get('session.currentUser');
   },
   afterModel(model) {
-    return model.get('courses');
+    return this.store.find('course', {user_id: model.get('id')});
   },
   setupController: function(controller, model) {
     var store = controller.get('store');
