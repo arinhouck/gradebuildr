@@ -200,6 +200,8 @@ describe "Users", type: :feature, :js => true do
       }
 
       click_link 'Courses'
+      wait_for_ajax
+
       first(:css, '.edit-btn').click
 
       delete_all_weights
@@ -222,10 +224,16 @@ describe "Users", type: :feature, :js => true do
 
     it "and delete a course" do
       click_link 'Courses'
+      wait_for_ajax
+
       first(:css, '.fa-trash').click
-      expect(all(:css, '.table tbody tr').length).to eq(1)
+      rows = all(:css, '.table tbody tr')
+      expect(rows.length).to eq(1)
       visit current_path # Check delete persists on refresh
-      expect(all(:css, '.table tbody tr').length).to eq(1)
+      wait_for_ajax
+
+      rows = all(:css, '.table tbody tr')
+      expect(rows.length).to eq(1)
       expect(first(:css, '.table tbody td').text).to eq('EEE 230')
     end
 
