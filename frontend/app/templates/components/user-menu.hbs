@@ -54,7 +54,6 @@
   {{#if dropdownExpanded}}
     <ul class="dropdown-menu rl-dropdown" role="menu">
         <li class="user-body">
-          {{loginErrorMessage}}
           <form {{action "authenticate" on="submit"}}>
           <div class="form-group">
             <label for="identification">Email address</label>
@@ -65,11 +64,11 @@
             {{input value=password placeholder="Password" type="password" name="password" class="form-control"}}
           </div>
           <div class="form-group">
+            <div class="pull-right">
+              <button type="submit" enter='authenticate' class="btn btn-default btn-flat" id="login">Log in</button>
+            </div>
             <div class="pull-left">
               <button {{action "toggleDropdown"}} class="btn btn-default btn-flat" id="cancel">Cancel</button>
-            </div>
-            <div class="pull-right">
-              <button type="submit" class="btn btn-default btn-flat" id="login">Log in</button>
             </div>
           </div>
           </form>
