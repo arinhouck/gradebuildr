@@ -12,15 +12,15 @@
     <table class="table no-margin">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Active Semester</th>
-          <th>Semester Credit Hours</th>
-          <th>Semester GPA</th>
-          <th>Cumulative GPA</th>
+          {{table-sort-header sortableArray=this.sortedStudents property='fullName' text='Name'}}
+          {{table-sort-header sortableArray=this.sortedStudents property='activeSemester' text='Active Semester'}}
+          {{table-sort-header sortableArray=this.sortedStudents property='semesterCreditHours' text='Semester Credit Hours'}}
+          {{table-sort-header sortableArray=this.sortedStudents property='semesterGpa' text='Semester GPA'}}
+          {{table-sort-header sortableArray=this.sortedStudents property='cumulativeGpa' text='Cumulative GPA'}}
         </tr>
       </thead>
       <tbody>
-        {{#each students as |student|}}
+        {{#each sortedStudents as |student|}}
           <tr>
             <td>{{link-to student.fullName 'dashboard.students.show' student.id}}</td>
             <td>{{student.activeSemester}}</td>
