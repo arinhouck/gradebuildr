@@ -4,16 +4,7 @@ class WeightsController < ApplicationController
   before_filter :require_permission_show, only: :show
 
   def index
-    @weights = []
-    if !!(params[:page] && params[:per_page])
-      User.find(params[:user_id]).courses.page(params[:page_number]).per(params[:per_page]).each do |course|
-        @weights << course.weights
-      end
-    else
-      User.find(params[:user_id]).courses.each do |course|
-        @weights << course.weights
-      end
-    end
+    @weights = Weight.find(params[:ids])
     render json: @weights
   end
 
