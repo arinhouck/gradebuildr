@@ -12,11 +12,28 @@
     <table class="table no-margin">
       <thead>
         <tr>
-          {{table-sort-header sortableArray=this.sortedStudents property='fullName' text='Name'}}
-          {{table-sort-header sortableArray=this.sortedStudents property='activeSemester' text='Active Semester'}}
-          {{table-sort-header sortableArray=this.sortedStudents property='semesterCreditHours' text='Semester Credit Hours'}}
-          {{table-sort-header sortableArray=this.sortedStudents property='semesterGpa' text='Semester GPA'}}
-          {{table-sort-header sortableArray=this.sortedStudents property='cumulativeGpa' text='Cumulative GPA'}}
+          {{!-- <i {{bindAttr class=":fa sortAscending:fa-sort-up:fa-sort-down :noPrint "}}>  --}}
+          <th {{action 'sortBy' 'fullName'}}>
+            Name
+          </th>
+          <th {{action 'sortBy' 'activeSemester'}}>
+            Active Semester
+          </th>
+          <th {{action 'sortBy' 'semesterCreditHours'}}>
+            Semester Credit Hours
+          </th>
+          <th {{action 'sortBy' 'semesterGpa'}}>
+            Semester GPA
+          </th>
+          <th {{action 'sortBy' 'cumulativeGpa'}}>
+            Cumulative GPA
+          </th>
+
+          {{!-- {{table-sort-header sortableArray=this.sortedStudents parent=this property='fullName' text='Name'}}
+          {{table-sort-header sortableArray=this.sortedStudents parent=this property='activeSemester' text='Active Semester'}}
+          {{table-sort-header sortableArray=this.sortedStudents parent=this property='semesterCreditHours' text='Semester Credit Hours'}}
+          {{table-sort-header sortableArray=this.sortedStudents parent=this property='semesterGpa' text='Semester GPA'}}
+          {{table-sort-header sortableArray=this.sortedStudents parent=this property='cumulativeGpa' text='Cumulative GPA'}} --}}
         </tr>
       </thead>
       <tbody>

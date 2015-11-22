@@ -5,6 +5,7 @@ export default Ember.Route.extend({
     return this.get('session.currentUser');
   },
   afterModel(model) {
-    return model.get('students');
+    this.controllerFor('dashboard.students.index').set('students', model.get('students'))
   }
+
 });
