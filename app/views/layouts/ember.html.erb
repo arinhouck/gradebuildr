@@ -11,8 +11,8 @@
     <%= csrf_meta_tags %>
   </head>
   <body class="skin-black">
-    <%= yield %>
+    <%#= yield %>
+    <%= render_ember_app :frontend %>
   </body>
-  <script src="https://checkout.stripe.com/checkout.js"></script>
   <%= render 'analytics' %>
 </html>

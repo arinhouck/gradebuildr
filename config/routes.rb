@@ -31,8 +31,10 @@ Rails.application.routes.draw do
     post :join, :on => :collection
   end
 
-  root 'ember#index'
-  get '/*path' => 'ember#index'
+  mount_ember_app :frontend, to: "/", controller: "ember", action: "index"
+
+  # root 'application#index'
+  # get '/*path' => 'application#index'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

@@ -17,8 +17,7 @@
     "growl": "~1.2.7",
     "JavaScript-MD5": "~1.1.0",
     "ember-c3": "~0.1.4",
-    "lodash": "^2.4.0",
-    "font-awesome": "~4.4.0"
+    "lodash": "^2.4.0"
   },
   "devDependencies": {
     "moment": "~2.10.3",

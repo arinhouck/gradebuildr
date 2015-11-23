@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token, if: :json_request?
   force_ssl :if => :needs_ssl_redirect?
 
-
   protected
 
   def needs_ssl_redirect?
