@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ajax from 'ic-ajax';
+import ajax from 'ember-ajax';
 
 export default Ember.Controller.extend({
   directors: Ember.computed.map('model.directors', item => item),
