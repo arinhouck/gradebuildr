@@ -35,7 +35,7 @@ group :development, :test do
   gem 'selenium-webdriver'
 end
 
-gem 'rails_12factor', group: :production
+gem 'rails_12factor', group: [:staging, :production]
 gem 'figaro'
 
 # Use jquery as the JavaScript library
@@ -61,5 +61,3 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
-gem 'rails_12factor', group: [:staging, :production]
