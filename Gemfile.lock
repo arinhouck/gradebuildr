@@ -72,7 +72,7 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
-    ember-cli-rails (0.5.5)
+    ember-cli-rails (0.5.4)
       cocaine (~> 0.5.0)
       non-stupid-digest-assets (~> 1.0.0)
       railties (>= 3.2, < 5)
@@ -242,7 +242,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise (~> 3.5.1)
-  ember-cli-rails
+  ember-cli-rails (= 0.5.4)
   figaro
   font-awesome-rails (~> 4.4.0)
   groupify
