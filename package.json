@@ -5,5 +5,9 @@
   "devDependencies": {
     "bower": "*"
   },
-  "cacheDirectories": []
+  "cacheDirectories": [],
+  "engines": {
+    "node": "0.12.7",
+    "npm": "2.12.1"
+  },
 }
