@@ -5,7 +5,11 @@
   "devDependencies": {
     "bower": "*"
   },
-  "cacheDirectories": [],
+  "cacheDirectories": [
+    "frontend/node_modules",
+    "frontend/bower_components",
+    "node_modules"
+  ],
   "engines": {
     "node": "0.12.7",
     "npm": "2.12.1"
