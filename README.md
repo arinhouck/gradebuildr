@@ -20,11 +20,11 @@ This application was made to help you track your grades in your college curricul
   * Go to `cd frontend`
   * Run `npm install -g ember-cli`
   * Run `npm install`
-  * Run `bower install`
+  * Run `bower install` (npm potentially will run this command)
 
 #### Rails 4
 
-  * Install ruby `rvm install ruby-2.0.0-p643`
+  * Install ruby `rvm install 2.2.2`
   * Run `bundle install`
   * Run `rake db:setup`
   * Finally run `rails s`
