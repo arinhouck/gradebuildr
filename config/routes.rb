@@ -33,8 +33,8 @@ Rails.application.routes.draw do
 
   mount_ember_app :frontend, to: "/", controller: "ember", action: "index"
 
-  # root 'application#index'
-  # get '/*path' => 'application#index'
+  # root 'ember#index'
+  # get '/*path' => 'ember#index'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
