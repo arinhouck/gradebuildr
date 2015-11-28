@@ -36,7 +36,7 @@
     "ember-cli-lodash": "^1.0.1",
     "ember-cli-pagination": "^0.6.6",
     "ember-cli-qunit": "0.3.13",
-    "ember-cli-rails-addon": "~> 0.5.0",
+    "ember-cli-rails-addon": "rondale-sc/ember-cli-rails-addon#sd-manifest",
     "ember-cli-simple-auth": "^0.8.0-beta.2",
     "ember-cli-simple-auth-devise": "^0.8.0-beta.2",
     "ember-cli-stripe": "^0.3.0",
